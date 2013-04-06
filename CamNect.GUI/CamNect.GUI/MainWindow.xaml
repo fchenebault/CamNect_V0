@@ -1,0 +1,45 @@
+﻿<Window xmlns:Toolkit="clr-namespace:Microsoft.Kinect.Toolkit;assembly=Microsoft.Kinect.Toolkit"  x:Class="CamNect.GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:k="http://schemas.microsoft.com/kinect/2013"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+        Background="White" Height="1080" Width="1920"
+        Title="Kinect Start" WindowStyle="None" WindowState="Maximized">
+
+    <Grid x:Name="global" Loaded="Window_Loaded" >
+        <Grid.Background>
+            <ImageBrush ImageSource="Ressources/Images/background.png" />
+        </Grid.Background>
+        <TextBlock x:Name="Instruction" Background="Transparent" Foreground="#FF642FC0" FontSize="55" FontFamily="Segoe UI" FontWeight="Light" Margin="0,0,0,180" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        <TextBlock Text="Start" Background="Transparent" Foreground="#F8FCFB" FontSize="75" FontFamily="Segoe UI" FontWeight="Light" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1000"/>
+        <Image Source="/Ressources/Images/cameraImageViolet.png" Margin="-3,3,1464,630" RenderTransformOrigin="0.5,0.5" >
+            <Image.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.LayoutTransform>
+        </Image>
+        <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" x:Name="message" Width="530" Foreground="#FFF11B1B" FontSize="40" Background="{x:Null}" Margin="1347,534,35,472" />
+
+
+        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi" />
+        
+        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920">
+           
+            <Grid x:Name="kinectRegionGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1080" Width="1920" Margin="10,-10,-10,10" >
+               
+                    <k:KinectTileButton Height="500" Width="500" k:KinectTileButton.Click="button_Start"/>
+                    
+            </Grid>
+           
+            
+        </k:KinectRegion>
+        <Button Content="Buttoncoco" x:Name="coco1" HorizontalAlignment="Left" Margin="485,69,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
