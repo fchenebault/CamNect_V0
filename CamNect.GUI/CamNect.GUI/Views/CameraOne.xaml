@@ -18,12 +18,17 @@
             <Button x:Name="buttonRight" Tag="NoInterval" Height="454" Canvas.Top="312" Width="71" Click="button_Right" Canvas.Left="1841" Opacity="0.2" Background="#FF1F43E4"/>
             <Button x:Name="buttonLeft" Tag="NoInterval" Height="454" Canvas.Top="312" Width="73" Click="button_Left" Canvas.Left="10" Opacity="0.2" Background="#FF1F43E4"/>
             <Button x:Name="buttonTop" Tag="NoInterval" Height="71" VerticalAlignment="Top" Width="1062" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="button_Top" Canvas.Left="385" Canvas.Top="10" Opacity="0.2" Background="#FF1F43E4"/>
-            <Button x:Name="buttonTopLeft" Tag="NoInterval" Height="165" VerticalAlignment="Top" Width="216" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="button_TopLeft" Canvas.Left="10" Canvas.Top="10" Opacity="0.2" Background="#FF1F43E4"/>
             <Button x:Name="buttonTopRight" Tag="NoInterval" Height="165" VerticalAlignment="Top" Width="217" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="button_TopRight" Canvas.Left="1695" Canvas.Top="10" Opacity="0.2" Background="#FF1F43E4"/>
             <Button x:Name="buttonDown" Tag="NoInterval" Height="71" VerticalAlignment="Top" Width="1139" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="button_Down" Canvas.Left="385" Canvas.Top="999" Opacity="0.2" Background="#FF1F43E4"/>
             <Button x:Name="buttonDownLeft" Tag="NoInterval" Height="171" VerticalAlignment="Top" Width="216" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="button_DownLeft" Canvas.Left="10" Canvas.Top="899" Opacity="0.2" Background="#FF1F43E4"/>
             <Button x:Name="buttonDownRight" Tag="NoInterval" Height="171" VerticalAlignment="Top" Width="215" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="button_DownRight" Canvas.Left="1695" Canvas.Top="899" Opacity="0.2" Background="#FF1F43E4"/>
-           
+            <Polygon Points="10,10 0,150 100,200 200,100 150,0  " Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="10" />
+            <Polygon Points="40,40 30,120 50,130 60,60 130,50 120,30  " Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="10" Canvas.Top="10" />
+
+            <Polygon Points="100,200 200,100 150,0 10,10 0,150    " Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="1000" Canvas.Top="10"/>
+            <Polygon Points="40,40 30,120 50,130 60,60 130,50 120,30  " Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="10" Canvas.Top="10" />
+
+
             <Canvas x:Name="StickMen" Width="200" Height="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.Left="1324" Canvas.Top="730"/>
             <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" Name="message" Width="530" Foreground="White" FontSize="40" Background="{x:Null}" />
             <Button Name="quitButton" Tag="Interval" Canvas.Left="1491" Canvas.Top="10" Height="123" Width="137" Click="quitButton_Click" BorderBrush="{x:Null}" >
