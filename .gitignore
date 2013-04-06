@@ -147,3 +147,6 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+
+# Stranges things
+pingme.txt
