@@ -14,14 +14,17 @@ namespace CamNect.Kinect
         public KinectSensorChooser sensorChooser;
         public GestureCamera gestureCamera;
         public Skeleton skeletonFocus;
-        
 
+
+        // Constructor
         public KinectMain(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
         {
             InitKinect(sensorChooserUi, kinectRegion);
             gestureCamera = new GestureCamera();
         }
         
+
+        // Initialise the Kinect
         public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion )
         {
             // initialize the sensor chooser and UI
@@ -36,7 +39,7 @@ namespace CamNect.Kinect
         }
 
 
-        // Check the kinect's status
+        // Check the Kinect's status
         private static void SensorChooserOnKinectChanged(object sender, KinectChangedEventArgs args)
         {
             if (args.OldSensor != null)
