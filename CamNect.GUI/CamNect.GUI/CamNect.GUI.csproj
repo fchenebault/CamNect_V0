@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="KinectHoverButton.cs" />
     <Compile Include="Views\CameraOne.xaml.cs">
       <DependentUpon>CameraOne.xaml</DependentUpon>
     </Compile>
