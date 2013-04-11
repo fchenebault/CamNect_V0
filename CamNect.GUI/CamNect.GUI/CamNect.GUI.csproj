@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\BlueDot.xaml.cs" />
     <Compile Include="Views\CameraOne.xaml.cs">
       <DependentUpon>CameraOne.xaml</DependentUpon>
     </Compile>
@@ -100,6 +101,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BlueDot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CameraOne.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
