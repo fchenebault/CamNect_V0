@@ -1,0 +1,168 @@
+﻿<Window x:Class="CamNect.GUI.Views.Start"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Start" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized">
+
+    <Window.Resources>
+        <Storyboard x:Key="Storyboard1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="254">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="254">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4.3" Value="500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard3">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="254">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4.6" Value="500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4.6" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard4">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="254">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4.9" Value="500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:4.9" Value="0"/>
+
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard5">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse4">
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="254">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:5.2" Value="500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse4"
+                 BeginTime="0:0:5.1" To="0" Duration="0:0:0"/>
+        </Storyboard>
+
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+            <BeginStoryboard Storyboard="{StaticResource Storyboard2}"/>
+            <BeginStoryboard Storyboard="{StaticResource Storyboard3}"/>
+            <BeginStoryboard Storyboard="{StaticResource Storyboard4}"/>
+            <BeginStoryboard Storyboard="{StaticResource Storyboard5}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    
+
+    <Grid Loaded="Window_Loaded">
+        <Grid.Background>
+            <ImageBrush ImageSource="../Ressources/Images/background.png" />
+        </Grid.Background>
+        
+        <TextBlock HorizontalAlignment="Left" Margin="734,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="58" Width="528" FontSize="40" RenderTransformOrigin="0.5,0.5" FontFamily="Gisha">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.103"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform><Run Language="fr-fr" Text="Camera control over Kinect "/></TextBlock>
+        <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="450" FontFamily="Gisha" FontSize="92" FontWeight="Bold" Foreground="#FF52318F" Margin="526,144,936,0"><Run Language="fr-fr" Text="CAMNECT"/></TextBlock>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="754,839,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Image HorizontalAlignment="Left" Height="168" Margin="1622,144,0,0" VerticalAlignment="Top" Width="220" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>
+        <Image HorizontalAlignment="Left" Height="304" Margin="1439,686,0,0" VerticalAlignment="Top" Width="403" Source="../Ressources/Images/image_groupe.jpg"/>
+        <Grid Margin="654,626,1083,405">
+            <Ellipse x:Name="ellipse" Fill="Black" HorizontalAlignment="Left" Margin="145,0,0,0" Stroke="Black" Width="20" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <TranslateTransform/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="ellipse1" Fill="Black" HorizontalAlignment="Left" Margin="120,0,0,0" Stroke="Black" Width="20" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <TranslateTransform/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="ellipse2" Fill="Black" HorizontalAlignment="Left" Margin="95,0,0,0" Stroke="Black" Width="20" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <TranslateTransform/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="ellipse3" Fill="Black" HorizontalAlignment="Left" Margin="70,0,0,0" Stroke="Black" Width="20" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <TranslateTransform/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="ellipse4" Fill="Black" HorizontalAlignment="Left" Stroke="Black" Width="20" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="45,0,0,0">
+                <Ellipse.RenderTransform>
+                    <TranslateTransform/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+
+
+        </Grid>
+        <!--<Image HorizontalAlignment="Left" Height="92" Margin="143,307,0,0" VerticalAlignment="Top" Width="350" Source="../Ressources/Images/kinect.png" RenderTransformOrigin="0.5,0.5"  Panel.ZIndex="5000">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+        </Image>
+        <Image HorizontalAlignment="Left" Height="100" Margin="205,237,0,0" VerticalAlignment="Top" Width="100" Source="../Ressources/Images/ptz214.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.375"/>
+                    <RotateTransform Angle="-10"/>
+                    <TranslateTransform X="0.327"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>-->
+
+
+    </Grid>
+
+</Window>
