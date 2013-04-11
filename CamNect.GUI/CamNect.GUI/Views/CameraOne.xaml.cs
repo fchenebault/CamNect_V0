@@ -10,6 +10,7 @@ using Microsoft.Kinect.Toolkit.Controls;
 using Microsoft.Kinect;
 using System.Windows;
 using ManagedUPnP;
+using System.Windows.Media;
 
 namespace CamNect.GUI.Views
 {
@@ -19,8 +20,10 @@ namespace CamNect.GUI.Views
     public partial class CameraOne : UserControl
     {
 
+        public static readonly DependencyProperty PageLeftEnabledProperty = DependencyProperty.Register(
+            "PageLeftEnabled", typeof(bool), typeof(MainWindow), new PropertyMetadata(false));
+
         /* Variables */
-        public List<Button> buttons;
         private static CameraPTZ cameraOne;
         private readonly KinectSensorChooser sensorChooser;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -40,7 +43,7 @@ namespace CamNect.GUI.Views
             BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
 
             // Use KinectMain class
-            this.buttons = new List<System.Windows.Controls.Button> { }; // quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight
+            //this.buttons = new List<System.Windows.Controls.Button> { quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight };
             //this.kinect = new KinectMain(this.sensorChooser.Kinect, buttons);
 
             /*
@@ -134,7 +137,7 @@ namespace CamNect.GUI.Views
             message.Content = null;
         }
 
-        public void button_Right(object sender, RoutedEventArgs e)
+        public void goRight_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -143,11 +146,11 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
                 message.Content = "Button Right";
-                cameraOne.goRight();
+                //cameraOne.goRight();
             }
         }
 
-        public void button_Left(object sender, RoutedEventArgs e)
+        public void goLeft_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -156,11 +159,11 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Left");
                 message.Content = "Button Left";
-                cameraOne.goLeft();
+                //cameraOne.goLeft();
             }
         }
 
-        public void button_Top(object sender, RoutedEventArgs e)
+        public void goUp_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -173,7 +176,7 @@ namespace CamNect.GUI.Views
             }
         }
 
-        public void button_TopLeft(object sender, RoutedEventArgs e)
+        public void goTopLeft_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -182,12 +185,12 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
                 message.Content = "Button TopLeft";
-                cameraOne.goUp();
-                cameraOne.goLeft();
+                //cameraOne.goUp();
+                //cameraOne.goLeft();
             }
         }
 
-        public void button_TopRight(object sender, RoutedEventArgs e)
+        public void goTopRight_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -196,13 +199,13 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button TopRight");
                 message.Content = "Button TopRight";
-                cameraOne.goUp();
-                cameraOne.goRight();
+                //cameraOne.goUp();
+                //cameraOne.goRight();
             }
             
         }
 
-        public void button_Down(object sender, RoutedEventArgs e)
+        public void goDown_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -211,11 +214,11 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Down");
                 message.Content = "Button Down";
-                cameraOne.goDown();
+                //cameraOne.goDown();
             }
         }
 
-        public void button_DownRight(object sender, RoutedEventArgs e)
+        public void goDownRight_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -224,13 +227,13 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button DownRight");
                 message.Content = "Button DownRight";
-                cameraOne.goDown();
-                cameraOne.goRight();
+                //cameraOne.goDown();
+                //cameraOne.goRight();
             }
             
         }
 
-        public void button_DownLeft(object sender, RoutedEventArgs e)
+        public void goDownLeft_onClick(object sender, RoutedEventArgs e)
         {
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -239,35 +242,15 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button DownLeft");
                 message.Content = "Button  DownLeft";
-                cameraOne.goDown();
-                cameraOne.goLeft();
+                //cameraOne.goDown();
+                //cameraOne.goLeft();
             }
         }
 
-        public void quitButton_Click(object sender, RoutedEventArgs e)
+        public void quit_onClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
 
-        public void button_Menu(object sender, RoutedEventArgs e)
-        {
-            /*Views.Menu MenuPage = new Views.Menu();
-            this.Content = MenuPage;*/
-        }
-
-        private void button_Screenshot(object sender, RoutedEventArgs e)
-        {
-            cameraOne.takeScreenshot();
-        }
-
-        private void button_Start(object sender, RoutedEventArgs e)
-        {
-            cameraOne.startCapture();
-        }
-
-        private void button_Stop(object sender, RoutedEventArgs e)
-        {
-            cameraOne.stopCapture();
-        }
     }
 }

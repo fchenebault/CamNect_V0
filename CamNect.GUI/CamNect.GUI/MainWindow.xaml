@@ -39,7 +39,6 @@
            
             
         </k:KinectRegion>
-        <Button Content="Buttoncoco" x:Name="coco1" HorizontalAlignment="Left" Margin="485,69,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

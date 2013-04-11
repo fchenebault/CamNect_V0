@@ -5,6 +5,7 @@ using System.Windows.Data;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using Microsoft.Kinect.Toolkit.Controls;
+using System.Collections.ObjectModel;
 
 namespace CamNect.Kinect
 {
@@ -14,6 +15,7 @@ namespace CamNect.Kinect
         public KinectSensorChooser sensorChooser;
         public GestureCamera gestureCamera;
         public Skeleton skeletonFocus;
+        public ReadOnlyCollection<HandPointer> handsTracked;
 
 
         // Constructor
@@ -21,11 +23,20 @@ namespace CamNect.Kinect
         {
             InitKinect(sensorChooserUi, kinectRegion);
             gestureCamera = new GestureCamera();
+            handsTracked = kinectRegion.HandPointers;
         }
-        
+
+        public bool AreHandsTracked()
+        {
+            if (handsTracked.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
 
         // Initialise the Kinect
-        public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion )
+        public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
         {
             // initialize the sensor chooser and UI
             this.sensorChooser = new KinectSensorChooser();
@@ -35,7 +46,7 @@ namespace CamNect.Kinect
 
             // Bind the sensor chooser's current sensor to the KinectRegion
             var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
-            BindingOperations.SetBinding(kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding); 
+            BindingOperations.SetBinding(kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
         }
 
 

@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Views\BlueDot.xaml.cs" />
+    <Compile Include="KinectHoverButton.cs" />
     <Compile Include="Views\CameraOne.xaml.cs">
       <DependentUpon>CameraOne.xaml</DependentUpon>
     </Compile>
