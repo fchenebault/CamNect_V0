@@ -6,6 +6,7 @@ using Microsoft.Kinect;
 using System;
 using CamNect.Kinect;
 using CamNect.Camera;
+using System.Collections.ObjectModel;
 
 namespace CamNect.GUI
 {
@@ -13,12 +14,11 @@ namespace CamNect.GUI
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
 
-    public partial class MainWindow : Window    
+    public partial class MainWindow : Window
     {
 
-       /* Variables */
+        /* Variables */
         private KinectMain kinect;
-        HandPointer coco;
 
         public MainWindow()
         {
@@ -59,21 +59,17 @@ namespace CamNect.GUI
 
         public void button_Start(object sender, RoutedEventArgs e)
         {
-               // coco = kinectRegion.HandPointers[1];
-
-              //  Point hand = coco.GetPosition(kinectRegion);
-             //   message.Content = hand.X;
             Views.Menu MenuPage = new Views.Menu(kinect.sensorChooser);
             this.Content = MenuPage;
-        //
+
         }
 
         public void quitButton_Click(object sender, RoutedEventArgs e)
         {
             //System.Windows.Application.Current.Shutdown();
-            
+
         }
 
-       
+
     }
 }

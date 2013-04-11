@@ -59,8 +59,8 @@
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,10,0,0" />
         <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="164" Margin="250,10,0,0"/>
 
-        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi"/>
-        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" >
+        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" Margin="312,0,1568,0"/>
+        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" VerticalAlignment="Bottom" >
             <k:KinectTileButton  x:Name="quit" HorizontalAlignment="Left" VerticalAlignment="Top" Height="123" Width="137" Click="quitButton_Click" BorderBrush="#FFFBFBFB" Margin="1492,10,0,0">
                 <k:KinectTileButton.Background>
                     <ImageBrush ImageSource="/Ressources/Images/exit.png"/>
