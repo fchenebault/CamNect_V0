@@ -59,12 +59,12 @@ namespace CamNect.GUI
 
         public void button_Start(object sender, RoutedEventArgs e)
         {
-                coco = kinectRegion.HandPointers[1];
+               // coco = kinectRegion.HandPointers[1];
 
-                Point hand = coco.GetPosition(kinectRegion);
-                message.Content = hand.X;
-        //    Views.Menu MenuPage = new Views.Menu(kinect.sensorChooser);
-        //    this.Content = MenuPage;
+              //  Point hand = coco.GetPosition(kinectRegion);
+             //   message.Content = hand.X;
+            Views.Menu MenuPage = new Views.Menu(kinect.sensorChooser);
+            this.Content = MenuPage;
         //
         }
 

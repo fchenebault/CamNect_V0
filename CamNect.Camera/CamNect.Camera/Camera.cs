@@ -59,7 +59,7 @@ namespace CamNect.Camera
 
     public class CameraPTZ : Camera
     {
-       
+
         public CameraPTZ(VlcControl control, Image imgPlayer) : base(control, imgPlayer) { }
 
         public override void initCamera(String ip)

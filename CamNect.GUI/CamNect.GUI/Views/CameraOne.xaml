@@ -15,17 +15,22 @@
             
            <Image x:Name= "CameraOnePlayer" Height="1080" Width="1920" />
 
-            <Polygon Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="250" />
-            <Polygon Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="250" />
-            <Polygon Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="450" Canvas.Top="10" />
-            <Polygon Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="450" Canvas.Bottom="10" />
-            
+            <Polygon x:Name="buttonLeft" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="250" />
+            <Polygon x:Name="buttonRight" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="250" />
+            <Polygon x:Name="buttonTop" Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="450" Canvas.Top="10" />
+            <Polygon x:Name="buttonDown" Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="450" Canvas.Bottom="10" />
+
+            <Polygon Points="45,0 0,45 15,65 45,30 75,65 90,45" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="895" Canvas.Top="20" />
+            <Polygon Points="45,65 0,20 15,0 45,35 75,0 90,20" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="895" Canvas.Bottom="20" />
+            <Polygon Points="0,45 45,0 65,15 30,45 65,75 45,90" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="20" Canvas.Top="495" />
+            <Polygon Points="65,45 20,0 0,15 35,45 0,75 20,90" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Right="20" Canvas.Top="495" />
+
             <Polygon Points="10,10 0,150 100,200 200,100 150,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="10" />
             <Polygon Points="40,40 30,120 50,130 60,60 130,50 120,30  " Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="10" Canvas.Top="10" />
 
             <Polygon Points="190,10 200,150 100,200 0,100 50,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="10" />
             <Polygon Points="90,40 100,120 80,130 70,60 0,50 10,30" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Right="40" Canvas.Top="10" />
-            
+
             <Polygon Points="10,190 0,50 100,0 200,100 150,200" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Bottom="10"/>
             <Polygon Points="40,90 30,10 50,0 60,70 130,80 120,100" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="10" Canvas.Bottom="40" />
 
@@ -35,11 +40,11 @@
 
             <Canvas x:Name="StickMen" Width="200" Height="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.Left="1324" Canvas.Top="730"/>
             <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" Name="message" Width="530" Foreground="White" FontSize="40" Background="{x:Null}" />
-            <Button Name="quitButton" Tag="Interval" Canvas.Left="1491" Canvas.Top="10" Height="123" Width="137" Click="quitButton_Click" BorderBrush="{x:Null}" >
+           <!-- <Button Name="quitButton" Tag="Interval" Canvas.Left="1491" Canvas.Top="10" Height="123" Width="137" Click="quitButton_Click" BorderBrush="{x:Null}" Visibility="Hidden" >
                 <Button.Background>
                     <ImageBrush ImageSource="/Ressources/Images/exit.png" />
                 </Button.Background>
-            </Button>
+            </Button>-->
             <Button x:Name="buttonMenu" Tag="Interval" Canvas.Left="414" Canvas.Top="174" Height="91" Width="137" Click="button_Menu" BorderBrush="{x:Null}" Visibility="Hidden" >
                 <Button.Background>
                     <ImageBrush ImageSource="/Ressources/Images/home.png" />
@@ -51,9 +56,18 @@
 
         </Canvas>
 
-        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,10,0,0" />
+        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="164" Margin="250,10,0,0"/>
+
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi"/>
-        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920">
-       </k:KinectRegion>
+        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" >
+            <k:KinectTileButton  x:Name="quit" HorizontalAlignment="Left" VerticalAlignment="Top" Height="123" Width="137" Click="quitButton_Click" BorderBrush="#FFFBFBFB" Margin="1492,10,0,0">
+                <k:KinectTileButton.Background>
+                    <ImageBrush ImageSource="/Ressources/Images/exit.png"/>
+                </k:KinectTileButton.Background>
+            </k:KinectTileButton>
+        </k:KinectRegion>
+       
+
     </Grid>
 </UserControl>

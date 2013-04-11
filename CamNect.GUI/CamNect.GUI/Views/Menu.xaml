@@ -11,7 +11,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
-        <Image x:Name= "cameraOne" Height="354" Width="507" VerticalAlignment="Bottom" Margin="0,0,0,215" />
+       <!-- <Image x:Name= "cameraOne" Height="354" Width="507" VerticalAlignment="Bottom" Margin="0,0,0,215" />
         <Image x:Name= "cameraTwo" Height="354" Width="507" Canvas.Left="202" Canvas.Top="138" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0" />
         <Image x:Name= "cameraThree" Height="354" Width="507" Canvas.Left="1222" Canvas.Top="138" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,100,0" />
         <TextBlock x:Name="Instruction" Background="Transparent" Foreground="#FF9F2FC0" FontSize="75" FontWeight="Light" FontFamily="Segoe UI" Margin="0,175,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -36,15 +36,25 @@
             
             <Canvas x:Name="StickMen" Tag="Interval" Width="249" Height="195" HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.Left="1522" Canvas.Top="842"/>
 
-        </Canvas>
+        </Canvas> -->
+        <Label Margin="300,880,0,0" Content="" Height="66" Name="message" Width="530" Foreground="White" FontSize="40" Background="{x:Null}" />
         
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi"/>
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920">
             <Grid x:Name="kinectRegionGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1080" Width="1920" Margin="10,-10,-10,10" >
-                <k:KinectTileButton Height="500" Width="500" k:KinectTileButton.Click="button_Two"/>
+                <!--<k:KinectTileButton Height="Auto" Width="Auto"  Margin="705,0,699,893"/>-->
+                <k:KinectScrollViewer Height="600" Margin="0,0,0,200" Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                    <WrapPanel VerticalAlignment="Center" x:Name="wrapPanel" Orientation="Vertical" k:KinectTileButton.Click="KinectTileButtonClick">
+                        <!-- items for design layout.  They will be replaced at runtime. -->
+                        <k:KinectTileButton x:Name= "cameraOne" Label="Grosse Camera" Height="600" Width="800" Margin="50,0" k:KinectTileButton.Click="button_Two" />
+                        <k:KinectTileButton Label="Petite Camera 1" Height="600" Width="800" Margin="50,0" />
+                        <k:KinectTileButton Label="Petite Camera 2" Height="600" Width="800" Margin="50,0"/>
+                    </WrapPanel>
+                </k:KinectScrollViewer>
             </Grid>
         </k:KinectRegion>
+
 
     </Grid>
 </UserControl>

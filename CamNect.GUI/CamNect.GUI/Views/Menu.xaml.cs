@@ -35,7 +35,7 @@ namespace CamNect.GUI.Views
             // Bind the sensor chooser's current sensor to the KinectRegion
             var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
             BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
-
+            //cameraArray[0] = new CameraPTZ(new Vlc.DotNet.Wpf.VlcControl(), cameraOne);
             // Use KinectMain class
             //this.kinect = new KinectMain(this.sensorChooser.Kinect);
             
@@ -160,6 +160,16 @@ namespace CamNect.GUI.Views
         public void button_Three(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void b1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void KinectTileButtonClick(object sender, RoutedEventArgs e)
+        {
+            message.Content = "click" ;
         }
 
     }

@@ -40,7 +40,7 @@ namespace CamNect.GUI.Views
             BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
 
             // Use KinectMain class
-            this.buttons = new List<System.Windows.Controls.Button> { quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight };
+            this.buttons = new List<System.Windows.Controls.Button> { }; // quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight
             //this.kinect = new KinectMain(this.sensorChooser.Kinect, buttons);
 
             /*
