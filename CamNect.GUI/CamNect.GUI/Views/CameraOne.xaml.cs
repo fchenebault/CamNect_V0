@@ -48,12 +48,17 @@ namespace CamNect.GUI.Views
 
             Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
             disc.DeviceAdded += new DeviceAddedEventHandler(discDeviceAdded);
-            disc.Start();
+            disc.Start();*/
 
-            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(moveToMenu);
-            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(moveToMenu);   */
+            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
+            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);   
         }
 
+
+        public void writeMessage()
+        {
+            message.Content = "Geste";
+        }
         /// <summary>
         /// Called when the KinectSensorChooser gets a new sensor
         /// </summary>
@@ -240,6 +245,22 @@ namespace CamNect.GUI.Views
                 message.Content = "Button  DownLeft";
                 //cameraOne.goDown();
                 //cameraOne.goLeft();
+            }
+        }
+
+        public void gestureEvent(object sender, EventArgs e)
+        {
+            Skeleton[] skeletons = kinectRegion.skeletons;
+            if (skeletons != null)
+            {
+
+                for (int i = 0; i < skeletons.Length; i++)
+                {
+                    if (skeletons[i].TrackingId == kinectRegion.PrimaryUserTrackingId)
+                    {
+                        kinect.gestureCamera.OnGesture(skeletons[i]);
+                    }
+                }
             }
         }
 

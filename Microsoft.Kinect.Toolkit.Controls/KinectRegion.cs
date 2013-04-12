@@ -142,7 +142,7 @@ namespace Microsoft.Kinect.Toolkit.Controls
         /// <summary>
         /// Intermediate storage for the skeleton data received from the Kinect sensor.
         /// </summary>
-        private Skeleton[] skeletons;
+        public Skeleton[] skeletons;
 
         /// <summary>
         /// Intermediate storage for the user information received from interaction stream.

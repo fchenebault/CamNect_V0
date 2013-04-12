@@ -87,8 +87,8 @@
         <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="164" Margin="250,10,0,0"/>
 
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" Margin="312,0,1568,0"/>
-     
-        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" VerticalAlignment="Bottom">
+
+        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent">
             <Grid x:Name="kinectRegionGrid" Height="1080" Width="1920">
                 <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Margin="1492,10,291,947" Opacity="0.4" />
                 <GUI:KinectHoverButton x:Name="buttonTop" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="450" Canvas.Top="10" Height="102" Width="972" Click="goUp_onClick" Margin="450,10,498,968"/>
@@ -99,7 +99,7 @@
                 <GUI:KinectHoverButton x:Name="buttonTopRight" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="1739" Height="176" Width="181" Click="goTopRight_onClick" Margin="1729,10,10,894"/>
                 <GUI:KinectHoverButton x:Name="buttonDownLeft" Style="{StaticResource KinectHoverButtonStyle}" Height="176" Width="181" Canvas.Top="904" Click="goDownLeft_onClick" Margin="10,894,1729,10"/>
                 <GUI:KinectHoverButton x:Name="buttonDownRight" Style="{StaticResource KinectHoverButtonStyle}" Height="176" Width="181" Canvas.Top="904" Canvas.Left="1739" Click="goDownRight_onClick" Margin="1729,894,10,10"/>
-                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="#FFFBFBFB" Margin="1474,10,0,0"/>
+                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0"/>
             </Grid>
         </k:KinectRegion>
     </Grid>
