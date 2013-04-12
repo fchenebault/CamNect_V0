@@ -51,9 +51,17 @@ namespace CamNect.GUI.Views
             disc.Start();*/
 
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
-            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);   
+            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);
+            kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
+           
+           // video.Play();
         }
 
+        public void retourMenu()
+        {
+            Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
+            this.Content = Menu;
+        }
 
         public void writeMessage()
         {

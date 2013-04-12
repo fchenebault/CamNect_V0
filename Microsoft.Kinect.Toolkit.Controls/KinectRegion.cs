@@ -885,7 +885,7 @@ namespace Microsoft.Kinect.Toolkit.Controls
                         var accelerometerReading = this.KinectSensor.AccelerometerGetCurrentReading();
 
                         // Hand data to Interaction framework to be processed
-                        this.interactionStream.ProcessSkeleton(this.skeletons, accelerometerReading, skeletonFrame.Timestamp);
+                         this.interactionStream.ProcessSkeleton(this.skeletons, accelerometerReading, skeletonFrame.Timestamp);
                     }
                     catch (InvalidOperationException)
                     {

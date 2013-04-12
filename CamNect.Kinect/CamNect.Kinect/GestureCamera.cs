@@ -66,7 +66,7 @@ namespace CamNect.Kinect
                 case "SwipeUp":
                     gestureKind = "Swipe Up";
                     Console.WriteLine("Up");
-                    
+                    OnSwipeUpEvent();
                     break;
                 case "SwipeDown":
                     gestureKind = "Swipe Down";
@@ -84,6 +84,9 @@ namespace CamNect.Kinect
 
         public delegate void SwipeRightEvent();
         public event SwipeRightEvent OnSwipeRightEvent;
+
+        public delegate void SwipeUpEvent();
+        public event SwipeUpEvent OnSwipeUpEvent;
     }
 
 }

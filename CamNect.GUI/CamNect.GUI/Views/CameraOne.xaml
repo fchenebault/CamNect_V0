@@ -54,7 +54,7 @@
         <Canvas x:Name ="CameraOneCanvas">
 
             <Image x:Name= "CameraOnePlayer" Height="1080" Width="1920" />
-            
+
             <Polygon x:Name="polygonLeft" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="250" />
             <Polygon x:Name="polygonRight" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="250" />
             <Polygon x:Name="polygonTop" Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="450" Canvas.Top="10" />
@@ -81,6 +81,8 @@
 
             <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" x:Name="message" Width="530" Foreground="Red" FontSize="40" Background="{x:Null}" />
 
+           
+
         </Canvas>
 
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,10,0,0" />
@@ -100,7 +102,7 @@
                 <GUI:KinectHoverButton x:Name="buttonDownLeft" Style="{StaticResource KinectHoverButtonStyle}" Height="176" Width="181" Canvas.Top="904" Click="goDownLeft_onClick" Margin="10,894,1729,10"/>
                 <GUI:KinectHoverButton x:Name="buttonDownRight" Style="{StaticResource KinectHoverButtonStyle}" Height="176" Width="181" Canvas.Top="904" Canvas.Left="1739" Click="goDownRight_onClick" Margin="1729,894,10,10"/>
                 <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0"/>
-            </Grid>
+            </Grid>        
         </k:KinectRegion>
     </Grid>
 </UserControl>

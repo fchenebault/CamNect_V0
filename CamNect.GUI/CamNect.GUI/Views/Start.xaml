@@ -8,7 +8,7 @@
 
     <Grid Loaded="Window_Loaded">
         <Grid.Background>
-            <ImageBrush ImageSource="../Ressources/Images/background.png" />
+            <ImageBrush ImageSource="../Ressources/Images/background.png" />          
         </Grid.Background>
 
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -28,8 +28,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform><Run Language="fr-fr" Text="Camera control over Kinect "/></TextBlock>
         <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="197" Width="741" FontFamily="Gisha" FontSize="140" Foreground="#FF662D91" Margin="547,357,624,0" FontWeight="Bold"><Run Language="fr-fr" Text="CAMNECT"/></TextBlock>
-        <Image HorizontalAlignment="Left" Height="252" Margin="1595,10,-35,0" VerticalAlignment="Top" Width="352" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>
-
+        <Image HorizontalAlignment="Left" Height="252" Margin="1595,10,-35,0" VerticalAlignment="Top" Width="352" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>    
         <Grid Margin="-10,139,10,-77">
             <CircularAnimations_Examples:BlueDot Width="40" Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00'/>
             <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.2'>
