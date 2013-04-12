@@ -185,6 +185,24 @@
       <Name>Microsoft.Kinect.Toolkit</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\rsz_1kinect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\rsz_ptz214.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\rsz_groupe_projets8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\logo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\kinectS8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\config.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

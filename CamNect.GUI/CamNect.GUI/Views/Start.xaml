@@ -18,27 +18,10 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBlock.RenderTransform><Run Language="fr-fr" Text="Camera control over Kinect "/></TextBlock>
-        <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="450" FontFamily="Gisha" FontSize="92" FontWeight="Bold" Foreground="#FF52318F" Margin="526,144,936,0"><Run Language="fr-fr" Text="CAMNECT"/></TextBlock>
-        <Image HorizontalAlignment="Left" Height="168" Margin="1622,144,0,0" VerticalAlignment="Top" Width="220" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>
-        <Image HorizontalAlignment="Left" Height="304" Margin="1439,686,0,0" VerticalAlignment="Top" Width="403" Source="../Ressources/Images/image_groupe.jpg"/>
-       
-        <!--<Image HorizontalAlignment="Left" Height="92" Margin="143,307,0,0" VerticalAlignment="Top" Width="350" Source="../Ressources/Images/kinect.png" RenderTransformOrigin="0.5,0.5"  Panel.ZIndex="5000">
-            <Image.Effect>
-                <DropShadowEffect/>
-            </Image.Effect>
-        </Image>
-        <Image HorizontalAlignment="Left" Height="100" Margin="205,237,0,0" VerticalAlignment="Top" Width="100" Source="../Ressources/Images/ptz214.png" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-0.375"/>
-                    <RotateTransform Angle="-10"/>
-                    <TranslateTransform X="0.327"/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>-->
+        <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="450" FontFamily="Gisha" FontSize="92" FontWeight="Bold" Foreground="#FF662D91" Margin="526,144,936,0"><Run Language="fr-fr" Text="CAMNECT"/></TextBlock>
+        <Image HorizontalAlignment="Left" Height="168" Margin="1592,226,0,0" VerticalAlignment="Top" Width="220" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>
 
-        <Grid Margin="0,62,0,-62">
+        <Grid Margin="0,62,0,0">
             <CircularAnimations_Examples:BlueDot Width="40" Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00'/>
             <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.2'>
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
@@ -110,6 +93,19 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
+            <Image HorizontalAlignment="Left" Height="223" Margin="2150,398,-530,0" VerticalAlignment="Top" Width="292" Source="/CamNect.GUI;component/Ressources/Images/rsz_groupe_projets8.jpg"/>
+            <Image HorizontalAlignment="Left" Height="290" Margin="1488,710,0,0" VerticalAlignment="Top" Width="414" Source="/CamNect.GUI;component/Ressources/Images/logo1.png"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="86,813,0,0" VerticalAlignment="Top" Width="300" Source="/CamNect.GUI;component/Ressources/Images/kinectS8.png" RenderTransformOrigin="0.492,0.49">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.298"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image HorizontalAlignment="Left" Height="100" Margin="2192,896,-380,0" VerticalAlignment="Top" Width="100" Source="/CamNect.GUI;component/Ressources/Images/config.png"/>
         </Grid>
 
     </Grid>
