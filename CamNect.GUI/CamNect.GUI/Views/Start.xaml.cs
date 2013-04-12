@@ -16,6 +16,7 @@ namespace CamNect.GUI.Views
         /* Variables */
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
 
         public Start()
@@ -30,7 +31,6 @@ namespace CamNect.GUI.Views
         private void Window_Loaded(Object sender, RoutedEventArgs e)
         {
             // Timer to wait for the other view
-            DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(7000);
             dispatcherTimer.Start();
@@ -39,6 +39,7 @@ namespace CamNect.GUI.Views
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            dispatcherTimer.Stop();
             Views.Menu MenuPage = new Menu(kinect.sensorChooser);
             this.Content = MenuPage;
         }
