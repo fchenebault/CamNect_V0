@@ -54,6 +54,7 @@
                 </k:KinectScrollViewer>
             </Grid>
         </k:KinectRegion>
+        <Image HorizontalAlignment="Left" Height="206" Margin="1586,833,0,0" VerticalAlignment="Top" Width="324" Source="/CamNect.GUI;component/Ressources/Images/logo1.png" RenderTransformOrigin="0.509,0.019"/>
 
 
     </Grid>
