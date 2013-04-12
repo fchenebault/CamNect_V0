@@ -19,6 +19,7 @@ namespace CamNect.GUI
 
         /* Variables */
         private KinectMain kinect;
+        public KinectSensorChooser sensorChooser;
 
         public MainWindow()
         {
@@ -27,15 +28,11 @@ namespace CamNect.GUI
             Instruction.Text = "Push the start button";
 
             // Sensor initialisation
-            this.kinect = new KinectMain(sensorChooserUi, kinectRegion);
+            this.sensorChooser = new KinectSensorChooser();
+            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
             // Add gestures events
             //kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
-        }
-
-        public void writeMessage()
-        {
-            message.Content = "SwipeLeft";
         }
 
         //Test the size screen

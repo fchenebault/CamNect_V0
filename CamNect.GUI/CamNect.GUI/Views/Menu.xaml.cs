@@ -19,22 +19,18 @@ namespace CamNect.GUI.Views
     {
 
         /* Variables */
-        private readonly KinectSensorChooser sensorChooser;
+        private KinectMain kinect;
+        public KinectSensorChooser sensorChooser;
         private static CamNect.Camera.Camera[] cameraArray = new CamNect.Camera.Camera[3];
 
         public Menu(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
 
-            // initialize the sensor chooser and UI
+            // Sensor initialisation
             this.sensorChooser = sensorChooser;
-            this.sensorChooser.KinectChanged += SensorChooserOnKinectChanged;
-            this.sensorChooserUi.KinectSensorChooser = this.sensorChooser;
-            this.sensorChooser.Start();
+            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
-            // Bind the sensor chooser's current sensor to the KinectRegion
-            var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
-            BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
             //cameraArray[0] = new CameraPTZ(new Vlc.DotNet.Wpf.VlcControl(), cameraOne);
             // Use KinectMain class
             //this.kinect = new KinectMain(this.sensorChooser.Kinect);
