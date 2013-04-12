@@ -24,24 +24,18 @@ namespace CamNect.GUI.Views
             "PageLeftEnabled", typeof(bool), typeof(MainWindow), new PropertyMetadata(false));
 
         /* Variables */
+        private KinectMain kinect;
         private static CameraPTZ cameraOne;
-        private readonly KinectSensorChooser sensorChooser;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         public CameraOne(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
 
-            // initialize the sensor chooser and UI
-            this.sensorChooser = sensorChooser;
-            this.sensorChooser.KinectChanged += SensorChooserOnKinectChanged;
-            this.sensorChooserUi.KinectSensorChooser = this.sensorChooser;
-            this.sensorChooser.Start();
+            // Sensor initialisation
+            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
-            // Bind the sensor chooser's current sensor to the KinectRegion
-            var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
-            BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
-
+           
             // Use KinectMain class
             //this.buttons = new List<System.Windows.Controls.Button> { quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight };
             //this.kinect = new KinectMain(this.sensorChooser.Kinect, buttons);
@@ -135,6 +129,7 @@ namespace CamNect.GUI.Views
         {
             this.timer.Stop();
             message.Content = null;
+            polygonTopLeft.IsEnabled = false;
         }
 
         public void goRight_onClick(object sender, RoutedEventArgs e)
@@ -181,6 +176,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
+                polygonTopLeft.IsEnabled = true;
                 this.timer.Interval = 3000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
@@ -247,10 +243,20 @@ namespace CamNect.GUI.Views
             }
         }
 
+        public void OnMouseEnterHandler(object sender, RoutedEventArgs e)
+        {
+            
+            SolidColorBrush brush = new SolidColorBrush(Colors.Purple);
+            polygonTopLeft.Fill = brush;
+            polygonTopLeft.Opacity = 0.5;
+        }
+
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        
 
     }
 }

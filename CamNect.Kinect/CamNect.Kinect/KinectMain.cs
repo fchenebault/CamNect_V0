@@ -19,8 +19,9 @@ namespace CamNect.Kinect
 
 
         // Constructor
-        public KinectMain(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
+        public KinectMain(KinectSensorChooser sensorChooser, KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
         {
+            this.sensorChooser = sensorChooser;
             InitKinect(sensorChooserUi, kinectRegion);
             gestureCamera = new GestureCamera();
             handsTracked = kinectRegion.HandPointers;
@@ -39,7 +40,6 @@ namespace CamNect.Kinect
         public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
         {
             // initialize the sensor chooser and UI
-            this.sensorChooser = new KinectSensorChooser();
             this.sensorChooser.KinectChanged += SensorChooserOnKinectChanged;
             sensorChooserUi.KinectSensorChooser = this.sensorChooser;
             this.sensorChooser.Start();
