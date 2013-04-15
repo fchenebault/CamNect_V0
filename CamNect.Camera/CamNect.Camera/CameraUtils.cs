@@ -20,6 +20,11 @@ namespace CamNect.Camera
             this.config = cfg;
         }
 
+        public CamConfig Config
+        {
+            get{return config;}
+        }
+
         public void goLeft()
         {
             String result;

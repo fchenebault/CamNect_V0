@@ -19,11 +19,11 @@
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Nom}" Header="Nom" />
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Id}" Header="Identifiant" />
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Pass}" Header="Mot de passe" />
-                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Option}" Header="Option" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding ptzOn}" Header="PTZ" />
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Serie}" Header="N° Serie" />
-                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Fenetre}" Header="N° Fenetre" />
-                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Show}" Visibility="Hidden" Header="Show" />
-                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Udn}" Visibility="Hidden" Header="Udn" />
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Rank}" Header="N° Fenetre" />
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding show}" Visibility="Hidden" Header="Show" />
+                
                 
                 <DataGridTemplateColumn Header="Supprimer">
                     

@@ -28,7 +28,7 @@ namespace CamNect.GUI.Views
 
         /* Variables */
         private KinectMain kinect;
-        private static List<CameraUtils> cameraList = new List<CameraUtils>();
+        public static List<CameraUtils> cameraList = new List<CameraUtils>();
         private static List<CamConfig> defaultConfig = new List<CamConfig>();
         private static int rank = 1;
 
@@ -38,7 +38,6 @@ namespace CamNect.GUI.Views
         public CameraOne(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
-            loadDatabase();
 
             // Sensor initialisation
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
@@ -61,11 +60,12 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
             kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
+
            
            // video.Play();
         }
 
-        public void loadDatabase()
+        public static void loadDatabase()
         {
             String json = null;
 
@@ -157,6 +157,7 @@ namespace CamNect.GUI.Views
             //a.Device.UniqueDeviceName.ToString();
 
             bool camExist = false;
+            System.Console.WriteLine("deviceadded");
 
             /* On recherche d'abord une configuration sauvegardée*/
             foreach (CamConfig cfg in ConfigCamWindow.Ligne)
@@ -194,7 +195,7 @@ namespace CamNect.GUI.Views
                 }
             }
 
-            CamNect.GUI.Views.ConfigCamWindow.CamRefresh();
+            ConfigCamWindow.CamRefresh();
 
 
             // ConfigCamWindow.getDg.Item
