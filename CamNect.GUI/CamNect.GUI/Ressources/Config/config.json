@@ -1,0 +1,16 @@
+[
+  {
+    "Afficher": false,
+    "Nom": "AXIS 214",
+    "Id": "root",
+    "Pass": "root",
+    "Uri": "/axis-cgi/mjpg/video.cgi",
+    "isPtz": true,
+    "Zoom": true,
+    "Modele": "AXIS 214",
+    "Serie": "00408CAB62FA",
+    "Rank": 1,
+    "Show": true,
+    "PtzOn": true
+  }
+]

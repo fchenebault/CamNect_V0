@@ -69,15 +69,15 @@ namespace CamNect.GUI.Views
         {
             String json = null;
 
-            if (!File.Exists("defaultconfig.json"))
+            if (!File.Exists("../../Ressources/Config/defaultconfig.json"))
             {
-                StreamWriter jsonfile = new StreamWriter("defaultconfig.json", false);
+                StreamWriter jsonfile = new StreamWriter("../../Ressources/Config/defaultconfig.json", false);
                 jsonfile.WriteLine("[]");
                 jsonfile.Close();
             }
             else
             {
-                json = File.ReadAllText("defaultconfig.json");
+                json = File.ReadAllText("../../Ressources/Config/defaultconfig.json");
                 defaultConfig = JsonConvert.DeserializeObject<List<CamConfig>>(json);
             }
         }

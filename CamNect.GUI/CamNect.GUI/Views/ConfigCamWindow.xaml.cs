@@ -50,16 +50,16 @@ namespace CamNect.GUI.Views
        private void CamConfigCollection()
        {
            String json=null;
-       
-           if (!File.Exists("config.json"))
+
+           if (!File.Exists("../../Ressources/Config/config.json"))
            {
-               StreamWriter jsonfile = new StreamWriter("config.json", false);
+               StreamWriter jsonfile = new StreamWriter("../../Ressources/Config/config.json", false);
                jsonfile.WriteLine("[]");
                jsonfile.Close();
            }
            else
            {
-               json = File.ReadAllText("config.json");
+               json = File.ReadAllText("../../Ressources/Config/config.json");
                ligne = JsonConvert.DeserializeObject<List<CamConfig>>(json);
            }
        }
@@ -98,7 +98,7 @@ namespace CamNect.GUI.Views
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            StreamWriter jsonfile = new StreamWriter("config.json", false);
+            StreamWriter jsonfile = new StreamWriter("../../Ressources/Config/config.json", false);
 
            
 

@@ -1,0 +1,33 @@
+[
+  {
+    "Afficher": false,
+    "Nom": "AXIS 214",
+    "Id": "root",
+    "Pass": "root",
+	"Uri": "/axis-cgi/mjpg/video.cgi",
+    "isPtz": true,
+	"ptzOn": true,
+	"Zoom": true,
+    "Modele": "AXIS 214",
+  },
+  {
+    "Afficher": false,
+    "Nom": "AXIS 218",
+    "Id": "root",
+    "Pass": "root",
+	"Uri": "/axis-media/media.amp?videocodec=jpeg",
+    "isPtz": false,
+	"Zoom": false,
+    "Modele": "AXIS 218",
+  },
+  {
+    "Afficher": false,
+    "Nom": "AXIS 219",
+    "Id": "root",
+    "Pass": "root",
+	"Uri": "/axis-media/media.amp?videocodec=jpeg",
+    "isPtz": false,
+	"Zoom": false,
+    "Modele": "AXIS 219",
+  }
+]
