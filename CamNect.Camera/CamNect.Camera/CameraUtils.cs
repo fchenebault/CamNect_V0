@@ -23,6 +23,7 @@ namespace CamNect.Camera
         public CamConfig Config
         {
             get{return config;}
+
         }
 
         public void goLeft()
