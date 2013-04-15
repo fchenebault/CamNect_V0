@@ -47,7 +47,9 @@
                 <k:KinectScrollViewer Height="600" Margin="0,0,0,200" Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                     <WrapPanel VerticalAlignment="Center" x:Name="wrapPanel" Orientation="Vertical" k:KinectTileButton.Click="KinectTileButtonClick">
                         <!-- items for design layout.  They will be replaced at runtime. -->
-                        <k:KinectTileButton x:Name= "cameraOne" Label="Grosse Camera" Height="600" Width="800" Margin="50,0" k:KinectTileButton.Click="button_Two" />
+                        <k:KinectTileButton x:Name= "cameraOne" Label="Grosse Camera" Height="600" Width="800" Margin="50,0" k:KinectTileButton.Click="button_Two" >
+                            <Image x:Name="test"  Height="530" Width="800" Margin="0,0,0,70" />
+                        </k:KinectTileButton>
                         <k:KinectTileButton Label="Petite Camera 1" Height="600" Width="800" Margin="50,0" />
                         <k:KinectTileButton Label="Petite Camera 2" Height="600" Width="800" Margin="50,0"/>
                     </WrapPanel>
