@@ -49,8 +49,9 @@
     <Reference Include="Microsoft.Kinect, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Needed_libs\CamNect.GUI\Newtonsoft.Json.dll</HintPath>
+	</Reference>
     <Reference Include="MjpegProcessor">
-      <HintPath>..\..\..\..\..\Downloads\MJPEG_bin\MjpegProcessor.dll</HintPath>
+      <HintPath>..\..\Needed_libs\CamNect.GUI\MjpegProcessor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
