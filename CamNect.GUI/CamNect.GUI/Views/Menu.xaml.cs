@@ -9,6 +9,7 @@ using Microsoft.Kinect.Toolkit.Controls;
 using Microsoft.Kinect;
 using System.Windows;
 using ManagedUPnP;
+using MjpegProcessor;
 
 namespace CamNect.GUI.Views
 {
@@ -22,6 +23,7 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
         private static CamNect.Camera.CameraUtils[] cameraArray = new CamNect.Camera.CameraUtils[3];
+        MjpegDecoder _mjpeg;
 
         public Menu(KinectSensorChooser sensorChooser)
         {
@@ -30,7 +32,9 @@ namespace CamNect.GUI.Views
             // Sensor initialisation
             this.sensorChooser = sensorChooser;
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
-
+            _mjpeg = new MjpegDecoder();
+            _mjpeg.FrameReady += mjpeg_FrameReady;
+            _mjpeg.ParseStream(new Uri("http://172.18.255.100/mjpg/video.mjpg"),"root","root");
             //cameraArray[0] = new CameraPTZ(new Vlc.DotNet.Wpf.VlcControl(), cameraOne);
             // Use KinectMain class
             //this.kinect = new KinectMain(this.sensorChooser.Kinect);
@@ -54,6 +58,16 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(moveToCameraOne);
             kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(moveToCameraOne);*/
 
+        }
+
+    //    private void Start_Click(object sender, RoutedEventArgs e)
+   //     {
+    //        _mjpeg.ParseStream(new Uri("http://172.18.255.100/mjpg/video.mjpg"));
+    //    }
+
+        private void mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
+        {
+            test.Source = e.BitmapImage;
         }
 
         /// <summary>
