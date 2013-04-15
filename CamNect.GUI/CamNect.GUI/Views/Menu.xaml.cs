@@ -21,7 +21,7 @@ namespace CamNect.GUI.Views
         /* Variables */
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
-        private static CamNect.Camera.Camera[] cameraArray = new CamNect.Camera.Camera[3];
+        private static CamNect.Camera.CameraUtils[] cameraArray = new CamNect.Camera.CameraUtils[3];
 
         public Menu(KinectSensorChooser sensorChooser)
         {
@@ -118,34 +118,6 @@ namespace CamNect.GUI.Views
            
         }
 
-        public static void discDeviceAdded(object sender, DeviceAddedEventArgs a)
-        {
-            if (a.Device.FriendlyName.Contains("AXIS 214"))
-            {
-                cameraArray[0].initCamera(a.Device.RootHostAddresses[0].ToString());
-                cameraArray[0].Play();
-                /*if (cameraArray[0] is CameraPTZ)
-                ((CameraPTZ)cameraArray[0]).zoomOn();*/
-            }
-
-            else if (a.Device.FriendlyName.Contains("AXIS M1054"))
-            {
-                cameraArray[1].initCamera(a.Device.RootHostAddresses[0].ToString());
-                cameraArray[1].Play();
-            }
-
-            else if (a.Device.FriendlyName.Contains("AXIS 54645"))
-            {
-                cameraArray[2].initCamera(a.Device.RootHostAddresses[0].ToString());
-                cameraArray[2].Play();
-            }
-        }
-
-
-        public void button_One(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         public void button_Two(object sender, RoutedEventArgs e)
         {
@@ -153,15 +125,6 @@ namespace CamNect.GUI.Views
             this.Content = CameraOnePage;
         }
 
-        public void button_Three(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void b1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void KinectTileButtonClick(object sender, RoutedEventArgs e)
         {

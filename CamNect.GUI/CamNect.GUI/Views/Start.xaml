@@ -113,6 +113,7 @@
                 </Image.RenderTransform>
             </Image>
         </Grid>
+        <Button Content="Button" Height="100px" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="936,139,0,0" Click="Button_Click_1"/>
 
     </Grid>
     

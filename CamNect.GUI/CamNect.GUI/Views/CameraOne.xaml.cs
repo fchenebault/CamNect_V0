@@ -11,6 +11,9 @@ using Microsoft.Kinect;
 using System.Windows;
 using ManagedUPnP;
 using System.Windows.Media;
+using System.IO;
+using Newtonsoft.Json;
+
 
 namespace CamNect.GUI.Views
 {
@@ -19,18 +22,23 @@ namespace CamNect.GUI.Views
     /// </summary>
     public partial class CameraOne : UserControl
     {
-
+        
         public static readonly DependencyProperty PageLeftEnabledProperty = DependencyProperty.Register(
             "PageLeftEnabled", typeof(bool), typeof(MainWindow), new PropertyMetadata(false));
 
         /* Variables */
         private KinectMain kinect;
-        private static CameraPTZ cameraOne;
+        private static List<CameraUtils> cameraList = new List<CameraUtils>();
+        private static List<CamConfig> defaultConfig = new List<CamConfig>();
+        private static int rank = 1;
+
+//        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         public CameraOne(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
+            loadDatabase();
 
             // Sensor initialisation
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
@@ -55,6 +63,23 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
            
            // video.Play();
+        }
+
+        public void loadDatabase()
+        {
+            String json = null;
+
+            if (!File.Exists("defaultconfig.json"))
+            {
+                StreamWriter jsonfile = new StreamWriter("defaultconfig.json", false);
+                jsonfile.WriteLine("[]");
+                jsonfile.Close();
+            }
+            else
+            {
+                json = File.ReadAllText("defaultconfig.json");
+                defaultConfig = JsonConvert.DeserializeObject<List<CamConfig>>(json);
+            }
         }
 
         public void retourMenu()
@@ -126,16 +151,63 @@ namespace CamNect.GUI.Views
 
         public static void discDeviceAdded(object sender, DeviceAddedEventArgs a)
         {
-            cameraOne.initCamera("172.18.255.100");
-            System.Console.WriteLine(a.Device.RootHostAddresses[0].ToString());
-            cameraOne.Play();
-            if (a.Device.FriendlyName.Contains("AXIS 214"))
+            //cameraOne.initCamera("172.18.255.100");
+            //System.Console.WriteLine(a.Device.RootHostAddresses[0].ToString());
+            //cameraOne.Play();
+            //a.Device.UniqueDeviceName.ToString();
+
+            bool camExist = false;
+
+            /* On recherche d'abord une configuration sauvegardée*/
+            foreach (CamConfig cfg in ConfigCamWindow.Ligne)
             {
-                cameraOne.initCamera(a.Device.RootHostAddresses[0].ToString());
-                cameraOne.Play();
-                /*if (cameraArray[0] is CameraPTZ)
-                ((CameraPTZ)cameraArray[0]).zoomOn();*/
+                if (a.Device.SerialNumber.ToString() == cfg.Serie)
+                {
+                    camExist = true;
+
+                    cfg.Show = true;
+                    cfg.Rank = rank;
+                    rank++;
+
+                    cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));
+                    break;
+                }
             }
+
+            if (!camExist)
+            {
+                foreach (CamConfig cfg in defaultConfig)
+                {
+                    if (a.Device.FriendlyName.Contains(cfg.Modele))
+                    {
+                        System.Console.WriteLine(cfg.Modele);
+                        cfg.Serie = a.Device.SerialNumber.ToString();
+                        cfg.Show = true;
+                        cfg.Rank = rank;
+                        rank++;
+
+                        ConfigCamWindow.AddCam(cfg);
+
+                        cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));
+                        break;
+                    }
+                }
+            }
+
+            CamNect.GUI.Views.ConfigCamWindow.CamRefresh();
+
+
+            // ConfigCamWindow.getDg.Item
+            //if (!camExist)
+
+
+            //cameraOne.initCamera(a.Device.RootHostAddresses[0].ToString());
+            //System.Console.WriteLine(a.Device.SerialNumber.ToString());
+
+            //cameraOne.Play();
+            /*if (cameraArray[0] is CameraPTZ)
+            ((CameraPTZ)cameraArray[0]).zoomOn();*/
+
         }
 
         public void TimerStop(Object myObject, EventArgs myEventArgs)

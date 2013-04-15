@@ -44,5 +44,15 @@ namespace CamNect.GUI.Views
             this.Content = MenuPage;
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            //Views.ConfigCam ConfigCamPage = new Views.ConfigCam();
+           //Var ConfigCamWindow = new NewWindow();
+            //this.Content = ConfigCamPage;
+            var ConfigCamWin = new ConfigCamWindow();
+            ConfigCamWin.ShowDialog();
+        }
+
     }
 }

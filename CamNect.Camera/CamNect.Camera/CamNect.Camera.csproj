@@ -61,7 +61,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Camera.cs" />
+    <Compile Include="CamConfig.cs" />
+    <Compile Include="CameraUtils.cs" />
     <Compile Include="HttpReq.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
