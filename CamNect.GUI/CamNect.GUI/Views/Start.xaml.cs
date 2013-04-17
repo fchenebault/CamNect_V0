@@ -59,7 +59,8 @@ namespace CamNect.GUI.Views
             //Views.ConfigCam ConfigCamPage = new Views.ConfigCam();
            //Var ConfigCamWindow = new NewWindow();
             //this.Content = ConfigCamPage;
-            configCamWin.ShowDialog();
+            configCamWin.Show();
+            
         }
 
     }

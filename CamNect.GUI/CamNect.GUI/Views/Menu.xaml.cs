@@ -35,7 +35,7 @@ namespace CamNect.GUI.Views
             _mjpeg = new MjpegDecoder();
             _mjpeg.FrameReady += mjpeg_FrameReady;
             _mjpeg.ParseStream(new Uri("http://172.18.255.100/mjpg/video.mjpg"),"root","root");
-            cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
+            //cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
 
                 //cameraArray[0] = new CameraPTZ(new Vlc.DotNet.Wpf.VlcControl(), cameraOne);
             // Use KinectMain class

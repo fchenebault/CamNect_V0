@@ -16,24 +16,19 @@ namespace CamNect.Camera
         public bool isPtz { get; set; }
         private bool ptzOn = false;
         public bool Zoom { get; set; }
+        public bool Son { get; set; }
         public string Modele { get; set; }
         public string Serie { get; set; }
-        public int Rank { get; set; }
-        private bool show = false;
-
-        public bool Show
-        {
-            get;
-            set;
-        }
-
+        public int Fenetre { get; set; }
+        public bool Plugged  { get; set; }
+       
         public bool PtzOn
         {
             get;
             set;
         }
 
-        public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, string serie, int rank, bool show)
+        public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, bool son, string serie, int fenetre, bool plugged)
         {
 
             this.Afficher = afficher;
@@ -44,8 +39,9 @@ namespace CamNect.Camera
             this.Uri = uri;
             this.isPtz = isPtz;
             this.Zoom = zoom;
-            this.Rank = rank;
-            this.show = show;
+            this.Son = son;
+            this.Fenetre = fenetre;
+            this.Plugged = plugged;
         }
     }
 }
