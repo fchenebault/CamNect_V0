@@ -30,9 +30,11 @@ namespace CamNect.GUI.Views
         public static List<CameraUtils> cameraList = new List<CameraUtils>();
         private static List<CamConfig> defaultConfig = new List<CamConfig>();
         private static int rank = 1;
+        public KinectSensorChooser sensorChooser;
 
 //        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        public System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
 
         public CameraOne(KinectSensorChooser sensorChooser)
         {
@@ -40,6 +42,7 @@ namespace CamNect.GUI.Views
 
             // Sensor initialisation
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+            this.sensorChooser = sensorChooser;
 
            
             // Use KinectMain class
@@ -214,7 +217,15 @@ namespace CamNect.GUI.Views
         {
             this.timer.Stop();
             message.Content = null;
+        }
+
+        public void highlightTimer_Tick(object sender, System.EventArgs e)
+        {
+            this.highlightTimer.Stop();
             polygonTopLeft.IsEnabled = false;
+            polygonDownLeft.IsEnabled = false;
+            polygonTopRight.IsEnabled = false;
+            polygonDownRight.IsEnabled = false;
         }
 
         public void goRight_onClick(object sender, RoutedEventArgs e)
@@ -258,10 +269,20 @@ namespace CamNect.GUI.Views
 
         public void goTopLeft_onClick(object sender, RoutedEventArgs e)
         {
+            // Highlighting corner polygon
+            if (this.highlightTimer != null)
+            {
+                this.highlightTimer.Stop();
+            }
+            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
+            this.highlightTimer.Interval = 40;
+            this.highlightTimer.Start();
+            polygonTopLeft.IsEnabled = true;
+            
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                polygonTopLeft.IsEnabled = true;
                 this.timer.Interval = 3000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
@@ -273,6 +294,17 @@ namespace CamNect.GUI.Views
 
         public void goTopRight_onClick(object sender, RoutedEventArgs e)
         {
+            // Highlighting corner polygon
+            if (this.highlightTimer != null)
+            {
+                this.highlightTimer.Stop();
+            }
+            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
+            this.highlightTimer.Interval = 40;
+            this.highlightTimer.Start();
+            polygonTopRight.IsEnabled = true;
+
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
@@ -301,6 +333,17 @@ namespace CamNect.GUI.Views
 
         public void goDownRight_onClick(object sender, RoutedEventArgs e)
         {
+            // Highlighting corner polygon
+            if (this.highlightTimer != null)
+            {
+                this.highlightTimer.Stop();
+            }
+            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
+            this.highlightTimer.Interval = 40;
+            this.highlightTimer.Start();
+            polygonDownRight.IsEnabled = true;
+
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
@@ -316,6 +359,17 @@ namespace CamNect.GUI.Views
 
         public void goDownLeft_onClick(object sender, RoutedEventArgs e)
         {
+            // Highlighting corner polygon
+            if (this.highlightTimer != null)
+            {
+                this.highlightTimer.Stop();
+            }
+            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
+            this.highlightTimer.Interval = 40;
+            this.highlightTimer.Start();
+            polygonDownLeft.IsEnabled = true;
+
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
@@ -342,14 +396,6 @@ namespace CamNect.GUI.Views
                     }
                 }
             }
-        }
-
-        public void OnMouseEnterHandler(object sender, RoutedEventArgs e)
-        {
-            
-            SolidColorBrush brush = new SolidColorBrush(Colors.Purple);
-            polygonTopLeft.Fill = brush;
-            polygonTopLeft.Opacity = 0.5;
         }
 
         public void quit_onClick(object sender, RoutedEventArgs e)
