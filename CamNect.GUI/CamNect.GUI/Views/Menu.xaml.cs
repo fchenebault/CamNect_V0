@@ -9,7 +9,6 @@ using Microsoft.Kinect.Toolkit.Controls;
 using Microsoft.Kinect;
 using System.Windows;
 using ManagedUPnP;
-using MjpegProcessor;
 
 namespace CamNect.GUI.Views
 {
@@ -23,52 +22,21 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
         private static CamNect.Camera.CameraUtils[] cameraArray = new CamNect.Camera.CameraUtils[3];
-        MjpegDecoder _mjpeg;
+        private MjpegReader[] readerArray = new MjpegReader[3];
 
         public Menu(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
-
+            
             // Sensor initialisation
             this.sensorChooser = sensorChooser;
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
-            _mjpeg = new MjpegDecoder();
-            _mjpeg.FrameReady += mjpeg_FrameReady;
-            _mjpeg.ParseStream(new Uri("http://172.18.255.101/mjpg/video.mjpg"),"root","root");
+
+            readerArray[0] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.100", player1);
+            readerArray[1] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.101", player2);
+            readerArray[2] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.102", player3);
+
             cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
-                //cameraArray[0] = new CameraPTZ(new Vlc.DotNet.Wpf.VlcControl(), cameraOne);
-            // Use KinectMain class
-            //this.kinect = new KinectMain(this.sensorChooser.Kinect);
-            
-
-           
-
-            /*Instruction.Text = "Select a CCTV";
-            this.buttons = new List<System.Windows.Controls.Button> { buttonOne, buttonTwo, buttonThree };
-            kinect = new KinectMain(MenuGrid, kinectButton, buttons);
-            kinectButton.Click += new RoutedEventHandler(this.kinect.curseur.kinectButton_Click);
-
-            /*cameraArray[0] = new CameraPTZ(new VlcControl(), cameraOne);
-            cameraArray[1] = new CameraSTD(new VlcControl(), cameraTwo);
-            cameraArray[2] = new CameraSTD(new VlcControl(), cameraThree);
-
-            Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
-            disc.DeviceAdded += new DeviceAddedEventHandler(discDeviceAdded);
-            disc.Start();/*
-
-            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(moveToCameraOne);
-            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(moveToCameraOne);*/
-
-        }
-
-    //    private void Start_Click(object sender, RoutedEventArgs e)
-   //     {
-    //        _mjpeg.ParseStream(new Uri("http://172.18.255.100/mjpg/video.mjpg"));
-    //    }
-
-        private void mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
-        {
-            test.Source = e.BitmapImage;
         }
 
         /// <summary>

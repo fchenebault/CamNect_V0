@@ -30,7 +30,6 @@ namespace CamNect.Camera
 
         public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, bool son, string serie, int fenetre, bool plugged)
         {
-
             this.Afficher = afficher;
             this.Nom = nom;
             this.Id = id;

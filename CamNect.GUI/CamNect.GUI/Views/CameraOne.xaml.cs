@@ -5,7 +5,6 @@ using CamNect.Camera;
 using System.Collections.Generic;
 using Microsoft.Kinect.Toolkit;
 using System.Windows.Data;
-using Microsoft.Kinect.Toolkit;
 using Microsoft.Kinect.Toolkit.Controls;
 using Microsoft.Kinect;
 using System.Windows;

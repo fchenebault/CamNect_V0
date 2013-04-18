@@ -11,7 +11,7 @@
     "Modele": null,
     "Serie": "21255",
     "Fenetre": 1,
-    "Plugged": true,
+    "Plugged": false,
     "PtzOn": false
   },
   {
@@ -71,7 +71,7 @@
     "Modele": "AXIS 214",
     "Serie": "00408CAB62FA",
     "Fenetre": 5,
-    "Plugged": false,
+    "Plugged": true,
     "PtzOn": true
   }
 ]
