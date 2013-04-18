@@ -69,15 +69,15 @@ namespace CamNect.GUI.Views
         {
             String json = null;
 
-            if (!File.Exists("defaultconfig.json"))
+            if (!File.Exists("../../Ressources/Config/defaultconfig.json"))
             {
-                StreamWriter jsonfile = new StreamWriter("defaultconfig.json", false);
+                StreamWriter jsonfile = new StreamWriter("../../Ressources/Config/defaultconfig.json", false);
                 jsonfile.WriteLine("[]");
                 jsonfile.Close();
             }
             else
             {
-                json = File.ReadAllText("defaultconfig.json");
+                json = File.ReadAllText("../../Ressources/Config/defaultconfig.json");
                 defaultConfig = JsonConvert.DeserializeObject<List<CamConfig>>(json);
             }
         }
@@ -166,9 +166,9 @@ namespace CamNect.GUI.Views
                 {
                     camExist = true;
 
-                    cfg.Show = true;
-                    cfg.Rank = rank;
-                    rank++;
+                    cfg.Plugged = true;
+                   /* cfg.Fenetre = rank;
+                    rank++;*/
 
                     cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));
                     break;
@@ -183,9 +183,9 @@ namespace CamNect.GUI.Views
                     {
                         System.Console.WriteLine(cfg.Modele);
                         cfg.Serie = a.Device.SerialNumber.ToString();
-                        cfg.Show = true;
-                        cfg.Rank = rank;
-                        rank++;
+                        cfg.Plugged= true;
+                        /*cfg.Rank = rank;
+                        rank++;*/
 
                         ConfigCamWindow.AddCam(cfg);
 
