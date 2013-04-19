@@ -44,7 +44,7 @@ namespace CamNect.GUI.Views
         public CameraOne(KinectSensorChooser sensorChooser, CameraUtils camera)
         {
             InitializeComponent();
-            polygons = new List<Polygon> { polygonDownLeft, polygonDown, polygonUp, polygonDownRight, polygonLeft, polygonRight, polygonUpLeft, polygonUpRight, polygonFlecheDown, polygonFlecheDownLeft, polygonFlecheDownRight, polygonFlecheLeft, polygonFlecheRight, polygonFlecheUp, polygonFlecheUpLeft, polygonFlecheUpRight };
+            polygons = new List<Polygon> { polygonOverDownLeft, polygonDown, polygonUp, polygonOverDownRight, polygonLeft, polygonRight, polygonOverUpLeft, polygonOverUpRight, polygonFlecheDown, polygonFlecheDownLeft, polygonFlecheDownRight, polygonFlecheLeft, polygonFlecheRight, polygonFlecheUp, polygonFlecheUpLeft, polygonFlecheUpRight };
             hoverButtons = new List<KinectHoverButton> { buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopLeft, buttonTopRight };
             foreach (KinectHoverButton hoverButton in this.hoverButtons)
             {
