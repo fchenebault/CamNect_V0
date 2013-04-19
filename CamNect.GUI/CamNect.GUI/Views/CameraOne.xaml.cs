@@ -56,21 +56,7 @@ namespace CamNect.GUI.Views
             this.sensorChooser = sensorChooser;
 
             reader = new MjpegReader(camera, CameraOnePlayer);
-            // Use KinectMain class
-            //this.buttons = new List<System.Windows.Controls.Button> { quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight };
-            //this.kinect = new KinectMain(this.sensorChooser.Kinect, buttons);
-
-            /*
-            kinect = new KinectMain(CameraOneGrid, kinectButton, buttons);
-            kinectButton.Click += new RoutedEventHandler(this.kinect.curseur.kinectButton_Click);
-
-            cameraOne = new CameraPTZ(new VlcControl(), CameraOnePlayer);
-
-            Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
-            disc.DeviceAdded += new DeviceAddedEventHandler(discDeviceAdded);
-            disc.Start();*/
-
-
+           
             // Events for gestures
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
             kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);
@@ -79,8 +65,7 @@ namespace CamNect.GUI.Views
             // Events for grip buttons
             backgroundGrip.isCameraOne = true;
             backgroundGrip.OnHandGrip += new KinectScrollViewer.HandGripEvent(activeButtons);
-            
-           // video.Play();
+           
         }
 
         public static void loadDatabase()
@@ -120,10 +105,6 @@ namespace CamNect.GUI.Views
 
         public static void discDeviceAdded(object sender, DeviceAddedEventArgs a)
         {
-            //cameraOne.initCamera("172.18.255.100");
-            //System.Console.WriteLine(a.Device.RootHostAddresses[0].ToString());
-            //cameraOne.Play();
-            //a.Device.UniqueDeviceName.ToString();
 
             bool camExist = false;
             System.Console.WriteLine("deviceadded");

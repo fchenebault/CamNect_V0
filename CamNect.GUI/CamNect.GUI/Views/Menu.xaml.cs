@@ -23,8 +23,8 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
         private static CamNect.Camera.CameraUtils[] cameraArray = new CamNect.Camera.CameraUtils[3];
-        KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
-        Image[] imageArray = new Image[CameraOne.cameraList.Count];
+        private KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
+        private Image[] imageArray = new Image[CameraOne.cameraList.Count];
         private MjpegReader[] readerArray = new MjpegReader[CameraOne.cameraList.Count];
 
         public Menu(KinectSensorChooser sensorChooser)
@@ -117,12 +117,6 @@ namespace CamNect.GUI.Views
                     // E.g.: sensor might be abruptly unplugged.
                 }
             }
-        }
-
-        private void moveToCameraOne()
-        {
-         //   Views.CameraOne CameraPage = new Views.CameraOne(this.sensorChooser);
-         //   this.Content = CameraPage;
         }
 
         ////When the window is loaded
