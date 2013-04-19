@@ -12,6 +12,7 @@ using ManagedUPnP;
 using System.Windows.Media;
 using System.IO;
 using Newtonsoft.Json;
+using System.Windows.Shapes;
 
 
 namespace CamNect.GUI.Views
@@ -31,40 +32,41 @@ namespace CamNect.GUI.Views
         private static List<CamConfig> defaultConfig = new List<CamConfig>();
         private static int fenetre = ConfigCamWindow.maxFenetre;
         public KinectSensorChooser sensorChooser;
-
+        public List<Polygon> polygons;
+        private List<KinectHoverButton> hoverButtons;
+        private bool isButtonActive = false;
+        private MjpegReader reader;
 //        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
+        private CameraUtils camera;
 
-        public CameraOne(KinectSensorChooser sensorChooser)
+        public CameraOne(KinectSensorChooser sensorChooser, CameraUtils camera)
         {
             InitializeComponent();
+            polygons = new List<Polygon> { polygonDownLeft, polygonDown, polygonUp, polygonDownRight, polygonLeft, polygonRight, polygonUpLeft, polygonUpRight, polygonFlecheDown, polygonFlecheDownLeft, polygonFlecheDownRight, polygonFlecheLeft, polygonFlecheRight, polygonFlecheUp, polygonFlecheUpLeft, polygonFlecheUpRight };
+            hoverButtons = new List<KinectHoverButton> { buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopLeft, buttonTopRight };
+            foreach (KinectHoverButton hoverButton in this.hoverButtons)
+            {
+                hoverButton.Visibility = System.Windows.Visibility.Hidden;
+            }
 
             // Sensor initialisation
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
             this.sensorChooser = sensorChooser;
 
-           
-            // Use KinectMain class
-            //this.buttons = new List<System.Windows.Controls.Button> { quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight };
-            //this.kinect = new KinectMain(this.sensorChooser.Kinect, buttons);
+            // Camera Initialisation
+            reader = new MjpegReader(camera, CameraOnePlayer);
 
-            /*
-            kinect = new KinectMain(CameraOneGrid, kinectButton, buttons);
-            kinectButton.Click += new RoutedEventHandler(this.kinect.curseur.kinectButton_Click);
-
-            cameraOne = new CameraPTZ(new VlcControl(), CameraOnePlayer);
-
-            Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
-            disc.DeviceAdded += new DeviceAddedEventHandler(discDeviceAdded);
-            disc.Start();*/
-
+            // Events for gestures
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
             kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
 
+            // Events for grip buttons
+            backgroundGrip.isCameraOne = true;
+            backgroundGrip.OnHandGrip += new KinectScrollViewer.HandGripEvent(activeButtons);
            
-           // video.Play();
         }
 
         public static void loadDatabase()
@@ -96,56 +98,7 @@ namespace CamNect.GUI.Views
         {
             message.Content = "Geste";
         }
-        /// <summary>
-        /// Called when the KinectSensorChooser gets a new sensor
-        /// </summary>
-        /// <param name="sender">sender of the event</param>
-        /// <param name="args">event arguments</param>
-        private static void SensorChooserOnKinectChanged(object sender, KinectChangedEventArgs args)
-        {
-            if (args.OldSensor != null)
-            {
-                try
-                {
-                    args.OldSensor.DepthStream.Range = DepthRange.Default;
-                    args.OldSensor.SkeletonStream.EnableTrackingInNearRange = false;
-                    args.OldSensor.DepthStream.Disable();
-                    args.OldSensor.SkeletonStream.Disable();
-                }
-                catch (InvalidOperationException)
-                {
-                    // KinectSensor might enter an invalid state while enabling/disabling streams or stream features.
-                    // E.g.: sensor might be abruptly unplugged.
-                }
-            }
-
-            if (args.NewSensor != null)
-            {
-                try
-                {
-                    args.NewSensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
-                    args.NewSensor.SkeletonStream.Enable();
-
-                    try
-                    {
-                        args.NewSensor.DepthStream.Range = DepthRange.Near;
-                        args.NewSensor.SkeletonStream.EnableTrackingInNearRange = true;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // Non Kinect for Windows devices do not support Near mode, so reset back to default mode.
-                        args.NewSensor.DepthStream.Range = DepthRange.Default;
-                        args.NewSensor.SkeletonStream.EnableTrackingInNearRange = false;
-                    }
-                }
-                catch (InvalidOperationException)
-                {
-                    // KinectSensor might enter an invalid state while enabling/disabling streams or stream features.
-                    // E.g.: sensor might be abruptly unplugged.
-                }
-            }
-        }
-
+       
 
         ////When the window is loaded
         private void CameraOne_Window_Loaded(Object sender, RoutedEventArgs e)
@@ -155,10 +108,6 @@ namespace CamNect.GUI.Views
        
         public static void discDeviceAdded(object sender, DeviceAddedEventArgs a)
         {
-            //cameraOne.initCamera("172.18.255.100");
-            //System.Console.WriteLine(a.Device.RootHostAddresses[0].ToString());
-            //cameraOne.Play();
-            //a.Device.UniqueDeviceName.ToString();
 
             bool camExist = false;
             System.Console.WriteLine("deviceadded");
@@ -223,17 +172,31 @@ namespace CamNect.GUI.Views
             message.Content = null;
         }
 
-        public void highlightTimer_Tick(object sender, System.EventArgs e)
+        private void highlightTimer_Tick(object sender, System.EventArgs e)
         {
             this.highlightTimer.Stop();
-            polygonTopLeft.IsEnabled = false;
-            polygonDownLeft.IsEnabled = false;
-            polygonTopRight.IsEnabled = false;
-            polygonDownRight.IsEnabled = false;
+            polygonUpLeft.IsHitTestVisible = false;
+            polygonDownLeft.IsHitTestVisible = false;
+            polygonUpRight.IsHitTestVisible = false;
+            polygonDownRight.IsHitTestVisible = false;
+        }
+
+        private void highlightPolygon(Polygon polygon)
+        {
+            // Highlighting corner polygon
+            if (this.highlightTimer != null)
+            {
+                this.highlightTimer.Stop();
+            }
+            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
+            this.highlightTimer.Interval = 40;
+            this.highlightTimer.Start();
+            polygon.IsHitTestVisible = true;
         }
 
         public void goRight_onClick(object sender, RoutedEventArgs e)
         {
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
@@ -241,12 +204,12 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
                 message.Content = "Button Right";
-                //cameraOne.goRight();
             }
         }
 
         public void goLeft_onClick(object sender, RoutedEventArgs e)
         {
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
@@ -254,35 +217,28 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Left");
                 message.Content = "Button Left";
-                //cameraOne.goLeft();
+                this.camera.goLeft();
             }
         }
 
         public void goUp_onClick(object sender, RoutedEventArgs e)
         {
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
                 this.timer.Interval = 2000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Top");
-                message.Content = "Button Top";
-                //cameraOne.goUp();
+                message.Content = "Button Up";
+                this.camera.goUp();
             }
         }
 
-        public void goTopLeft_onClick(object sender, RoutedEventArgs e)
+        public void goUpLeft_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonTopLeft.IsEnabled = true;
-            
+            highlightPolygon(polygonUpLeft);
+
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -290,23 +246,14 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 3000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
-                message.Content = "Button TopLeft";
-                //cameraOne.goUp();
-                //cameraOne.goLeft();
+                message.Content = "Button UpLeft";
+                this.camera.goUpLeft();
             }
         }
 
-        public void goTopRight_onClick(object sender, RoutedEventArgs e)
+        public void goUpRight_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonTopRight.IsEnabled = true;
+            highlightPolygon(polygonUpRight);
 
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
@@ -315,37 +262,29 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 3000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopRight");
-                message.Content = "Button TopRight";
-                //cameraOne.goUp();
-                //cameraOne.goRight();
+                message.Content = "Button UpRight";
+                this.camera.goUpRight();
             }
             
         }
 
         public void goDown_onClick(object sender, RoutedEventArgs e)
         {
+            // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
                 this.timer.Interval = 2000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Down");
-               // message.Content = "Button Down";
-                //cameraOne.goDown();
+                message.Content = "Button Down";
+                this.camera.goDown();
             }
         }
 
         public void goDownRight_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonDownRight.IsEnabled = true;
+            highlightPolygon(polygonDownRight);
 
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
@@ -355,23 +294,14 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button DownRight");
                 message.Content = "Button DownRight";
-                //cameraOne.goDown();
-                //cameraOne.goRight();
+                this.camera.goDownRight();
             }
             
         }
 
         public void goDownLeft_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonDownLeft.IsEnabled = true;
+            highlightPolygon(polygonDownLeft);
 
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
@@ -381,8 +311,7 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button DownLeft");
                 message.Content = "Button  DownLeft";
-                //cameraOne.goDown();
-                //cameraOne.goLeft();
+                this.camera.goDownLeft();
             }
         }
 
@@ -406,10 +335,33 @@ namespace CamNect.GUI.Views
         {
             System.Windows.Application.Current.Shutdown();
         }
-
-        public void scrollbutton_dragOver(object sender, RoutedEventArgs e)
+               
+        public void activeButtons()
         {
-            message.Content = "DragOver";
+            if (isButtonActive)
+            {
+                foreach (Polygon polygon in this.polygons)
+                {
+                    polygon.IsEnabled = false;
+                }
+                foreach (KinectHoverButton hoverButton in this.hoverButtons)
+                {
+                    hoverButton.Visibility = System.Windows.Visibility.Hidden;
+                }
+                isButtonActive = false;
+            }
+            else
+            {
+                foreach (Polygon polygon in this.polygons)
+                {
+                    polygon.IsEnabled = true;
+                }
+                foreach (KinectHoverButton hoverButton in this.hoverButtons)
+                {
+                    hoverButton.Visibility = System.Windows.Visibility.Visible;
+                }
+                isButtonActive = true;
+            }
         }
 
     }

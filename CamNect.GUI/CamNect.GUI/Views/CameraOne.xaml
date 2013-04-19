@@ -50,14 +50,30 @@
         <Style x:Key="PolygonStyle" TargetType="{x:Type Polygon}">
             <Style.Triggers>
                 <Trigger Property="IsEnabled" Value="True">
-                    <Setter Property="Fill" Value="#8000FF"/>
-                    <Setter Property="Opacity" Value="0.1"/>
+                    <Setter Property="Fill" Value="#C2E1FF"/>
+                    <Setter Property="Opacity" Value="0.2"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Fill" Value="Transparent"/>
                 </Trigger>
+                <Trigger Property="IsHitTestVisible" Value="True">
+                    <Setter Property="Fill" Value="#8000FF"/>
+                    <Setter Property="Opacity" Value="0.1" />
+                </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="PolygonStyleFleche" TargetType="{x:Type Polygon}">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="True">
+                    <Setter Property="Opacity" Value="0.2"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
 
     </UserControl.Resources>
 
@@ -69,34 +85,37 @@
 
             <Image x:Name= "CameraOnePlayer" Height="1080" Width="1920" />
 
-            <Polygon x:Name="polygonLeft" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="250" />
-            <Polygon x:Name="polygonRight" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="250" />
-            <Polygon x:Name="polygonTop" Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="450" Canvas.Top="10" />
-            <Polygon x:Name="polygonDown" Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="450" Canvas.Bottom="10" />
+            <Polygon x:Name="polygonLeft" Style="{StaticResource  PolygonStyle}" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.1" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="250" IsEnabled="False" IsHitTestVisible="False"/>
 
-            <Polygon Points="45,0 0,45 15,65 45,30 75,65 90,45" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="895" Canvas.Top="20" />
-            <Polygon Points="45,65 0,20 15,0 45,35 75,0 90,20" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="895" Canvas.Bottom="20" />
-            <Polygon Points="0,45 45,0 65,15 30,45 65,75 45,90" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="20" Canvas.Top="495" />
-            <Polygon Points="65,45 20,0 0,15 35,45 0,75 20,90" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Right="20" Canvas.Top="495" />
+            <Polygon x:Name="polygonRight" Style="{StaticResource  PolygonStyle}" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.1" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="250" IsEnabled="False" IsHitTestVisible="False"/>
+
+            <Polygon x:Name="polygonUp" Style="{StaticResource  PolygonStyle}" Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.1" Fill="#C2E1FF" Canvas.Left="450" Canvas.Top="10" IsEnabled="False" IsHitTestVisible="False"/>
+
+            <Polygon x:Name="polygonDown" Style="{StaticResource  PolygonStyle}" Points="0,0 0,100 970,100 970,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.1" Fill="#C2E1FF" Canvas.Left="450" Canvas.Bottom="10" IsEnabled="False" IsHitTestVisible="False"/>
+
+            <Polygon x:Name="polygonFlecheUp" Style="{StaticResource  PolygonStyleFleche}" Points="45,0 0,45 15,65 45,30 75,65 90,45" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Left="895" Canvas.Top="20" IsEnabled="False" />
+            <Polygon x:Name="polygonFlecheDown" Style="{StaticResource  PolygonStyleFleche}" Points="45,65 0,20 15,0 45,35 75,0 90,20" Stroke="#3C44DD" StrokeThickness="2"  Fill="DarkViolet" Canvas.Left="895" Canvas.Bottom="20" IsEnabled="False" />
+            <Polygon x:Name="polygonFlecheLeft" Style="{StaticResource  PolygonStyleFleche}" Points="0,45 45,0 65,15 30,45 65,75 45,90" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Left="20" Canvas.Top="495" IsEnabled="False" />
+            <Polygon x:Name="polygonFlecheRight" Style="{StaticResource  PolygonStyleFleche}" Points="65,45 20,0 0,15 35,45 0,75 20,90" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Right="20" Canvas.Top="495" IsEnabled="False" />
 
             <!--<Polygon Points="10,10 0,150 100,200 200,100 150,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="10" />-->
-            <Polygon x:Name="polygonTopLeft"  Style="{StaticResource  PolygonStyle}" Points="10,10 0,150 100,200 200,100 150,0" Canvas.Left="10" Canvas.Top="10" IsEnabled="False" />
-            <Polygon Points="10,10 0,150 100,200 200,100 150,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="10" />
-            <Polygon Points="40,40 30,120 50,130 60,60 130,50 120,30" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="10" Canvas.Top="10" />
+            <Polygon x:Name="polygonUpLeft"  Style="{StaticResource  PolygonStyle}" Points="10,10 0,150 100,200 200,100 150,0" StrokeThickness="4" Opacity="0.1" Fill="#C2E1FF" Canvas.Left="10" Canvas.Top="10" IsEnabled="False" IsHitTestVisible="False"/>
+            <Polygon Points="10,10 0,150 100,200 200,100 150,0" Stroke="#3C44DD" Canvas.Left="10" Canvas.Top="10" />
+            <Polygon x:Name="polygonFlecheUpLeft" Style="{StaticResource  PolygonStyleFleche}" Points="40,40 30,120 50,130 60,60 130,50 120,30" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Left="10" Canvas.Top="10" IsEnabled="False" />
 
-            <Polygon x:Name="polygonTopRight" Style="{StaticResource  PolygonStyle}" Points="190,10 200,150 100,200 0,100 50,0" Canvas.Right="10" Canvas.Top="10" IsEnabled="False" />
-            <Polygon Points="190,10 200,150 100,200 0,100 50,0" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="10" />
-            <Polygon Points="90,40 100,120 80,130 70,60 0,50 10,30" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Right="40" Canvas.Top="10" />
+            <Polygon x:Name="polygonUpRight" Style="{StaticResource  PolygonStyle}" Points="190,10 200,150 100,200 0,100 50,0" StrokeThickness="4" Opacity="0.1" Fill="#C2E1FF" Canvas.Right="10" Canvas.Top="10" IsEnabled="False" IsHitTestVisible="False" />
+            <Polygon Points="190,10 200,150 100,200 0,100 50,0" Stroke="#3C44DD" Canvas.Right="10" Canvas.Top="10" />
+            <Polygon x:Name="polygonFlecheUpRight" Style="{StaticResource  PolygonStyleFleche}" Points="90,40 100,120 80,130 70,60 0,50 10,30" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Right="40" Canvas.Top="10" IsEnabled="False" />
 
-            <Polygon x:Name="polygonDownLeft" Style="{StaticResource  PolygonStyle}" Points="10,190 0,50 100,0 200,100 150,200" Canvas.Left="10" Canvas.Bottom="10" IsEnabled="False" />
-            <Polygon Points="10,190 0,50 100,0 200,100 150,200" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Left="10" Canvas.Bottom="10"/>
-            <Polygon Points="40,90 30,10 50,0 60,70 130,80 120,100" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Left="10" Canvas.Bottom="40" />
+            <Polygon x:Name="polygonDownLeft" Style="{StaticResource  PolygonStyle}" Points="10,190 0,50 100,0 200,100 150,200" StrokeThickness="3" Opacity="0.1" Fill="#C2E1FF" Canvas.Left="10" Canvas.Bottom="10" IsEnabled="False" IsHitTestVisible="False"/>
+            <Polygon Points="10,190 0,50 100,0 200,100 150,200" Stroke="#3C44DD"  Canvas.Left="10" Canvas.Bottom="10"/>
+            <Polygon x:Name="polygonFlecheDownLeft" Style="{StaticResource  PolygonStyleFleche}" Points="40,90 30,10 50,0 60,70 130,80 120,100" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Left="10" Canvas.Bottom="40" IsEnabled="False" />
 
-            <Polygon x:Name="polygonDownRight" Style="{StaticResource  PolygonStyle}" Points="190,190 200,50 100,0 0,100 50,200" Canvas.Right="10" Canvas.Bottom="10" IsEnabled="False" />
-            <Polygon Points="190,190 200,50 100,0 0,100 50,200" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.2" Fill="#C2E1FF" Canvas.Right="10" Canvas.Bottom="10" />
-            <Polygon Points="90,90 100,10 80,0 70,70 0,80 10,100" Stroke="#3C44DD" StrokeThickness="2" Opacity="0.2" Fill="DarkViolet" Canvas.Right="40" Canvas.Bottom="40" />
+            <Polygon x:Name="polygonDownRight" Style="{StaticResource  PolygonStyle}" Points="190,190 200,50 100,0 0,100 50,200" Canvas.Right="10" Canvas.Bottom="10" IsEnabled="False" IsHitTestVisible="False"/>
+            <Polygon Points="190,190 200,50 100,0 0,100 50,200" Stroke="#3C44DD" StrokeThickness="4" Opacity="0.1" Fill="#C2E1FF" Canvas.Right="10" Canvas.Bottom="10" />
+            <Polygon x:Name="polygonFlecheDownRight" Style="{StaticResource  PolygonStyleFleche}" Points="90,90 100,10 80,0 70,70 0,80 10,100" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Right="40" Canvas.Bottom="40" IsEnabled="False" />
 
-            <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" x:Name="message" Width="530" Foreground="Red" FontSize="40" Background="{x:Null}" />
+            <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" x:Name="message" Width="530" Foreground="Red" FontSize="40" Background="{x:Null}" Panel.ZIndex="1000"  />
 
 
 
@@ -108,20 +127,25 @@
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" Margin="312,0,1568,0"/>
 
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent">
+
             <Grid x:Name="kinectRegionGrid" Height="1080" Width="1920">
                 <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Margin="1492,10,291,947" Opacity="0.4" />
+                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0" Panel.ZIndex="1000" />
+                <k:KinectScrollViewer x:Name="backgroundGrip" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" HoverBackground="Transparent" />
+
                 <GUI:KinectHoverButton x:Name="buttonTop" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="450" Canvas.Top="10" Height="102" Width="972" Click="goUp_onClick" Margin="450,10,498,968"/>
                 <GUI:KinectHoverButton x:Name="buttonRight" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="1808" Canvas.Top="250" Click="goRight_onClick" Margin="1808,252,10,252" />
                 <GUI:KinectHoverButton x:Name="buttonLeft" Style="{StaticResource KinectHoverButtonStyle}"  Canvas.Left="1808" Canvas.Top="250" Click="goRight_onClick" Margin="10,252,1808,252" />
                 <GUI:KinectHoverButton x:Name="buttonDown" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="450" Canvas.Top="968" Height="102" Width="972" Click="goDown_onClick" Margin="450,968,498,10"/>
-                <GUI:KinectHoverButton x:Name="buttonTopLeft" Style="{StaticResource KinectHoverButtonStyleForCorner}" Canvas.Left="5" Height="176" Width="181" Click="goTopLeft_onClick" Margin="10,10,1729,894" />
-                <GUI:KinectHoverButton x:Name="buttonTopRight" Style="{StaticResource KinectHoverButtonStyleForCorner}" Canvas.Left="1739" Height="176" Width="181" Click="goTopRight_onClick" Margin="1729,10,10,894"/>
+                <GUI:KinectHoverButton x:Name="buttonTopLeft" Style="{StaticResource KinectHoverButtonStyleForCorner}" Canvas.Left="5" Height="176" Width="181" Click="goUpLeft_onClick" Margin="10,10,1729,894" />
+                <GUI:KinectHoverButton x:Name="buttonTopRight" Style="{StaticResource KinectHoverButtonStyleForCorner}" Canvas.Left="1739" Height="176" Width="181" Click="goUpRight_onClick" Margin="1729,10,10,894"/>
                 <GUI:KinectHoverButton x:Name="buttonDownLeft" Style="{StaticResource KinectHoverButtonStyleForCorner}" Height="176" Width="181" Canvas.Top="904" Click="goDownLeft_onClick" Margin="10,894,1729,10"/>
                 <GUI:KinectHoverButton x:Name="buttonDownRight" Style="{StaticResource KinectHoverButtonStyleForCorner}" Height="176" Width="181" Canvas.Top="904" Canvas.Left="1739" Click="goDownRight_onClick" Margin="1729,894,10,10"/>
-                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0"/>
 
-                <k:KinectScrollViewer Margin="450,968,498,0" x:Name="scrollbutton" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" DragOver="scrollbutton_dragOver"/>
             </Grid>
+
         </k:KinectRegion>
+        <Image x:Name="player" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1920" Height="1080" Margin="-954,-536,954,536" />
+
     </Grid>
 </UserControl>

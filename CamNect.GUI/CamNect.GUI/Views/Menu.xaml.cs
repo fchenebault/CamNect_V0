@@ -9,6 +9,7 @@ using Microsoft.Kinect.Toolkit.Controls;
 using Microsoft.Kinect;
 using System.Windows;
 using ManagedUPnP;
+using System.Windows.Shapes;
 
 namespace CamNect.GUI.Views
 {
@@ -22,7 +23,9 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
         private static CamNect.Camera.CameraUtils[] cameraArray = new CamNect.Camera.CameraUtils[3];
-        private MjpegReader[] readerArray = new MjpegReader[3];
+        private KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
+        private Image[] imageArray = new Image[CameraOne.cameraList.Count];
+        private MjpegReader[] readerArray = new MjpegReader[CameraOne.cameraList.Count];
 
         public Menu(KinectSensorChooser sensorChooser)
         {
@@ -32,12 +35,39 @@ namespace CamNect.GUI.Views
             this.sensorChooser = sensorChooser;
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
-            readerArray[0] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.100", player1);
-            readerArray[1] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.101", player2);
-            readerArray[2] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.102", player3);
-
-            cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
+            InitCam();
         }
+
+
+       public void InitCam()
+        {
+            // Pour chaque caméra de la liste, on crée la zone d'affichage et lance le player.          
+            
+            System.Console.WriteLine("nb de cam: "+CameraOne.cameraList.Count.ToString());
+
+            for (int i = 0 ; i < CameraOne.cameraList.Count ; i++) 
+            {
+               
+                kinectButtonArray[i] = new KinectTileButton();
+                kinectButtonArray[i].Width = 800;
+                kinectButtonArray[i].Height = 600;          
+                imageArray[i] = new Image();
+                imageArray[i].Height = 600;
+                imageArray[i].Width = 800;
+                kinectButtonArray[i].Content = imageArray[i];                            
+                kinectButtonArray[i].Click += KinectTileButtonClick;               
+                wrapPanel.Children.Add(kinectButtonArray[i]);                   
+            }
+
+            for (int i = 0; i < CameraOne.cameraList.Count; i++)
+            {
+              //  int j = CameraOne.cameraList[i].Config.Fenetre;
+                kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
+                this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
+            }
+
+        }
+
 
         /// <summary>
         /// Called when the KinectSensorChooser gets a new sensor
@@ -89,12 +119,6 @@ namespace CamNect.GUI.Views
             }
         }
 
-        private void moveToCameraOne()
-        {
-            Views.CameraOne CameraPage = new Views.CameraOne(this.sensorChooser);
-            this.Content = CameraPage;
-        }
-
         ////When the window is loaded
         private void Menu_Window_Loaded(Object sender, RoutedEventArgs e)
         {
@@ -102,16 +126,29 @@ namespace CamNect.GUI.Views
         }
 
 
-        public void button_Two(object sender, RoutedEventArgs e)
-        {
-            Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser);
-            this.Content = CameraOnePage;
-        }
-
 
         private void KinectTileButtonClick(object sender, RoutedEventArgs e)
         {
-            message.Content = "click" ;
+            KinectTileButton boutonClick = (KinectTileButton)sender;
+            int i,j=0;
+            //reconnaissance du bouton
+            for (i = 0; i < kinectButtonArray.Length; i++)
+            {
+                if (boutonClick == kinectButtonArray[i])
+                {
+                    j = i;
+                }
+                this.readerArray[i].MjpegReaderStop();
+            }
+
+            if (CameraOne.cameraList[j].Config.isPtz)
+            {
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[j]);
+                this.Content = CameraOnePage;
+            }
+
+            message.Content = "Camera numero"+i.ToString(); 
+            
         }
 
     }

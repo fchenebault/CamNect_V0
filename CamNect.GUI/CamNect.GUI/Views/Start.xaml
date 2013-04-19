@@ -4,11 +4,11 @@
         xmlns:k="http://schemas.microsoft.com/kinect/2013"
         Title="Start" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300" xmlns:CircularAnimations_Examples="clr-namespace:CamNect.GUI.Views">
-    
+
 
     <Grid Loaded="Window_Loaded">
         <Grid.Background>
-            <ImageBrush ImageSource="../Ressources/Images/background.png" />          
+            <ImageBrush ImageSource="../Ressources/Images/background.png" />
         </Grid.Background>
 
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -16,8 +16,12 @@
 
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" Margin="27,-18,-35,10">
         </k:KinectRegion>
-
         
+        <Image  Source="/Ressources/Images/config.png" Canvas.Left="1506" Canvas.Top="20" Margin="790,166,936,752"  />
+
+        <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="186" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="790,166,0,0" RenderTransformOrigin="-1.88,0.062"/>
+
+
         <TextBlock HorizontalAlignment="Left" Margin="785,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="115" Width="600" FontSize="50" RenderTransformOrigin="0.5,0.5" FontFamily="Gisha">
             <TextBlock.RenderTransform>
                 <TransformGroup>
@@ -28,7 +32,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform><Run Language="fr-fr" Text="Camera control over Kinect "/></TextBlock>
         <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="197" Width="741" FontFamily="Gisha" FontSize="140" Foreground="#FF662D91" Margin="547,357,624,0" FontWeight="Bold"><Run Language="fr-fr" Text="CAMNECT"/></TextBlock>
-        <Image HorizontalAlignment="Left" Height="252" Margin="1595,10,-35,0" VerticalAlignment="Top" Width="352" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>    
+        <Image HorizontalAlignment="Left" Height="252" Margin="1595,10,-35,0" VerticalAlignment="Top" Width="352" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>
         <Grid Margin="-10,139,10,-77">
             <CircularAnimations_Examples:BlueDot Width="40" Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00'/>
             <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.2'>
@@ -112,10 +116,10 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
+            <Button Content="Erreur" HorizontalAlignment="Left" Margin="366,62,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         </Grid>
-        <Button Content="Button" Height="100px" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="936,139,0,0" Click="Button_Click_1"/>
 
     </Grid>
-    
+
 
 </Window>
