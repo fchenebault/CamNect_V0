@@ -19,15 +19,5 @@
     "isPtz": false,
 	"Zoom": false,
     "Modele": "AXIS M1054",
-  },
-  {
-    "Afficher": false,
-    "Nom": "AXIS M1054",
-    "Id": "root",
-    "Pass": "root",
-	"Uri": "/axis-cgi/mjpg/video.cgi",
-    "isPtz": false,
-	"Zoom": false,
-    "Modele": "AXIS M1054",
   }
 ]
