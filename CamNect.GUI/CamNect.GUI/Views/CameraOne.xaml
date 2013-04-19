@@ -68,7 +68,7 @@
 
     <Grid x:Name="CameraOneGrid" Loaded="CameraOne_Window_Loaded">
         <Grid.Background>
-            <ImageBrush ImageSource="/Ressources/Images/background.png" />
+            <ImageBrush x:Name="fond" ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
         <Canvas x:Name ="CameraOneCanvas">
 

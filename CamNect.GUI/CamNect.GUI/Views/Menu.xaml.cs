@@ -61,7 +61,7 @@ namespace CamNect.GUI.Views
 
             for (int i = 0; i < CameraOne.cameraList.Count; i++)
             {
-                int j = CameraOne.cameraList[i].Config.Fenetre;
+              //  int j = CameraOne.cameraList[i].Config.Fenetre;
                 kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
                 this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
             }
@@ -132,12 +132,6 @@ namespace CamNect.GUI.Views
         }
 
 
-        public void button_Two(object sender, RoutedEventArgs e)
-        {
-            Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser);
-            this.Content = CameraOnePage;
-        }
-
 
         private void KinectTileButtonClick(object sender, RoutedEventArgs e)
         {
@@ -152,6 +146,11 @@ namespace CamNect.GUI.Views
                 }
             }
 
+            if (CameraOne.cameraList[i].Config.isPtz)
+            {
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser);
+                this.Content = CameraOnePage;
+            }
 
             message.Content = "Camera numero"+i.ToString(); 
             
