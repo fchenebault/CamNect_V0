@@ -41,7 +41,7 @@ namespace CamNect.GUI.Views
         {
             // Timer to wait for the other view
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(2000);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(7000);
             dispatcherTimer.Start();
         }
 
@@ -53,7 +53,7 @@ namespace CamNect.GUI.Views
             this.Content = MenuPage;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Config(object sender, RoutedEventArgs e)
         {
 
             //Views.ConfigCam ConfigCamPage = new Views.ConfigCam();
@@ -61,6 +61,13 @@ namespace CamNect.GUI.Views
             //this.Content = ConfigCamPage;
             configCamWin.Show();
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Stop();
+            Views.Error ErrorPage = new Error(kinect.sensorChooser);
+            this.Content = ErrorPage;
         }
 
     }

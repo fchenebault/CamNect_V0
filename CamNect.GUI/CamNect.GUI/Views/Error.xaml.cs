@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CamNect.Kinect;
+using Microsoft.Kinect.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +19,20 @@ namespace CamNect.GUI.Views
     /// <summary>
     /// Logique d'interaction pour Error.xaml
     /// </summary>
-    public partial class Error : Window
+    public partial class Error : UserControl
     {
-        public Error()
+        /* Variables */
+        private KinectMain kinect;
+        public KinectSensorChooser sensorChooser;
+
+        public Error(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
+
+            // Sensor initialisation
+            this.sensorChooser = sensorChooser;
+            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+
         }
 
 
@@ -35,5 +46,6 @@ namespace CamNect.GUI.Views
         {
 
         }
+
     }
 }

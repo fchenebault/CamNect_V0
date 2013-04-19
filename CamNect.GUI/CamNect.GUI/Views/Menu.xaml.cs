@@ -39,6 +39,7 @@ namespace CamNect.GUI.Views
             cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
         }
 
+
         /// <summary>
         /// Called when the KinectSensorChooser gets a new sensor
         /// </summary>
