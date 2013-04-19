@@ -23,6 +23,8 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
         private static CamNect.Camera.CameraUtils[] cameraArray = new CamNect.Camera.CameraUtils[3];
+        KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
+        Image[] imageArray = new Image[CameraOne.cameraList.Count];
         private MjpegReader[] readerArray = new MjpegReader[CameraOne.cameraList.Count];
 
         public Menu(KinectSensorChooser sensorChooser)
@@ -40,25 +42,29 @@ namespace CamNect.GUI.Views
        public void InitCam()
         {
             // Pour chaque caméra de la liste, on crée la zone d'affichage et lance le player.          
-            KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
-            Image[] imageArray = new Image[CameraOne.cameraList.Count];
+            
             System.Console.WriteLine("nb de cam: "+CameraOne.cameraList.Count.ToString());
 
             for (int i = 0 ; i < CameraOne.cameraList.Count ; i++) 
-            {                
+            {
+               
                 kinectButtonArray[i] = new KinectTileButton();
                 kinectButtonArray[i].Width = 800;
                 kinectButtonArray[i].Height = 600;          
                 imageArray[i] = new Image();
-                imageArray[i].Height = 530;
+                imageArray[i].Height = 600;
                 imageArray[i].Width = 800;
-                kinectButtonArray[i].Content = imageArray[i];
+                kinectButtonArray[i].Content = imageArray[i];                            
+                kinectButtonArray[i].Click += KinectTileButtonClick;               
+                wrapPanel.Children.Add(kinectButtonArray[i]);                   
+            }
+
+            for (int i = 0; i < CameraOne.cameraList.Count; i++)
+            {
+                int j = CameraOne.cameraList[i].Config.Fenetre;
                 kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
-                kinectButtonArray[i].Click += KinectTileButtonClick;
                 this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
-                wrapPanel.Children.Add(kinectButtonArray[i]);          
-         
-            }       
+            }
 
         }
 
@@ -135,7 +141,19 @@ namespace CamNect.GUI.Views
 
         private void KinectTileButtonClick(object sender, RoutedEventArgs e)
         {
-            message.Content = ((KinectTileButton)sender).Label; 
+            KinectTileButton boutonClick = (KinectTileButton)sender;
+            int i;
+            //reconnaissance du bouton
+            for (i = 0; i < kinectButtonArray.Length; i++)
+            {
+                if (boutonClick == kinectButtonArray[i])
+                {
+                    break;
+                }
+            }
+
+
+            message.Content = "Camera numero"+i.ToString(); 
             
         }
 
