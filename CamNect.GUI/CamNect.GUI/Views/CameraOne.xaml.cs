@@ -117,8 +117,8 @@ namespace CamNect.GUI.Views
                     camExist = true;
 
                     cfg.Plugged = true;
-                   /* cfg.Fenetre = rank;
-                    rank++;*/
+                    cfg.Fenetre = rank;
+                    rank++;
 
                     cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));
                     break;
@@ -134,8 +134,8 @@ namespace CamNect.GUI.Views
                         System.Console.WriteLine(cfg.Modele);
                         cfg.Serie = a.Device.SerialNumber.ToString();
                         cfg.Plugged= true;
-                        /*cfg.Rank = rank;
-                        rank++;*/
+                        cfg.Fenetre = rank;
+                        rank++;
 
                         ConfigCamWindow.AddCam(cfg);
 
