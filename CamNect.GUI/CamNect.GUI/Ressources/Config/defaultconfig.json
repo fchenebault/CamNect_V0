@@ -15,7 +15,7 @@
     "Nom": "AXIS M1054",
     "Id": "root",
     "Pass": "root",
-	"Uri": "/axis-cgi/mjpg/video.cgi",
+	"Uri": "/axis-media/media.amp?videocodec=jpeg",
     "isPtz": false,
 	"Zoom": false,
     "Modele": "AXIS M1054",
