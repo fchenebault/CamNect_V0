@@ -12,22 +12,12 @@
   },
   {
     "Afficher": false,
-    "Nom": "AXIS 218",
+    "Nom": "AXIS M1054",
     "Id": "root",
     "Pass": "root",
 	"Uri": "/axis-media/media.amp?videocodec=jpeg",
     "isPtz": false,
 	"Zoom": false,
-    "Modele": "AXIS 218",
-  },
-  {
-    "Afficher": false,
-    "Nom": "AXIS 219",
-    "Id": "root",
-    "Pass": "root",
-	"Uri": "/axis-media/media.amp?videocodec=jpeg",
-    "isPtz": false,
-	"Zoom": false,
-    "Modele": "AXIS 219",
+    "Modele": "AXIS M1054",
   }
 ]
