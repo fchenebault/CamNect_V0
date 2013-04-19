@@ -20,10 +20,10 @@ namespace CamNect.Camera
         {
             _mjpeg = new MjpegDecoder();
             this.reader = reader;
-            String url = "http://" + camera.Ip + "/mjpg/video.mjpg";
+            String url = "http://" +camera.Ip + "/mjpg/video.mjpg";
 
             _mjpeg.FrameReady += mjpeg_FrameReady;
-
+            _mjpeg.ParseStream(new Uri(url), camera.Config.Id, camera.Config.Pass);
        }
 
         private void mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
