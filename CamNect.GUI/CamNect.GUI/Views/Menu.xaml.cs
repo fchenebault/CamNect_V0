@@ -130,22 +130,22 @@ namespace CamNect.GUI.Views
         private void KinectTileButtonClick(object sender, RoutedEventArgs e)
         {
             KinectTileButton boutonClick = (KinectTileButton)sender;
-            int i;
+            int i,j=0;
             //reconnaissance du bouton
             for (i = 0; i < kinectButtonArray.Length; i++)
             {
                 if (boutonClick == kinectButtonArray[i])
                 {
-                    break;
+                    j = i;
                 }
+                this.readerArray[i].MjpegReaderStop();
             }
 
-            if (CameraOne.cameraList[i].Config.isPtz)
+            if (CameraOne.cameraList[j].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[i]);
-                   
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[i]);                  
                 this.Content = CameraOnePage;               
-                   
+
             }
 
             message.Content = "Camera numero"+i.ToString(); 

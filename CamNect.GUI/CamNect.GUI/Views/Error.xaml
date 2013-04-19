@@ -20,7 +20,7 @@
             <Run Language="fr-fr" Text="We apologize for this unfortunate situation !"/>
         </TextBlock>
 
-        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920">
+        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" Margin="-10,0,10,0">
 
             <Grid x:Name="kinectRegionGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1080" Width="1920" Margin="10,-10,-10,10" >
                 <Grid.RowDefinitions>
