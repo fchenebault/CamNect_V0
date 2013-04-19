@@ -31,24 +31,6 @@ namespace CamNect.GUI.Views
             // Sensor initialisation
             this.sensorChooser = sensorChooser;
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
-<<<<<<< HEAD
-            _mjpeg = new MjpegDecoder();
-            _mjpeg.FrameReady += mjpeg_FrameReady;
-            _mjpeg.ParseStream(new Uri("http://172.18.255.100/mjpg/video.mjpg"),"root","root");
-            cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
-                //cameraArray[0] = new CameraPTZ(new Vlc.DotNet.Wpf.VlcControl(), cameraOne);
-            // Use KinectMain class
-            //this.kinect = new KinectMain(this.sensorChooser.Kinect);
-            
-
-           
-
-            /*Instruction.Text = "Select a CCTV";
-            this.buttons = new List<System.Windows.Controls.Button> { buttonOne, buttonTwo, buttonThree };
-            kinect = new KinectMain(MenuGrid, kinectButton, buttons);
-            kinectButton.Click += new RoutedEventHandler(this.kinect.curseur.kinectButton_Click);
-=======
->>>>>>> 5d09cb853fc19a6d7a17985d9e72223a1f578ba8
 
             readerArray[0] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.100", player1);
             readerArray[1] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.101", player2);

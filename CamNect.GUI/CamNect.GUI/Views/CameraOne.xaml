@@ -120,7 +120,7 @@
                 <GUI:KinectHoverButton x:Name="buttonDownRight" Style="{StaticResource KinectHoverButtonStyleForCorner}" Height="176" Width="181" Canvas.Top="904" Canvas.Left="1739" Click="goDownRight_onClick" Margin="1729,894,10,10"/>
                 <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0"/>
 
-                <k:KinectScrollViewer Margin="450,968,498,0" x:Name="scrollbutton" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"/>
+                <k:KinectScrollViewer Margin="450,968,498,0" x:Name="scrollbutton" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" DragOver="scrollbutton_dragOver"/>
             </Grid>
         </k:KinectRegion>
     </Grid>

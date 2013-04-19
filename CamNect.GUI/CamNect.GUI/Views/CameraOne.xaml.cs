@@ -326,7 +326,7 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 2000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Down");
-                message.Content = "Button Down";
+               // message.Content = "Button Down";
                 //cameraOne.goDown();
             }
         }
@@ -403,7 +403,10 @@ namespace CamNect.GUI.Views
             System.Windows.Application.Current.Shutdown();
         }
 
-        
+        public void scrollbutton_dragOver(object sender, RoutedEventArgs e)
+        {
+            message.Content = "DragOver";
+        }
 
     }
 }
