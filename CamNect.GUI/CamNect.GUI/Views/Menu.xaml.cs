@@ -143,8 +143,9 @@ namespace CamNect.GUI.Views
 
             if (CameraOne.cameraList[j].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[j]);
-                this.Content = CameraOnePage;
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[i]);                  
+                this.Content = CameraOnePage;               
+
             }
 
             message.Content = "Camera numero"+i.ToString(); 

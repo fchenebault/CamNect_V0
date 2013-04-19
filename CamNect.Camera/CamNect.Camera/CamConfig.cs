@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,20 +13,23 @@ namespace CamNect.Camera
         public string Nom { get; set; }
         public string Id { get; set; }
         public string Pass { get; set; }
+        public string Resolution { get; set; }
         public string Uri { get; set; }
         public bool isPtz { get; set; }
-        private bool ptzOn = false;
+        public bool PtzOn = true;
         public bool Zoom { get; set; }
         public bool Son { get; set; }
         public string Modele { get; set; }
         public string Serie { get; set; }
         public int Fenetre { get; set; }
         public bool Plugged  { get; set; }
+     
        
-        public bool PtzOn
+
+        public CamConfig()
         {
-            get;
-            set;
+            Afficher = true;
+            Resolution = "640x480";
         }
 
         public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, bool son, string serie, int fenetre, bool plugged)

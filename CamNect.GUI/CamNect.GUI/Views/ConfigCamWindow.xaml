@@ -1,32 +1,55 @@
 ﻿<Window x:Class="CamNect.GUI.Views.ConfigCamWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ConfigCamWindow" Height="500" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  AllowsTransparency="True" ShowInTaskbar="False" Background="#FFFFE6E6" WindowStyle="None" >
-    <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove" >
-        <Grid.Background >
+        xmlns:staticData="clr-namespace:CamNect.GUI.Views"
+        Title="ConfigCamWindow" Height="536" Width="1136" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Background="Transparent"  AllowsTransparency="True" ShowInTaskbar="False"  WindowStyle="None" >
+
+    <Window.Resources>
+        <staticData:ResolutionList x:Key="ResolutionList"/>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.Background>
             <ImageBrush  ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="0*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Content="Annuler" HorizontalAlignment="Left" Margin="484,447,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.RowSpan="2" RenderTransformOrigin="0.173,0.545"/>
+        <Button Content="Annuler" HorizontalAlignment="Left" Margin="588,472,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.RowSpan="2" RenderTransformOrigin="0.173,0.545"/>
         <DataGrid AutoGenerateColumns="False" Height="398"
-                  
-            PreviewMouseLeftButtonDown="OnMouseLeftButtonDownGrid"     
-            BeginningEdit="OnBeginEdit"
-            CellEditEnding="OnEndEdit"
-                  
-        	HorizontalAlignment="Left" Margin="10,19,0,0" x:Name="dgCamConfig"  
-        	VerticalAlignment="Top" Width="880" 
+       
+        	HorizontalAlignment="Left" Margin="77,55,0,0" x:Name="dgCamConfig"  
+        	VerticalAlignment="Top" Width="980" 
         	ItemsSource="{Binding}" ColumnWidth="*" RowHeight="40"
         	SelectionMode="Single"    AllowDrop="True"  BorderThickness="0" GridLinesVisibility="None" HeadersVisibility="Column"
-        	CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="{x:Null}" Background="{x:Null}" CanUserAddRows="False" Grid.RowSpan="2" Foreground="#FF4E0CBA" >
+        	CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="{x:Null}" Background="{x:Null}" CanUserAddRows="False" Grid.RowSpan="2" Foreground="#FF4E0CBA"  >
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Afficher}" Header="Afficher" Width="Auto"/>
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Nom}" Header="Nom" />
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Id}" Header="Identifiant" />
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Pass}" Header="Mot de passe" />
+
+
+                <DataGridTemplateColumn Header="Resolution" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Resolution}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox Height="22" 
+                                      ItemsSource="{StaticResource ResolutionList}"
+                                      SelectedItem="{Binding Resolution}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+
+                </DataGridTemplateColumn>
+
+
                 <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Move}" Header=" Mvt " Width="Auto"/>
                 <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Zoom}" Header=" Zoom " Width="Auto"/>
                 <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Son}" Header=" Son " Width="Auto"/>
@@ -37,45 +60,19 @@
 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{x:Static DataGrid.DeleteCommand}" Content="Supprimer"/>
+                            <Button Command="{x:Static DataGrid.DeleteCommand}"  Content="Supprimer"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
 
+
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="OK" HorizontalAlignment="Left" Height="22" Margin="362,447,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
-        <Button Content="dgd" HorizontalAlignment="Left" Margin="718,459,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+        <Button Content="OK" HorizontalAlignment="Left" Height="22" Margin="466,472,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
+        <Button Content="dgd" HorizontalAlignment="Left" Margin="1019,478,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
 
-        <!-- Drag and Drop Popup -->
-        <Popup
-      x:Name="popup1"
-      IsHitTestVisible="False"
-      Placement="RelativePoint"
-      PlacementTarget="{Binding ElementName=me}"
-      AllowsTransparency="True">
-            <Border
-        BorderBrush="LightSteelBlue"
-        BorderThickness="2"
-        Background="White"
-        Opacity="0.75">
-                <StackPanel
-          Orientation="Horizontal"
-          Margin="4,3,8,3">
-                    <Image
-            Source="/Ressources/Images/DragInsert.png"
-            Width="16"
-            Height="16" />
-                    <TextBlock
-            FontSize="14"
-            FontWeight="Bold"
-            VerticalAlignment="Center"
-            Text="{Binding ElementName=me, Path=DraggedItem.Nom}"
-            Margin="8,0,0,0" />
-                </StackPanel>
-            </Border>
-        </Popup>
+
     </Grid>
 
     <Window.Triggers>

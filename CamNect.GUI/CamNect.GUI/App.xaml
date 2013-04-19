@@ -21,19 +21,29 @@
 
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Plugged}" Value="False">
-                    <Setter Property="IsEnabled" Value="False"/>
-                    <Setter Property="Foreground" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
             </Style.Triggers>
 
         </Style>
-
+        
+        
+        
         <Style  TargetType="{x:Type DataGridCell}">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ptzOn}" Value="False">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Foreground" Value="Gray"/>
+                </DataTrigger>
+            </Style.Triggers>
+            
+            
         </Style>
 
-
+        
 
     </Application.Resources>
 </Application>
