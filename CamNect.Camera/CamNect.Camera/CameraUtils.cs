@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Controls;
-using Vlc.DotNet.Core.Medias;
-using Vlc.DotNet.Wpf;
 
 
 namespace CamNect.Camera
