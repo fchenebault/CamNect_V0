@@ -108,6 +108,7 @@
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" Margin="312,0,1568,0"/>
 
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent">
+
             <Grid x:Name="kinectRegionGrid" Height="1080" Width="1920">
                 <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Margin="1492,10,291,947" Opacity="0.4" />
                 <GUI:KinectHoverButton x:Name="buttonTop" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="450" Canvas.Top="10" Height="102" Width="972" Click="goUp_onClick" Margin="450,10,498,968"/>
@@ -122,6 +123,9 @@
 
                 <k:KinectScrollViewer Margin="450,968,498,0" x:Name="scrollbutton" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" />
             </Grid>
+
         </k:KinectRegion>
+        <Image x:Name="player" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1920" Height="1080" Margin="-964,-532,964,532" />
+
     </Grid>
 </UserControl>
