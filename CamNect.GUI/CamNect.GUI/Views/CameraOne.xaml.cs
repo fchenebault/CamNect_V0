@@ -57,6 +57,7 @@ namespace CamNect.GUI.Views
 
             // Camera Initialisation
             reader = new MjpegReader(camera, CameraOnePlayer);
+            this.camera = camera;
 
             // Events for gestures
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
@@ -111,8 +112,8 @@ namespace CamNect.GUI.Views
 
             bool camExist = false;
             System.Console.WriteLine("deviceadded");
-            
             System.Console.WriteLine(fenetre);
+            
             /* On recherche d'abord une configuration sauvegardée*/
             foreach (CamConfig cfg in ConfigCamWindow.ligne)
             {
@@ -138,8 +139,8 @@ namespace CamNect.GUI.Views
                         cfg.Serie = a.Device.SerialNumber.ToString();
                         cfg.Plugged= true;
                         cfg.Fenetre = fenetre;
-                      
-
+                        
+                       
                         ConfigCamWindow.AddCam(cfg);
 
                         cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));

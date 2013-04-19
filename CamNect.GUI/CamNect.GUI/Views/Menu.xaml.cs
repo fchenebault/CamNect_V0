@@ -145,11 +145,16 @@ namespace CamNect.GUI.Views
             {
                 Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[j]);                  
                 this.Content = CameraOnePage;               
-
+                
             }
 
             message.Content = "Camera numero"+i.ToString(); 
             
+        }
+
+        private void quit_onClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
 
     }

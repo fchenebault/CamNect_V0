@@ -147,7 +147,7 @@ namespace CamNect.GUI.Views
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            AddCam(new CamConfig(true, "cameraX", "122554", "hidden","URL", true, false, true, "21255", 5, true));
+            /*AddCam(new CamConfig(true, "cameraX", "122554", "hidden","URL", true, false, true, "21255", 5, true));
             ligne = new ObservableCollection<CamConfig>(ligne.OrderByDescending(a => a.Plugged).ThenBy(a => a.Fenetre));
             int index;
             foreach (CamConfig l in ligne)
@@ -156,7 +156,12 @@ namespace CamNect.GUI.Views
                 l.Fenetre = index + 1;
             }
             //
-            dgCam.ItemsSource = ligne;
+            dgCam.ItemsSource = ligne;*/
+            foreach (CameraUtils u in CameraOne.cameraList)
+            {
+                System.Console.WriteLine(u.Config.Nom);
+            }
+            
         }
 
         public static void reindexCam()
