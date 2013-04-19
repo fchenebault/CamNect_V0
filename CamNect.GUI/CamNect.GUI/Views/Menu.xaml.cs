@@ -34,12 +34,6 @@ namespace CamNect.GUI.Views
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
             InitCam();
-
-            //readerArray[0] = new MjpegReader(CameraOne.cameraList[0], player1);
-           // readerArray[1] = new MjpegReader(CameraOne.cameraList[0], player2);
-           // readerArray[2] = new MjpegReader(CameraOne.cameraList[0], player3);
-
-            //cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
         }
 
 
@@ -62,7 +56,7 @@ namespace CamNect.GUI.Views
                 kinectButtonArray[i].Click += KinectTileButtonClick;
                 
                 wrapPanel.Children.Add(kinectButtonArray[i]);
-                this.readerArray[0] = new MjpegReader(CameraOne.cameraList[i], image);
+                this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], image);
          
             }       
 
@@ -139,8 +133,8 @@ namespace CamNect.GUI.Views
 
         private void KinectTileButtonClick(object sender, RoutedEventArgs e)
         {
-            message.Content = sender.ToString(); ;
-
+            message.Content = ((KinectTileButton)sender).Label; 
+            
         }
 
     }
