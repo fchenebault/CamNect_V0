@@ -118,6 +118,8 @@ namespace Microsoft.Kinect.Toolkit.Controls
             {
                 this.InitializeKinectScrollViewer();
             }
+
+            isUseForPTZ = false;
         }
 
         private enum GripState
@@ -473,8 +475,14 @@ namespace Microsoft.Kinect.Toolkit.Controls
             {
                 this.HandleHandPointerGrip(kinectHandPointerEventArgs.HandPointer);
                 kinectHandPointerEventArgs.Handled = true;
+                if (isUseForPTZ)
+                    OnHandGrip();
             }
         }
+
+        public bool isUseForPTZ;
+        public delegate void HandGripEvent();
+        public event HandGripEvent OnHandGrip;
 
         private void HandleHandPointerGrip(HandPointer handPointer)
         {

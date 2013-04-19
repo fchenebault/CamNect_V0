@@ -88,6 +88,9 @@
       <DependentUpon>CameraOne.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfigCamWindow.xaml.cs" />
+    <Compile Include="Views\Error.xaml.cs">
+      <DependentUpon>Error.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,10 @@
     <Page Include="Views\ConfigCamWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Error.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\Images\config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
