@@ -108,6 +108,22 @@
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" Margin="312,0,1568,0"/>
 
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent">
+
+            <Grid x:Name="kinectRegionGrid" Height="1080" Width="1920">
+                <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Margin="1492,10,291,947" Opacity="0.4" />
+                <GUI:KinectHoverButton x:Name="buttonTop" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="450" Canvas.Top="10" Height="102" Width="972" Click="goUp_onClick" Margin="450,10,498,968"/>
+                <GUI:KinectHoverButton x:Name="buttonRight" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="1808" Canvas.Top="250" Click="goRight_onClick" Margin="1808,252,10,252" />
+                <GUI:KinectHoverButton x:Name="buttonLeft" Style="{StaticResource KinectHoverButtonStyle}"  Canvas.Left="1808" Canvas.Top="250" Click="goRight_onClick" Margin="10,252,1808,252" />
+                <GUI:KinectHoverButton x:Name="buttonDown" Style="{StaticResource KinectHoverButtonStyle}" Canvas.Left="450" Canvas.Top="968" Height="102" Width="972" Click="goDown_onClick" Margin="450,968,498,10"/>
+                <GUI:KinectHoverButton x:Name="buttonTopLeft" Style="{StaticResource KinectHoverButtonStyleForCorner}" Canvas.Left="5" Height="176" Width="181" Click="goTopLeft_onClick" Margin="10,10,1729,894" />
+                <GUI:KinectHoverButton x:Name="buttonTopRight" Style="{StaticResource KinectHoverButtonStyleForCorner}" Canvas.Left="1739" Height="176" Width="181" Click="goTopRight_onClick" Margin="1729,10,10,894"/>
+                <GUI:KinectHoverButton x:Name="buttonDownLeft" Style="{StaticResource KinectHoverButtonStyleForCorner}" Height="176" Width="181" Canvas.Top="904" Click="goDownLeft_onClick" Margin="10,894,1729,10"/>
+                <GUI:KinectHoverButton x:Name="buttonDownRight" Style="{StaticResource KinectHoverButtonStyleForCorner}" Height="176" Width="181" Canvas.Top="904" Canvas.Left="1739" Click="goDownRight_onClick" Margin="1729,894,10,10"/>
+                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0"/>
+
+                <k:KinectScrollViewer Margin="450,968,498,0" x:Name="scrollbutton" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" />
+            </Grid>
+
         </k:KinectRegion>
         <Image x:Name="player" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1920" Height="1080" Margin="-964,-532,964,532" />
 

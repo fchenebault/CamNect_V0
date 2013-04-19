@@ -473,8 +473,12 @@ namespace Microsoft.Kinect.Toolkit.Controls
             {
                 this.HandleHandPointerGrip(kinectHandPointerEventArgs.HandPointer);
                 kinectHandPointerEventArgs.Handled = true;
+                OnHandGrip();
             }
         }
+
+        public delegate void HandGripEvent();
+        public event HandGripEvent OnHandGrip;
 
         private void HandleHandPointerGrip(HandPointer handPointer)
         {

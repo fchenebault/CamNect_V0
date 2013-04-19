@@ -63,7 +63,7 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
 
-           
+            scrollbutton.OnHandGrip += new KinectScrollViewer.HandGripEvent(actionForGrip);
            // video.Play();
         }
 
@@ -94,56 +94,7 @@ namespace CamNect.GUI.Views
         {
             message.Content = "Geste";
         }
-        /// <summary>
-        /// Called when the KinectSensorChooser gets a new sensor
-        /// </summary>
-        /// <param name="sender">sender of the event</param>
-        /// <param name="args">event arguments</param>
-        private static void SensorChooserOnKinectChanged(object sender, KinectChangedEventArgs args)
-        {
-            if (args.OldSensor != null)
-            {
-                try
-                {
-                    args.OldSensor.DepthStream.Range = DepthRange.Default;
-                    args.OldSensor.SkeletonStream.EnableTrackingInNearRange = false;
-                    args.OldSensor.DepthStream.Disable();
-                    args.OldSensor.SkeletonStream.Disable();
-                }
-                catch (InvalidOperationException)
-                {
-                    // KinectSensor might enter an invalid state while enabling/disabling streams or stream features.
-                    // E.g.: sensor might be abruptly unplugged.
-                }
-            }
-
-            if (args.NewSensor != null)
-            {
-                try
-                {
-                    args.NewSensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
-                    args.NewSensor.SkeletonStream.Enable();
-
-                    try
-                    {
-                        args.NewSensor.DepthStream.Range = DepthRange.Near;
-                        args.NewSensor.SkeletonStream.EnableTrackingInNearRange = true;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // Non Kinect for Windows devices do not support Near mode, so reset back to default mode.
-                        args.NewSensor.DepthStream.Range = DepthRange.Default;
-                        args.NewSensor.SkeletonStream.EnableTrackingInNearRange = false;
-                    }
-                }
-                catch (InvalidOperationException)
-                {
-                    // KinectSensor might enter an invalid state while enabling/disabling streams or stream features.
-                    // E.g.: sensor might be abruptly unplugged.
-                }
-            }
-        }
-
+       
 
         ////When the window is loaded
         private void CameraOne_Window_Loaded(Object sender, RoutedEventArgs e)
@@ -403,7 +354,7 @@ namespace CamNect.GUI.Views
             System.Windows.Application.Current.Shutdown();
         }
 
-        public void scrollbutton_dragOver(object sender, RoutedEventArgs e)
+        public void actionForGrip()
         {
             message.Content = "DragOver";
         }

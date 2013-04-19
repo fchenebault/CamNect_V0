@@ -36,10 +36,10 @@ namespace CamNect.Kinect
                 return false;
         }
 
-        public HandPointer getPrimaryHand(ReadOnlyCollection<HandPointer> handsTracked)
+        public HandPointer getPrimaryHand()
         {
             primaryHand = null;
-            foreach (HandPointer hand in handsTracked)
+            foreach (HandPointer hand in this.handsTracked)
             {
                 if (hand.IsPrimaryHandOfUser)
                     primaryHand = hand;
