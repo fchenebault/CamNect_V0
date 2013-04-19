@@ -29,7 +29,7 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public static List<CameraUtils> cameraList = new List<CameraUtils>();
         private static List<CamConfig> defaultConfig = new List<CamConfig>();
-        private static int rank = 1;
+        private static int fenetre = ConfigCamWindow.maxFenetre;
         public KinectSensorChooser sensorChooser;
 
 //        private static CameraPTZ cameraOne;
@@ -83,6 +83,8 @@ namespace CamNect.GUI.Views
                 defaultConfig = JsonConvert.DeserializeObject<List<CamConfig>>(json);
             }
         }
+
+
 
         public void retourMenu()
         {
@@ -150,7 +152,7 @@ namespace CamNect.GUI.Views
         {
             
         }
-
+       
         public static void discDeviceAdded(object sender, DeviceAddedEventArgs a)
         {
             //cameraOne.initCamera("172.18.255.100");
@@ -160,17 +162,16 @@ namespace CamNect.GUI.Views
 
             bool camExist = false;
             System.Console.WriteLine("deviceadded");
-
+            
+            System.Console.WriteLine(fenetre);
             /* On recherche d'abord une configuration sauvegardée*/
-            foreach (CamConfig cfg in ConfigCamWindow.Ligne)
+            foreach (CamConfig cfg in ConfigCamWindow.ligne)
             {
                 if (a.Device.SerialNumber.ToString() == cfg.Serie)
                 {
                     camExist = true;
 
                     cfg.Plugged = true;
-                   /* cfg.Fenetre = rank;
-                    rank++;*/
 
                     cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));
                     break;
@@ -183,15 +184,18 @@ namespace CamNect.GUI.Views
                 {
                     if (a.Device.FriendlyName.Contains(cfg.Modele))
                     {
+                        fenetre = ConfigCamWindow.maxFenetre++;
                         System.Console.WriteLine(cfg.Modele);
                         cfg.Serie = a.Device.SerialNumber.ToString();
                         cfg.Plugged= true;
-                        /*cfg.Rank = rank;
-                        rank++;*/
+                        cfg.Fenetre = fenetre;
+                         
 
                         ConfigCamWindow.AddCam(cfg);
 
                         cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));
+
+                        //cameraList.Sort(
                         break;
                     }
                 }

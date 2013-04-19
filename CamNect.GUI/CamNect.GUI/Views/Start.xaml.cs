@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using Microsoft.Kinect.Toolkit;
 using ManagedUPnP;
+using System.Collections.ObjectModel;
+using CamNect.Camera;
 
 namespace CamNect.GUI.Views
 {
@@ -18,6 +20,7 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
         public static ConfigCamWindow configCamWin;
+        public static int maxFenetre;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
 
@@ -32,6 +35,9 @@ namespace CamNect.GUI.Views
             CameraOne.loadDatabase();
             configCamWin = new ConfigCamWindow();
 
+            //maxFenetre;
+
+
             Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
             disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
             disc.Start();
@@ -41,7 +47,7 @@ namespace CamNect.GUI.Views
         {
             // Timer to wait for the other view
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(2000);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10000);
             dispatcherTimer.Start();
         }
 
