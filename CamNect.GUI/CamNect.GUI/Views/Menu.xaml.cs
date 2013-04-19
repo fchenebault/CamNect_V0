@@ -32,9 +32,9 @@ namespace CamNect.GUI.Views
             this.sensorChooser = sensorChooser;
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
-            readerArray[0] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.100", player1);
-            readerArray[1] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.101", player2);
-            readerArray[2] = new MjpegReader(CameraOne.cameraList[0].Config, "172.18.255.102", player3);
+            readerArray[0] = new MjpegReader(CameraOne.cameraList[0], player1);
+            readerArray[1] = new MjpegReader(CameraOne.cameraList[0], player2);
+            readerArray[2] = new MjpegReader(CameraOne.cameraList[0], player3);
 
             cameraOne.Label = CameraOne.cameraList[0].Config.Nom;
         }
