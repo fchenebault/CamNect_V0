@@ -98,7 +98,7 @@
 
             <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" x:Name="message" Width="530" Foreground="Red" FontSize="40" Background="{x:Null}" />
 
-           
+
 
         </Canvas>
 
@@ -119,7 +119,9 @@
                 <GUI:KinectHoverButton x:Name="buttonDownLeft" Style="{StaticResource KinectHoverButtonStyleForCorner}" Height="176" Width="181" Canvas.Top="904" Click="goDownLeft_onClick" Margin="10,894,1729,10"/>
                 <GUI:KinectHoverButton x:Name="buttonDownRight" Style="{StaticResource KinectHoverButtonStyleForCorner}" Height="176" Width="181" Canvas.Top="904" Canvas.Left="1739" Click="goDownRight_onClick" Margin="1729,894,10,10"/>
                 <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0"/>
-            </Grid>        
+
+                <k:KinectScrollViewer Margin="450,968,498,0" x:Name="scrollbutton" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"/>
+            </Grid>
         </k:KinectRegion>
     </Grid>
 </UserControl>

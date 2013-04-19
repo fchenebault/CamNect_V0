@@ -16,6 +16,7 @@ namespace CamNect.Kinect
         public GestureCamera gestureCamera;
         public Skeleton skeletonFocus;
         public ReadOnlyCollection<HandPointer> handsTracked;
+        public HandPointer primaryHand;
 
 
         // Constructor
@@ -35,6 +36,16 @@ namespace CamNect.Kinect
                 return false;
         }
 
+        public HandPointer getPrimaryHand(ReadOnlyCollection<HandPointer> handsTracked)
+        {
+            primaryHand = null;
+            foreach (HandPointer hand in handsTracked)
+            {
+                if (hand.IsPrimaryHandOfUser)
+                    primaryHand = hand;
+            }
+            return this.primaryHand;
+        }
 
         // Initialise the Kinect
         public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
