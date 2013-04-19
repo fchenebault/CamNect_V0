@@ -37,7 +37,7 @@ namespace CamNect.GUI.Views
         }
 
 
-        public void InitCam()
+       public void InitCam()
         {
             // Pour chaque caméra de la liste, on crée la zone d'affichage et lance le player.          
             KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
@@ -61,6 +61,8 @@ namespace CamNect.GUI.Views
             }       
 
         }
+
+
         /// <summary>
         /// Called when the KinectSensorChooser gets a new sensor
         /// </summary>

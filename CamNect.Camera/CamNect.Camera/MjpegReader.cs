@@ -23,8 +23,8 @@ namespace CamNect.Camera
             String url = "http://" + camera.Ip + "/mjpg/video.mjpg";
 
             _mjpeg.FrameReady += mjpeg_FrameReady;
-            _mjpeg.ParseStream(new Uri(url), camera.Config.Id, camera.Config.Pass);
-        }
+
+       }
 
         private void mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
         {
