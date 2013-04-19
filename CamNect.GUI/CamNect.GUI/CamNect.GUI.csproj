@@ -50,9 +50,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Needed_libs\CamNect.GUI\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="MjpegProcessor">
-      <HintPath>..\..\Needed_libs\CamNect.GUI\MjpegProcessor.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
