@@ -15,12 +15,13 @@
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi" />
 
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" Margin="27,-18,-35,10">
+
+            <Grid>
+                <Image  Source="/Ressources/Images/config.png" Canvas.Left="1506" Canvas.Top="20" Margin="105,108,1621,810"  />
+            
+                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="186" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="105,108,0,0" RenderTransformOrigin="-1.88,0.062"/>
+            </Grid>
         </k:KinectRegion>
-        
-        <Image  Source="/Ressources/Images/config.png" Canvas.Left="1506" Canvas.Top="20" Margin="105,108,1621,810"  />
-
-        <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="186" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="105,108,0,0" RenderTransformOrigin="-1.88,0.062"/>
-
 
         <TextBlock HorizontalAlignment="Left" Margin="785,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="115" Width="600" FontSize="50" RenderTransformOrigin="0.5,0.5" FontFamily="Gisha">
             <TextBlock.RenderTransform>
