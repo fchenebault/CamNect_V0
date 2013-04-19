@@ -138,7 +138,7 @@ namespace CamNect.GUI.Views
                         cfg.Serie = a.Device.SerialNumber.ToString();
                         cfg.Plugged= true;
                         cfg.Fenetre = fenetre;
-                         
+                      
 
                         ConfigCamWindow.AddCam(cfg);
 
