@@ -12,6 +12,7 @@ using ManagedUPnP;
 using System.Windows.Media;
 using System.IO;
 using Newtonsoft.Json;
+using System.Windows.Shapes;
 
 
 namespace CamNect.GUI.Views
@@ -31,6 +32,9 @@ namespace CamNect.GUI.Views
         private static List<CamConfig> defaultConfig = new List<CamConfig>();
         private static int rank = 1;
         public KinectSensorChooser sensorChooser;
+        public List<Polygon> polygons;
+        private List<KinectHoverButton> hoverButtons;
+        private bool isButtonActive = false;
 
 //        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -39,6 +43,12 @@ namespace CamNect.GUI.Views
         public CameraOne(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
+            polygons = new List<Polygon> { polygonDownLeft, polygonDown, polygonUp, polygonDownRight, polygonLeft, polygonRight, polygonUpLeft, polygonUpRight };
+            hoverButtons = new List<KinectHoverButton> { buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopLeft, buttonTopRight };
+            foreach (KinectHoverButton hoverButton in this.hoverButtons)
+            {
+                hoverButton.Visibility = System.Windows.Visibility.Hidden;
+            }
 
             // Sensor initialisation
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
@@ -66,23 +76,9 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
 
             // Events for grip buttons
-            buttonGripDown.isUseForPTZ = true;
-            buttonGripDown.OnHandGrip += new KinectScrollViewer.HandGripEvent(goDown_onClick);
-            buttonGripUp.isUseForPTZ = true;
-            buttonGripUp.OnHandGrip += new KinectScrollViewer.HandGripEvent(goUp_onClick);
-            buttonGripRight.isUseForPTZ = true;
-            buttonGripLeft.OnHandGrip += new KinectScrollViewer.HandGripEvent(goLeft_onClick);
-            buttonGripLeft.isUseForPTZ = true;
-            buttonGripRight.OnHandGrip += new KinectScrollViewer.HandGripEvent(goRight_onClick);
-            buttonGripDownLeft.isUseForPTZ = true;
-            buttonGripDownLeft.OnHandGrip += new KinectScrollViewer.HandGripEvent(goDownLeft_onClick);
-            buttonGripDownRight.isUseForPTZ = true;
-            buttonGripDownRight.OnHandGrip += new KinectScrollViewer.HandGripEvent(goDownRight_onClick);
-            buttonGripUpLeft.isUseForPTZ = true;
-            buttonGripUpLeft.OnHandGrip += new KinectScrollViewer.HandGripEvent(goUpLeft_onClick);
-            buttonGripUpRight.isUseForPTZ = true;
-            buttonGripUpRight.OnHandGrip += new KinectScrollViewer.HandGripEvent(goUpRight_onClick);
-
+            backgroundGrip.isCameraOne = true;
+            backgroundGrip.OnHandGrip += new KinectScrollViewer.HandGripEvent(activeButtons);
+            
            // video.Play();
         }
 
@@ -192,28 +188,14 @@ namespace CamNect.GUI.Views
         public void highlightTimer_Tick(object sender, System.EventArgs e)
         {
             this.highlightTimer.Stop();
-            polygonUpLeft.IsEnabled = false;
-            polygonDownLeft.IsEnabled = false;
-            polygonUpRight.IsEnabled = false;
-            polygonDownRight.IsEnabled = false;
-            polygonDown.IsEnabled = false;
-            polygonRight.IsEnabled = false;
-            polygonUp.IsEnabled = false;
-            polygonLeft.IsEnabled = false;
+            polygonUpLeft.IsHitTestVisible = false;
+            polygonDownLeft.IsHitTestVisible = false;
+            polygonUpRight.IsHitTestVisible = false;
+            polygonDownRight.IsHitTestVisible = false;
         }
 
-        public void goRight_onClick()
+        public void goRight_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonRight.IsEnabled = true;
-
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -222,22 +204,11 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
                 message.Content = "Button Right";
-                //cameraOne.goRight();
             }
         }
 
-        public void goLeft_onClick()
+        public void goLeft_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonLeft.IsEnabled = true;
-
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -246,22 +217,11 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Left");
                 message.Content = "Button Left";
-                //cameraOne.goLeft();
             }
         }
 
-        public void goUp_onClick()
+        public void goUp_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonUp.IsEnabled = true;
-
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -270,11 +230,10 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Top");
                 message.Content = "Button Up";
-                //cameraOne.goUp();
             }
         }
 
-        public void goUpLeft_onClick()
+        public void goUpLeft_onClick(object sender, RoutedEventArgs e)
         {
             // Highlighting corner polygon
             if (this.highlightTimer != null)
@@ -284,8 +243,8 @@ namespace CamNect.GUI.Views
             this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
             this.highlightTimer.Interval = 40;
             this.highlightTimer.Start();
-            polygonUpLeft.IsEnabled = true;
-            
+            polygonUpLeft.IsHitTestVisible = true;
+
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -294,12 +253,10 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
                 message.Content = "Button UpLeft";
-                //cameraOne.goUp();
-                //cameraOne.goLeft();
             }
         }
 
-        public void goUpRight_onClick()
+        public void goUpRight_onClick(object sender, RoutedEventArgs e)
         {
             // Highlighting corner polygon
             if (this.highlightTimer != null)
@@ -309,7 +266,7 @@ namespace CamNect.GUI.Views
             this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
             this.highlightTimer.Interval = 40;
             this.highlightTimer.Start();
-            polygonUpRight.IsEnabled = true;
+            polygonUpRight.IsHitTestVisible = true;
 
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
@@ -319,24 +276,12 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button TopRight");
                 message.Content = "Button UpRight";
-                //cameraOne.goUp();
-                //cameraOne.goRight();
             }
             
         }
 
-        public void goDown_onClick()
+        public void goDown_onClick(object sender, RoutedEventArgs e)
         {
-            // Highlighting corner polygon
-            if (this.highlightTimer != null)
-            {
-                this.highlightTimer.Stop();
-            }
-            this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
-            this.highlightTimer.Interval = 40;
-            this.highlightTimer.Start();
-            polygonDown.IsEnabled = true;
-
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
@@ -345,11 +290,10 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Down");
                 message.Content = "Button Down";
-                //cameraOne.goDown();
             }
         }
 
-        public void goDownRight_onClick()
+        public void goDownRight_onClick(object sender, RoutedEventArgs e)
         {
             // Highlighting corner polygon
             if (this.highlightTimer != null)
@@ -359,7 +303,7 @@ namespace CamNect.GUI.Views
             this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
             this.highlightTimer.Interval = 40;
             this.highlightTimer.Start();
-            polygonDownRight.IsEnabled = true;
+            polygonDownRight.IsHitTestVisible = true;
 
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
@@ -369,13 +313,11 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button DownRight");
                 message.Content = "Button DownRight";
-                //cameraOne.goDown();
-                //cameraOne.goRight();
             }
             
         }
 
-        public void goDownLeft_onClick()
+        public void goDownLeft_onClick(object sender, RoutedEventArgs e)
         {
             // Highlighting corner polygon
             if (this.highlightTimer != null)
@@ -385,7 +327,7 @@ namespace CamNect.GUI.Views
             this.highlightTimer.Tick += new System.EventHandler(highlightTimer_Tick);
             this.highlightTimer.Interval = 40;
             this.highlightTimer.Start();
-            polygonDownLeft.IsEnabled = true;
+            polygonDownLeft.IsHitTestVisible = true;
 
             // Execute action
             this.timer.Tick += new EventHandler(this.TimerStop);
@@ -395,8 +337,6 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button DownLeft");
                 message.Content = "Button  DownLeft";
-                //cameraOne.goDown();
-                //cameraOne.goLeft();
             }
         }
 
@@ -420,10 +360,33 @@ namespace CamNect.GUI.Views
         {
             System.Windows.Application.Current.Shutdown();
         }
-
-        public void actionForGrip()
+               
+        public void activeButtons()
         {
-            message.Content = "DragOver";
+            if (isButtonActive)
+            {
+                foreach (Polygon polygon in this.polygons)
+                {
+                    polygon.IsEnabled = false;
+                }
+                foreach (KinectHoverButton hoverButton in this.hoverButtons)
+                {
+                    hoverButton.Visibility = System.Windows.Visibility.Hidden;
+                }
+                isButtonActive = false;
+            }
+            else
+            {
+                foreach (Polygon polygon in this.polygons)
+                {
+                    polygon.IsEnabled = true;
+                }
+                foreach (KinectHoverButton hoverButton in this.hoverButtons)
+                {
+                    hoverButton.Visibility = System.Windows.Visibility.Visible;
+                }
+                isButtonActive = true;
+            }
         }
 
     }

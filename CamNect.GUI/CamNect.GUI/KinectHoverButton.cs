@@ -16,7 +16,7 @@ namespace CamNect.GUI
     /// <summary>
     /// A button that continually triggers a click when the mouse or hand pointer hovers over it
     /// </summary>
-    internal class KinectHoverButton : KinectButtonBase
+    public class KinectHoverButton : KinectButtonBase
     {
         /// <summary>
         /// IsHandPointerOver dependency property for use in the control template triggers
