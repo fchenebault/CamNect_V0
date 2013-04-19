@@ -32,6 +32,7 @@ namespace CamNect.GUI.Views
             // Sensor initialisation
             this.sensorChooser = sensorChooser;
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+ 
 
         }
 
