@@ -35,12 +35,13 @@ namespace CamNect.GUI.Views
         public List<Polygon> polygons;
         private List<KinectHoverButton> hoverButtons;
         private bool isButtonActive = false;
-
+        
+        private MjpegReader reader;
 //        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
 
-        public CameraOne(KinectSensorChooser sensorChooser)
+        public CameraOne(KinectSensorChooser sensorChooser, CameraUtils camera)
         {
             InitializeComponent();
             polygons = new List<Polygon> { polygonDownLeft, polygonDown, polygonUp, polygonDownRight, polygonLeft, polygonRight, polygonUpLeft, polygonUpRight };
@@ -54,7 +55,7 @@ namespace CamNect.GUI.Views
             this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
             this.sensorChooser = sensorChooser;
 
-           
+            reader = new MjpegReader(camera, CameraOnePlayer);
             // Use KinectMain class
             //this.buttons = new List<System.Windows.Controls.Button> { quitButton, buttonDown, buttonDownLeft, buttonDownRight, buttonLeft, buttonRight, buttonTop, buttonTopRight };
             //this.kinect = new KinectMain(this.sensorChooser.Kinect, buttons);

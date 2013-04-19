@@ -121,8 +121,8 @@ namespace CamNect.GUI.Views
 
         private void moveToCameraOne()
         {
-            Views.CameraOne CameraPage = new Views.CameraOne(this.sensorChooser);
-            this.Content = CameraPage;
+         //   Views.CameraOne CameraPage = new Views.CameraOne(this.sensorChooser);
+         //   this.Content = CameraPage;
         }
 
         ////When the window is loaded
@@ -148,7 +148,7 @@ namespace CamNect.GUI.Views
 
             if (CameraOne.cameraList[i].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[i]);
                 this.Content = CameraOnePage;
             }
 
