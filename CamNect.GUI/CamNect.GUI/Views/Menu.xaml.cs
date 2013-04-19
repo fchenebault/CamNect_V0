@@ -41,22 +41,23 @@ namespace CamNect.GUI.Views
         {
             // Pour chaque caméra de la liste, on crée la zone d'affichage et lance le player.          
             KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
+            Image[] imageArray = new Image[CameraOne.cameraList.Count];
+
             System.Console.WriteLine("nb de cam: "+CameraOne.cameraList.Count.ToString());
 
             for (int i = 0;i < CameraOne.cameraList.Count; i++) 
             {                
                 kinectButtonArray[i] = new KinectTileButton();
                 kinectButtonArray[i].Width = 800;
-                kinectButtonArray[i].Height = 530;          
-                Image image = new Image();
-                image.Height = 600;
-                image.Width = 800;
-                kinectButtonArray[i].Content = image;
+                kinectButtonArray[i].Height = 600;          
+                imageArray[i] = new Image();
+                imageArray[i].Height = 530;
+                imageArray[i].Width = 800;
+                kinectButtonArray[i].Content = imageArray[i];
                 kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
                 kinectButtonArray[i].Click += KinectTileButtonClick;
-                
-                wrapPanel.Children.Add(kinectButtonArray[i]);
-                this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], image);
+                this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
+                wrapPanel.Children.Add(kinectButtonArray[i]);          
          
             }       
 
