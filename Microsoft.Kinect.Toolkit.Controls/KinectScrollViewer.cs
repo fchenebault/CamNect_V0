@@ -119,7 +119,7 @@ namespace Microsoft.Kinect.Toolkit.Controls
                 this.InitializeKinectScrollViewer();
             }
 
-            isUseForPTZ = false;
+            isCameraOne = false;
         }
 
         private enum GripState
@@ -349,7 +349,7 @@ namespace Microsoft.Kinect.Toolkit.Controls
                     this.grippedHandpointer = null;
                 }
             }
-        }
+         }
 
         private void OnHandPointerMove(object sender, HandPointerEventArgs kinectHandPointerEventArgs)
         {
@@ -475,14 +475,13 @@ namespace Microsoft.Kinect.Toolkit.Controls
             {
                 this.HandleHandPointerGrip(kinectHandPointerEventArgs.HandPointer);
                 kinectHandPointerEventArgs.Handled = true;
-                if (isUseForPTZ)
+                
+                // For grip activity on XAML
+                if (isCameraOne)
                     OnHandGrip();
+                
             }
         }
-
-        public bool isUseForPTZ;
-        public delegate void HandGripEvent();
-        public event HandGripEvent OnHandGrip;
 
         private void HandleHandPointerGrip(HandPointer handPointer)
         {
@@ -576,6 +575,10 @@ namespace Microsoft.Kinect.Toolkit.Controls
                 {
                     kinectHandPointerEventArgs.HandPointer.Capture(null);
                 }
+
+                // For grip activity on XAML
+                /*if (isCameraOne)
+                    OnHandReleaseGrip();*/
             }
         }
 
@@ -714,5 +717,15 @@ namespace Microsoft.Kinect.Toolkit.Controls
             this.scrollViewerInertiaScroller.Start(this, scrollVelocity, AnimationState.Inertial, doHorizontalInertialScroll, doVerticalInertialScroll);
             return true;
         }
+
+        // Created by the Camnect Team
+        public bool isCameraOne;
+
+        public delegate void HandGripEvent();
+        public event HandGripEvent OnHandGrip;
+
+        /*
+        public delegate void HandReleaseGripEvent();
+        public event HandReleaseGripEvent OnHandReleaseGrip;*/
     }
 }
