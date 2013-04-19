@@ -143,7 +143,7 @@ namespace CamNect.GUI.Views
 
             if (CameraOne.cameraList[j].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[i]);                  
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[j]);                  
                 this.Content = CameraOnePage;               
 
             }

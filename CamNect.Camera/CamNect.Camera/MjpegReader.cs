@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Net;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace CamNect.Camera
 {
@@ -16,6 +17,8 @@ namespace CamNect.Camera
         // Variables
         private Image reader;
         private MjpegDecoder _mjpeg;
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
 
         public MjpegReader(CameraUtils camera, Image reader)
         {
@@ -26,6 +29,9 @@ namespace CamNect.Camera
             _mjpeg.FrameReady += mjpeg_FrameReady;
             _mjpeg.Error += mjpeg_Error;
             _mjpeg.ParseStream(new Uri(url), camera.Config.Id, camera.Config.Pass);
+
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10000);
         }
        
         // In case of Errors
@@ -40,6 +46,15 @@ namespace CamNect.Camera
         private void mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
         {
                 reader.Source = e.BitmapImage;
+                dispatcherTimer.Start();
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            dispatcherTimer.Stop();
+            Uri uri = new Uri("/Ressources/Images/warning_big.png", UriKind.Relative);
+            ImageSource bi = new BitmapImage(uri);
+            reader.Source = bi;
         }
 
         public void MjpegReaderStop()
