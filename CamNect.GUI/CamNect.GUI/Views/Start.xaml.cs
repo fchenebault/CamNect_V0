@@ -46,7 +46,7 @@ namespace CamNect.GUI.Views
         {
             // Timer to wait for the other view
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10000);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(3000);
             dispatcherTimer.Start();
         }
 
