@@ -1,0 +1,30 @@
+﻿<UserControl
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:k="http://schemas.microsoft.com/kinect/2013"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Toolkit="clr-namespace:Microsoft.Kinect.Toolkit;assembly=Microsoft.Kinect.Toolkit" xmlns:GUI="clr-namespace:CamNect.GUI" x:Class="CamNect.GUI.Views.CameraNotPTZ"
+       mc:Ignorable="d" 
+        Background="White" Height="1080" Width="1920">
+
+    <Grid x:Name="CameraOneGrid" Loaded="CameraOne_Window_Loaded">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Ressources/Images/background.png" />
+        </Grid.Background>
+
+        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,10,0,0" />
+        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Center" Height="123" VerticalAlignment="Top" Width="164" />
+        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" />
+
+        <k:KinectRegion x:Name="kinectRegion" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent" Height="1080" Width="1920">
+
+            <Grid x:Name="kinectRegionGrid" >
+                <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Margin="1492,10,291,947" Opacity="0.5" />
+                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0" Panel.ZIndex="1000" />
+            </Grid>
+        </k:KinectRegion>
+
+    </Grid>
+
+</UserControl>

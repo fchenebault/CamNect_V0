@@ -205,6 +205,7 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
                 message.Content = "Button Right";
+                this.camera.goRight();
             }
         }
 
