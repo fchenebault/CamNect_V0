@@ -19,8 +19,8 @@
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920">
             <Grid x:Name="kinectRegionGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1080" Width="1920" Margin="10,-10,-10,10" >
                 
-                <k:KinectTileButton Height="154" Width="Auto" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1315,858,443,68" Panel.ZIndex="1000" >
-                    <Image x:Name="Menu" Source="/Ressources/Images/exit.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />                   
+                <k:KinectTileButton Height="154" Width="Auto" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1315,858,443,68" >
+                    <Image x:Name="image_Menu" Source="/Ressources/Images/exit.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />                   
                 </k:KinectTileButton>
                 <k:KinectScrollViewer Height="600" Margin="0,0,0,200" Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                     <WrapPanel VerticalAlignment="Center" x:Name="wrapPanel" Orientation="Vertical" >
