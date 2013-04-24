@@ -11,14 +11,18 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
-        
+
         <Label Margin="300,880,0,0" Content="" Height="66" Name="message" Width="930" Foreground="White" FontSize="40" Background="{x:Null}" />
-        
+
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi"/>
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920">
             <Grid x:Name="kinectRegionGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1080" Width="1920" Margin="10,-10,-10,10" >
-                <k:KinectScrollViewer Height="600" Margin="0,0,0,200" Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                
+                <k:KinectTileButton Height="154" Width="Auto" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1315,858,443,68" >
+                    <Image x:Name="image_Menu" Source="/Ressources/Images/exit.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />                   
+                </k:KinectTileButton>
+                <k:KinectScrollViewer Height="600" Margin="0,176,0,304" Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                     <WrapPanel VerticalAlignment="Center" x:Name="wrapPanel" Orientation="Vertical" >
 
                     </WrapPanel>

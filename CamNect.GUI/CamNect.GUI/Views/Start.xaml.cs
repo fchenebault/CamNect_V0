@@ -37,7 +37,6 @@ namespace CamNect.GUI.Views
 
             //maxFenetre;
 
-
             Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
             disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
             disc.Start();

@@ -18,8 +18,8 @@
 
             <Grid>
                 <Image  Source="/Ressources/Images/config.png" Canvas.Left="1506" Canvas.Top="20" Margin="105,108,1621,810"  />
-            
-                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="186" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="105,108,0,0" RenderTransformOrigin="-1.88,0.062"/>
+
+                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="162" Width="194" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="105,108,0,0" RenderTransformOrigin="-1.88,0.062"/>
             </Grid>
         </k:KinectRegion>
 

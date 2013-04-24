@@ -57,6 +57,7 @@ namespace CamNect.GUI.Views
 
             // Camera Initialisation
             reader = new MjpegReader(camera, CameraOnePlayer);
+            this.camera = camera;
 
             // Events for gestures
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
