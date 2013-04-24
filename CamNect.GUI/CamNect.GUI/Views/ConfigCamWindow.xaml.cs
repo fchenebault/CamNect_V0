@@ -88,16 +88,16 @@ namespace CamNect.GUI.Views
             CamConfigCollection();
 
             //Trie les objets en deux categirie, true/false, puis en fonction du numero de fenetre
-            ligne = new ObservableCollection<CamConfig>(ligne.OrderByDescending(a => a.Plugged).ThenBy(a => a.Fenetre));
+            //ligne = new ObservableCollection<CamConfig>(ligne.OrderByDescending(a => a.Plugged).ThenBy(a => a.Fenetre));
             
             //Reindex le numero de fenetre
-            int index;
+            /*int index;
             foreach (CamConfig l in ligne)
             {
                 index = ligne.IndexOf(l);
                 l.Fenetre = index + 1;
                 l.Plugged = false;
-            }
+            }*/
 
 
 
@@ -137,7 +137,19 @@ namespace CamNect.GUI.Views
         public static void AddCam(CamConfig cfg)
         {
             ligne.Add(cfg);
-            dgCam.Items.Refresh();  
+            System.Console.WriteLine("-- AJOUT --");
+            System.Console.WriteLine(cfg.Modele);
+            System.Console.WriteLine(cfg.Serie);
+
+            System.Console.WriteLine("-- LISTE --");
+            foreach (CamConfig c in ligne)
+            {
+                System.Console.WriteLine(c.Modele + " - " + c.Serie);
+            }
+
+            dgCam.Items.Refresh();
+
+
         }
 
         public static void CamRefresh()
@@ -157,10 +169,12 @@ namespace CamNect.GUI.Views
             }
             //
             dgCam.ItemsSource = ligne;*/
-            foreach (CameraUtils u in CameraOne.cameraList)
+            /*foreach (CameraUtils u in CameraOne.cameraList)
             {
                 System.Console.WriteLine(u.Config.Nom);
-            }
+            }*/
+
+           // AddCam(new CamConfig(true, "AXIS M1054", "root", "hiddeb", "URL", true, false, true, "1236454215241", 5, true));
             
         }
 

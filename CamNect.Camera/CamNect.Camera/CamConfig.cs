@@ -18,7 +18,6 @@ namespace CamNect.Camera
         public bool isPtz { get; set; }
         public bool PtzOn = true;
         public bool Zoom { get; set; }
-        public bool Son { get; set; }
         public string Modele { get; set; }
         public string Serie { get; set; }
         public int Fenetre { get; set; }
@@ -32,7 +31,7 @@ namespace CamNect.Camera
             Resolution = "640x480";
         }
 
-        public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, bool son, string serie, int fenetre, bool plugged)
+        public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, string serie, int fenetre, bool plugged)
         {
             this.Afficher = afficher;
             this.Nom = nom;
@@ -42,9 +41,25 @@ namespace CamNect.Camera
             this.Uri = uri;
             this.isPtz = isPtz;
             this.Zoom = zoom;
-            this.Son = son;
             this.Fenetre = fenetre;
             this.Plugged = plugged;
+        }
+
+        public void Clone(CamConfig cfg)
+        {
+            this.Afficher = cfg.Afficher;
+            this.Nom = cfg.Nom;
+            this.Id = cfg.Id;
+            this.Pass = cfg.Pass;
+            this.Resolution = cfg.Resolution;
+            this.Uri = cfg.Uri;
+            this.isPtz = cfg.isPtz;
+            this.PtzOn = cfg.PtzOn;
+            this.Zoom = cfg.Zoom;
+            this.Modele = cfg.Modele;
+            this.Serie = cfg.Serie;
+            this.Fenetre = cfg.Fenetre;
+            this.Plugged = cfg.Plugged;
         }
     }
 }
