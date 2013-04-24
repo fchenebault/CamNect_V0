@@ -91,6 +91,9 @@
     </ApplicationDefinition>
     <Compile Include="Views\BlueDot.xaml.cs" />
     <Compile Include="KinectHoverButton.cs" />
+    <Compile Include="Views\CameraNotPTZ.xaml.cs">
+      <DependentUpon>CameraNotPTZ.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CameraOne.xaml.cs">
       <DependentUpon>CameraOne.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,10 @@
     <Page Include="Views\BlueDot.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CameraNotPTZ.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CameraOne.xaml">
       <Generator>MSBuild:Compile</Generator>

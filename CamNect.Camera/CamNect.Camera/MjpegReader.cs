@@ -19,25 +19,24 @@ namespace CamNect.Camera
         private MjpegDecoder _mjpeg;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
-
         public MjpegReader(CameraUtils camera, Image reader)
         {
             _mjpeg = new MjpegDecoder();
             this.reader = reader;
-            String url = "http://" +camera.Ip + "/mjpg/video.mjpg";
+            String url = "http://" + camera.Ip + "/mjpg/video.mjpg";
 
             _mjpeg.FrameReady += mjpeg_FrameReady;
             _mjpeg.Error += mjpeg_Error;
             _mjpeg.ParseStream(new Uri(url), camera.Config.Id, camera.Config.Pass);
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10000);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(3000);
         }
-       
+
         // In case of Errors
         void mjpeg_Error(object sender, ErrorEventArgs e)
         {
-            Uri uri = new Uri("/Ressources/Images/warning_big.png", UriKind.Relative);
+            Uri uri = new Uri("/ressources/images/warning_big.png", UriKind.Relative);
             ImageSource bi = new BitmapImage(uri);
             reader.Source = bi;
         }
@@ -45,13 +44,15 @@ namespace CamNect.Camera
         // For new video frame
         private void mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
         {
-                reader.Source = e.BitmapImage;
-                dispatcherTimer.Start();
+            reader.Source = e.BitmapImage;
+            dispatcherTimer.Stop();
+            dispatcherTimer.Start();
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             dispatcherTimer.Stop();
+            _mjpeg.StopStream();
             Uri uri = new Uri("/Ressources/Images/warning_big.png", UriKind.Relative);
             ImageSource bi = new BitmapImage(uri);
             reader.Source = bi;
