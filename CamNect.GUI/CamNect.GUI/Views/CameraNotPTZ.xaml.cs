@@ -12,6 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CamNect.Kinect;
+using CamNect.Camera;
+using Microsoft.Kinect.Toolkit.Controls;
+using Microsoft.Kinect.Toolkit;
+using Microsoft.Kinect;
 
 namespace CamNect.GUI.Views
 {
@@ -20,9 +25,45 @@ namespace CamNect.GUI.Views
     /// </summary>
     public partial class CameraNotPTZ : UserControl
     {
-        public CameraNotPTZ()
+
+        // Variables
+        private KinectMain kinect;
+        public KinectSensorChooser sensorChooser;
+        private CameraUtils camera;
+        private MjpegReader reader;
+
+        public CameraNotPTZ(KinectSensorChooser sensorChooser, CameraUtils camera)
         {
             InitializeComponent();
+
+            // Sensor initialisation
+            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+            this.sensorChooser = sensorChooser;
+
+            // Camera Initialisation
+            reader = new MjpegReader(camera, CameraNotPTZPlayer);
+            this.camera = camera;
+        }
+
+        public void gestureEvent(object sender, EventArgs e)
+        {
+            Skeleton[] skeletons = kinectRegion.skeletons;
+            if (skeletons != null)
+            {
+
+                for (int i = 0; i < skeletons.Length; i++)
+                {
+                    if (skeletons[i].TrackingId == kinectRegion.PrimaryUserTrackingId)
+                    {
+                        kinect.gestureCamera.OnGesture(skeletons[i]);
+                    }
+                }
+            }
+        }
+
+        public void quit_onClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }

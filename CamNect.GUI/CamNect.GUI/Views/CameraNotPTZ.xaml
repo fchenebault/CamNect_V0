@@ -8,10 +8,12 @@
        mc:Ignorable="d" 
         Background="White" Height="1080" Width="1920">
 
-    <Grid x:Name="CameraOneGrid" Loaded="CameraOne_Window_Loaded">
+    <Grid x:Name="CameraOneGrid" >
         <Grid.Background>
             <ImageBrush ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
+
+        <Image x:Name= "CameraNotPTZPlayer" Height="1080" Width="1920" />
 
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,10,0,0" />
         <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Center" Height="123" VerticalAlignment="Top" Width="164" />
@@ -20,11 +22,15 @@
         <k:KinectRegion x:Name="kinectRegion" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent" Height="1080" Width="1920">
 
             <Grid x:Name="kinectRegionGrid" >
-                <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Margin="1492,10,291,947" Opacity="0.5" />
-                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="1474,10,0,0" Panel.ZIndex="1000" />
+               
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,-1074,12,0">
+                    <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Opacity="0.5" />
+                </k:KinectTileButton>
             </Grid>
         </k:KinectRegion>
 
+        
+        
     </Grid>
 
 </UserControl>

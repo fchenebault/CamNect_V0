@@ -28,6 +28,26 @@ namespace CamNect.Camera
             get { return ip;}
         }
 
+        public void lightOn()
+        {
+            HttpReq.HttpGet("http://" + ip + "/axis-cgi/io/lightcontrol.cgi?action=L1:-100", config.Id, config.Pass);
+        }
+
+        public void lightOff()
+        {
+            HttpReq.HttpGet("http://" + ip + "/axis-cgi/io/lightcontrol.cgi?action=L1:-0", config.Id, config.Pass);
+        }
+
+        public void playMediaClip(int idMediaClip)
+        {
+            // idMediaClip 
+            // 6 : Click
+            // 7 : Psst
+            // 8 : Intruder
+            // 9 : Dog barking
+            HttpReq.HttpGet("http://" + ip + "/axis-cgi/mediaclip.cgi?action=play&clip=" + idMediaClip, config.Id, config.Pass);
+        }
+
         public void goLeft()
         {
             String result;

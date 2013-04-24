@@ -148,9 +148,9 @@ namespace CamNect.GUI.Views
                 this.Content = CameraOnePage;
             }
             else
-            {/*
+            {
                 Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, CameraOne.cameraList[j]);
-                this.Content = CameraOnePage;*/
+                this.Content = cameraNotPTZPage;
             }
 
             message.Content = "Camera numero"+i.ToString(); 
