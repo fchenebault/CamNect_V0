@@ -24,8 +24,15 @@
             <Grid x:Name="kinectRegionGrid" >
                
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,-1074,12,0">
-                    <Image x:Name="Menu" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Opacity="0.5" />
+                    <Image x:Name="exit" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Opacity="0.5" />
                 </k:KinectTileButton>
+                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent" Click="lumiere_onClick" Margin="133,-426,1567,426">
+                    <Image x:Name="lumiere" Source="/Ressources/Images/lumiere.png" />
+                    </k:KinectTileButton>
+                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
+                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
+                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
+                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
             </Grid>
         </k:KinectRegion>
 
