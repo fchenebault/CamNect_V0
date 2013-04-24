@@ -64,11 +64,11 @@ namespace CamNect.GUI.Views
            {
                json = File.ReadAllText("../../Ressources/Config/config.json");
                ligne = JsonConvert.DeserializeObject<ObservableCollection<CamConfig>>(json);
-               try
+               /*try
                {
                    maxFenetre = ligne.Max(a => a.Fenetre);
                }
-               catch { }
+               catch { }*/
            }
 
        }

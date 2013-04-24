@@ -30,7 +30,7 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public static List<CameraUtils> cameraList = new List<CameraUtils>();
         private static List<CamConfig> defaultConfig = new List<CamConfig>();
-        private static int fenetre = ConfigCamWindow.maxFenetre;
+        //private static int fenetre = ConfigCamWindow.maxFenetre;
         public KinectSensorChooser sensorChooser;
         public List<Polygon> polygons;
         private List<KinectHoverButton> hoverButtons;
@@ -111,7 +111,7 @@ namespace CamNect.GUI.Views
 
             bool camExist = false;
             System.Console.WriteLine("deviceadded");
-            System.Console.WriteLine(fenetre);
+           // System.Console.WriteLine(fenetre);
             
             /* On recherche d'abord une configuration sauvegardée*/
             foreach (CamConfig cfg in ConfigCamWindow.ligne)
@@ -133,11 +133,14 @@ namespace CamNect.GUI.Views
                 {
                     if (a.Device.FriendlyName.Contains(cfg.Modele))
                     {
-                        fenetre = ConfigCamWindow.maxFenetre++;
+                        //fenetre = ConfigCamWindow.maxFenetre++;
+                        System.Console.WriteLine("-- NOUVELLE CAMERA --");
                         System.Console.WriteLine(cfg.Modele);
+                        System.Console.WriteLine(a.Device.SerialNumber.ToString());
+
                         cfg.Serie = a.Device.SerialNumber.ToString();
                         cfg.Plugged= true;
-                        cfg.Fenetre = fenetre;
+                        //cfg.Fenetre = fenetre;
                         
                        
                         ConfigCamWindow.AddCam(cfg);
