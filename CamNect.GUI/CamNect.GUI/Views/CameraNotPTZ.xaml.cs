@@ -65,5 +65,10 @@ namespace CamNect.GUI.Views
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        public void lumiere_onClick(object sender, RoutedEventArgs e)
+        {
+            this.camera.lightOn();
+        }
     }
 }
