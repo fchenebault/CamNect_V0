@@ -157,10 +157,16 @@ namespace CamNect.GUI.Views
             
         }
 
-        private void quit_onClick(object sender, RoutedEventArgs e)
+        private void quitOnClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void reloadOnClick(object sender, RoutedEventArgs e)
+        {
+            InitCam();
+        }
+
 
     }
 }
