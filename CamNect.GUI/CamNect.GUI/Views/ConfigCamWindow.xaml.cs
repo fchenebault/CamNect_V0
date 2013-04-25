@@ -160,6 +160,7 @@ namespace CamNect.GUI.Views
             }*/
 
            // AddCam(new CamConfig(true, "AXIS M1054", "root", "hiddeb", "URL", true, false, true, "1236454215241", 5, true));
+
             
         }
 
@@ -176,6 +177,11 @@ namespace CamNect.GUI.Views
             }
             //
             dgCam.Items.Refresh();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

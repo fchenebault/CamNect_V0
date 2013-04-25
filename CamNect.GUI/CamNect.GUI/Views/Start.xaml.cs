@@ -37,7 +37,7 @@ namespace CamNect.GUI.Views
 
             Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
             disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
-            //disc.DeviceRemoved += new DeviceRemovedEventHandler(CameraOne.discDeviceRemoved);
+            disc.DeviceRemoved += new DeviceRemovedEventHandler(CameraOne.discDeviceRemoved);
             disc.Start();
 
             // Timer 
