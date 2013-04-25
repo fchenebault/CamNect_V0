@@ -141,21 +141,32 @@ namespace CamNect.GUI.Views
                 this.readerArray[i].MjpegReaderStop();
             }
 
+            //La caméra selectionnée est-elle PTZ ?
             if (CameraOne.cameraList[j].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser,CameraOne.cameraList[j]);                  
-                this.Content = CameraOnePage;               
-                
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, CameraOne.cameraList[j]);
+                this.Content = CameraOnePage;
+            }
+            else
+            {
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, CameraOne.cameraList[j]);
+                this.Content = cameraNotPTZPage;
             }
 
             message.Content = "Camera numero"+i.ToString(); 
             
         }
 
-        private void quit_onClick(object sender, RoutedEventArgs e)
+        private void quitOnClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void reloadOnClick(object sender, RoutedEventArgs e)
+        {
+            InitCam();
+        }
+
 
     }
 }

@@ -143,13 +143,13 @@ namespace CamNect.GUI.Views
                         cfg.Serie = a.Device.SerialNumber.ToString();
                         cfg.Plugged= true;
                         //cfg.Fenetre = fenetre;
-                        
-                       
-                        ConfigCamWindow.AddCam(cfg);
 
-                        cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfg));
+                        CamConfig cfgAux = new CamConfig();
+                        cfgAux.Clone(cfg);
 
-                        //cameraList.Sort(
+                        ConfigCamWindow.AddCam(cfgAux);
+
+                        cameraList.Add(new CameraUtils(a.Device.RootHostAddresses[0].ToString(), cfgAux));
                         break;
                     }
                 }
@@ -209,6 +209,7 @@ namespace CamNect.GUI.Views
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
                 message.Content = "Button Right";
+                this.camera.goRight();
             }
         }
 
