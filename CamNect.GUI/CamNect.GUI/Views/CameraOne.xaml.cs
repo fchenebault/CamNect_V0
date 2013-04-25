@@ -415,7 +415,7 @@ namespace CamNect.GUI.Views
                     xZoom = xEcart;
                     return;
                 }
-                else if (System.Math.Abs(xEcart - xZoom) > kinectRegion.Width * 0.1)
+                else if (System.Math.Abs(xEcart - xZoom) > kinectRegion.Width * 0.5)
                 {
                     // System.Console.WriteLine("mode zoom");
                     this.timer.Tick += new EventHandler(this.TimerStop);
