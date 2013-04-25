@@ -20,6 +20,7 @@ namespace CamNect.Camera
         public bool Zoom { get; set; }
         public string Modele { get; set; }
         public string Serie { get; set; }
+        public string UDN { get; set; }
         public int Fenetre { get; set; }
         public bool Plugged  { get; set; }
      
@@ -31,12 +32,13 @@ namespace CamNect.Camera
             Resolution = "640x480";
         }
 
-        public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, string serie, int fenetre, bool plugged)
+        public CamConfig(bool afficher, string nom, string id, string pass, string uri, bool isPtz, bool zoom, string serie, string udn, int fenetre, bool plugged)
         {
             this.Afficher = afficher;
             this.Nom = nom;
             this.Id = id;
             this.Serie = serie;
+            this.UDN = udn;
             this.Pass = pass;
             this.Uri = uri;
             this.isPtz = isPtz;
