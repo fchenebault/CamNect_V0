@@ -174,6 +174,18 @@ namespace CamNect.GUI.Views
 
         }
 
+        public static void discDeviceRemoved(object sender, DeviceAddedEventArgs a)
+        {
+            foreach (CameraUtils cam in cameraList)
+            {
+                if (cam.Config.Serie == a.Device.SerialNumber.ToString())
+                {
+                    cameraList.Remove(cam);
+                    break;
+                }
+            }
+        }
+
         public void TimerStop(Object myObject, EventArgs myEventArgs)
         {
             this.timer.Stop();
