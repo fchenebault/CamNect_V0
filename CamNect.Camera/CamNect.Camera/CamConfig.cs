@@ -60,6 +60,7 @@ namespace CamNect.Camera
             this.Zoom = cfg.Zoom;
             this.Modele = cfg.Modele;
             this.Serie = cfg.Serie;
+            this.UDN = cfg.UDN;
             this.Fenetre = cfg.Fenetre;
             this.Plugged = cfg.Plugged;
         }

@@ -174,11 +174,14 @@ namespace CamNect.GUI.Views
 
         public static void discDeviceRemoved(object sender, DeviceRemovedEventArgs a)
         {
+            System.Console.WriteLine("--deviceremoved--");
             foreach (CameraUtils cam in cameraList)
             {
                 if (cam.Config.UDN == a.UDN.ToString())
                 {
+                    System.Console.WriteLine("-- REMOVE --" + cam.Config.Nom + " " + cameraList.Count.ToString());
                     cameraList.Remove(cam);
+                    System.Console.WriteLine(cameraList.Count.ToString());
                     break;
                 }
             }
