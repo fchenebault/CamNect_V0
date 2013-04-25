@@ -92,6 +92,9 @@ namespace CamNect.GUI.Views
 
         public void retourMenu()
         {
+            this.Content = null;
+            reader.MjpegReaderStop();
+
             Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
             this.Content = Menu;
         }
