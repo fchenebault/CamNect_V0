@@ -28,14 +28,9 @@ namespace CamNect.Camera
             get { return ip;}
         }
 
-        public void lightOn()
+        public void light(int value)
         {
-            HttpReq.HttpGet("http://" + ip + "/axis-cgi/io/lightcontrol.cgi?action=L1:-100", config.Id, config.Pass);
-        }
-
-        public void lightOff()
-        {
-            HttpReq.HttpGet("http://" + ip + "/axis-cgi/io/lightcontrol.cgi?action=L1:-0", config.Id, config.Pass);
+            HttpReq.HttpGet("http://" + ip + "/axis-cgi/lightcontrol.cgi?level=" + value, config.Id, config.Pass);
         }
 
         public void playMediaClip(int idMediaClip)
