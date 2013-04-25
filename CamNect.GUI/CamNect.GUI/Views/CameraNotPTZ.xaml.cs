@@ -27,6 +27,7 @@ namespace CamNect.GUI.Views
     {
 
         // Variables
+        private int i;
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
         private CameraUtils camera;
@@ -43,6 +44,11 @@ namespace CamNect.GUI.Views
             // Camera Initialisation
             reader = new MjpegReader(camera, CameraNotPTZPlayer);
             this.camera = camera;
+
+            // Light initialisation
+            i = 0;
+            lumiereEllipse.StrokeThickness = 100;
+                       
         }
 
         public void gestureEvent(object sender, EventArgs e)
@@ -63,12 +69,33 @@ namespace CamNect.GUI.Views
 
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
+            camera.light(0);
             System.Windows.Application.Current.Shutdown();
         }
 
-        public void lumiere_onClick(object sender, RoutedEventArgs e)
+
+        private void LightIncreaseButtonClick(object sender, RoutedEventArgs e)
         {
-            this.camera.lightOn();
+            if (i < 96)
+            {
+                i += 5;
+                lumiereEllipse.StrokeThickness = 100-i;
+            }
+            camera.light(i);
+            message.Content = "valeur" + i;
+            
+        }
+
+        private void LightDecreaseButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (i > 4)
+            {
+                i -= 5;
+                lumiereEllipse.StrokeThickness = 100-i;
+            }
+            camera.light(i);
+            message.Content = "valeur" + i;
+            
         }
     }
 }

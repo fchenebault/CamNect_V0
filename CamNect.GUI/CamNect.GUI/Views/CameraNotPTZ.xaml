@@ -8,36 +8,70 @@
        mc:Ignorable="d" 
         Background="White" Height="1080" Width="1920">
 
-    <Grid x:Name="CameraOneGrid" >
+    <UserControl.Resources>
+
+        <Style x:Key="KinectHoverButtonStyle" TargetType="{x:Type GUI:KinectHoverButton}">
+            <Setter Property="Background" Value="#C2E1FF"/>
+            <Setter Property="Opacity" Value="0.35"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="BorderBrush" Value="#3C44DD"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GUI:KinectHoverButton}">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{TemplateBinding Content}"></ContentPresenter>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.35"/>
+
+                </Trigger>
+                <Trigger Property="IsHandPointerOver" Value="True">
+                    <Setter Property="Opacity" Value="0.55"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+
+    <Grid x:Name="CameraOneGrid" Height="1080" Width="1920">
         <Grid.Background>
             <ImageBrush ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
 
-        <Image x:Name= "CameraNotPTZPlayer" Height="1080" Width="1920" />
+        <Image x:Name= "CameraNotPTZPlayer" />
+        <Label Canvas.Left="711" Canvas.Top="689" Content="" x:Name="message" Foreground="Red" FontSize="40" Background="{x:Null}" Panel.ZIndex="1000" Margin="513,833,739,145"  />
 
-        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,10,0,0" />
-        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Center" Height="123" VerticalAlignment="Top" Width="164" />
-        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" />
+        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="112,10,0,0" Width="164" />
+        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Center" Height="123" VerticalAlignment="Top" Width="164" Margin="800,0,956,0"/>
+        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" Margin="862,0,1018,0" Height="40" Width="40" />
 
-        <k:KinectRegion x:Name="kinectRegion" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent" Height="1080" Width="1920">
+        <k:KinectRegion x:Name="kinectRegion" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent" Height="1080">
 
             <Grid x:Name="kinectRegionGrid" >
-               
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,-1074,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightIncreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageLeftEnabled}" Margin="1752,-504,68,660" Grid.ColumnSpan="2" />
+                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1752,48,68,108" Grid.ColumnSpan="2" />
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,-602,126,0">
                     <Image x:Name="exit" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Opacity="0.5" />
                 </k:KinectTileButton>
-                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent" Click="lumiere_onClick" Margin="133,-426,1567,426">
-                    <Image x:Name="lumiere" Source="/Ressources/Images/lumiere.png" />
-                    </k:KinectTileButton>
-                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
-                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
-                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
-                <k:KinectTileButton Background=" Transparent" BorderBrush="Transparent"></k:KinectTileButton>
             </Grid>
         </k:KinectRegion>
 
-        
-        
+        <Ellipse x:Name="lumiereEllipse" Fill="#8000FF" HorizontalAlignment="Right" VerticalAlignment="Center" Height="100" Width="100" Stroke="Transparent" StrokeThickness="100" Opacity="0.9" RenderTransformOrigin="0.54,0.507" Margin="0,489,72,491" />
+
     </Grid>
 
 </UserControl>
