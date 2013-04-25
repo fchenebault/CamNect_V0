@@ -344,13 +344,13 @@ namespace CamNect.GUI.Views
         public bool isModeZoom()
         {
             // Verifie que les 2 mains soient trackées
-            if (kinect.handsTracked.Count>1)
+            if (kinect.handsTracked.Count > 1)
             {
                 Point hand1 = kinect.handsTracked[0].GetPosition(kinectRegion);
                 Point hand2 = kinect.handsTracked[1].GetPosition(kinectRegion);
 
                 //Vérifie si les 2 mains sont à hauteur du centre de l'image (Peut etre trouver un autre élément) marge de 1/5
-                if (hand1.Y < (kinectRegion.Height / 2) * 1.4 && hand1.Y > (kinectRegion.Height / 2) * 0.6 && hand2.Y < (kinectRegion.Height / 2) * 1.4 && hand2.Y > (kinectRegion.Height / 2) * 0.6)
+                if (hand1.Y < (kinectRegion.Height) * 0.7 && hand1.Y > (kinectRegion.Height) * 0.3 && hand2.Y < (kinectRegion.Height) * 0.7 && hand2.Y > (kinectRegion.Height) * 0.3)
                 { //On desactive les boutons si necessaire
                     if (isButtonActive)
                     {
@@ -365,12 +365,20 @@ namespace CamNect.GUI.Views
                         isButtonActive = false;
                     }
                     kinectRegion.Visibility = System.Windows.Visibility.Hidden;
-
+           //         im_handL.Visibility = System.Windows.Visibility.Visible;
+           //         im_handR.Visibility = System.Windows.Visibility.Visible;
+                    im_modeZoom.Visibility = System.Windows.Visibility.Visible;
+                    text_modeZoom.Visibility = System.Windows.Visibility.Visible;
                     return true;
+
                 }
             }
             kinectRegion.Visibility = System.Windows.Visibility.Visible;
-            xZoom = -1;
+         //   im_handL.Visibility = System.Windows.Visibility.Hidden;
+         //   im_handR.Visibility = System.Windows.Visibility.Hidden;
+            im_modeZoom.Visibility = System.Windows.Visibility.Hidden;
+            text_modeZoom.Visibility = System.Windows.Visibility.Hidden;
+            xZoom = 0;
             return false;
         }
 
@@ -390,18 +398,24 @@ namespace CamNect.GUI.Views
                 handL = kinect.handsTracked[0].GetPosition(kinectRegion);
                 handR = kinect.handsTracked[1].GetPosition(kinectRegion);
             }
+
+         //   Canvas.SetTop(im_handL,handL.Y- kinectRegion.Height / 2);
+         //   Canvas.SetTop(im_handR, handR.Y - kinectRegion.Height / 2);
+
             Double diff = System.Math.Abs((handL.X + handR.X - kinectRegion.Width));
             // Coordonnée en X 'centré'
             if (diff < kinectRegion.Width*0.4)
             {
                 Double xEcart = handR.X - handL.X;
+              //  Canvas.SetLeft(im_handL, CameraOneCanvas.Width / 2 - System.Math.Abs(xEcart / 2));
+              //  Canvas.SetLeft(im_handR, System.Math.Abs(xEcart / 2) + CameraOneCanvas.Width / 2);
 
-                if (xZoom < 0)
+                if (xZoom == 0)
                 {
                     xZoom = xEcart;
                     return;
                 }
-                else if (System.Math.Abs(xEcart - xZoom) > kinectRegion.Width * 0.05)
+                else if (System.Math.Abs(xEcart - xZoom) > kinectRegion.Width * 0.1)
                 {
                     // System.Console.WriteLine("mode zoom");
                     this.timer.Tick += new EventHandler(this.TimerStop);
