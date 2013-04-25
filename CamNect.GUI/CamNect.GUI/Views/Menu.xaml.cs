@@ -46,6 +46,7 @@ namespace CamNect.GUI.Views
 
             // Initialise the number of images depending on camera(s)
             InitCam();
+            message.Content = CameraOne.cameraList.Count;
         }
 
 

@@ -12,6 +12,8 @@
             <ImageBrush ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
 
+        <Label Margin="300,880,0,0" Content="" Height="66" Name="message" Width="930" Foreground="White" FontSize="40" Background="{x:Null}" />
+
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi"/>
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920">

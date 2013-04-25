@@ -11,6 +11,7 @@
     "Zoom": false,
     "Modele": "AXIS M1054",
     "Serie": "00408CAFA482",
+    "UDN": null,
     "Fenetre": 0,
     "Plugged": true
   },
@@ -26,6 +27,7 @@
     "Zoom": true,
     "Modele": "AXIS 214",
     "Serie": "00408CAB62FA",
+    "UDN": null,
     "Fenetre": 0,
     "Plugged": true
   },
@@ -41,6 +43,7 @@
     "Zoom": false,
     "Modele": "AXIS M1054",
     "Serie": "00408CDBEB07",
+    "UDN": null,
     "Fenetre": 0,
     "Plugged": true
   }

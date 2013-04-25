@@ -23,7 +23,6 @@ namespace CamNect.GUI.Views
         public static int maxFenetre;
         DispatcherTimer dispatcherTimer;
 
-
         public Start()
         {
             InitializeComponent();
@@ -34,21 +33,29 @@ namespace CamNect.GUI.Views
 
             CameraOne.loadDatabase();
             configCamWin = new ConfigCamWindow();
+            configCamWin.Closed += OnCloseConfig;
 
             Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
             disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
-            disc.DeviceRemoved += new DeviceRemovedEventHandler(CameraOne.discDeviceRemoved);
+            //disc.DeviceRemoved += new DeviceRemovedEventHandler(CameraOne.discDeviceRemoved);
             disc.Start();
 
             // Timer 
              dispatcherTimer = new DispatcherTimer();
         }
 
+        private void OnCloseConfig(object sender, EventArgs e)
+        {
+            this.Content = null;
+            Views.Menu MenuPage = new Menu(kinect.sensorChooser);
+            this.Content = MenuPage;
+        }
+
         private void Window_Loaded(Object sender, RoutedEventArgs e)
         {
             // Timer to wait for the other view
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(3000);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(7000);
             dispatcherTimer.Start();
         }
 
@@ -56,7 +63,6 @@ namespace CamNect.GUI.Views
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             dispatcherTimer.Stop();
-
             this.Content = null;
             Views.Menu MenuPage = new Menu(kinect.sensorChooser);
             this.Content = MenuPage;
