@@ -41,6 +41,8 @@ namespace CamNect.GUI.Views
         public System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
         private CameraUtils camera;
 
+        private Double xZoom=-1;
+
         public CameraOne(KinectSensorChooser sensorChooser, CameraUtils camera)
         {
             InitializeComponent();
@@ -86,7 +88,6 @@ namespace CamNect.GUI.Views
                 defaultConfig = JsonConvert.DeserializeObject<List<CamConfig>>(json);
             }
         }
-
 
 
         public void retourMenu()
@@ -331,8 +332,91 @@ namespace CamNect.GUI.Views
                     {
                         kinect.gestureCamera.OnGesture(skeletons[i]);
                     }
+                    if (isModeZoom())
+                    {
+                        ZoomDezoom();
+                    }
                 }
             }
+        }
+
+        public bool isModeZoom()
+        {
+            // Verifie que les 2 mains soient trackées
+            if (kinect.handsTracked.Count>1)
+            {
+                Point hand1 = kinect.handsTracked[0].GetPosition(kinectRegion);
+                Point hand2 = kinect.handsTracked[1].GetPosition(kinectRegion);
+
+                //Vérifie si les 2 mains sont à hauteur du centre de l'image (Peut etre trouver un autre élément) marge de 1/5
+                if (hand1.Y < (kinectRegion.Height / 2) * 1.4 && hand1.Y > (kinectRegion.Height / 2) * 0.6 && hand2.Y < (kinectRegion.Height / 2) * 1.4 && hand2.Y > (kinectRegion.Height / 2) * 0.6)
+                { //On desactive les boutons si necessaire
+                    if (isButtonActive)
+                    {
+                        foreach (Polygon polygon in this.polygons)
+                        {
+                            polygon.IsEnabled = false;
+                        }
+                        foreach (KinectHoverButton hoverButton in this.hoverButtons)
+                        {
+                            hoverButton.Visibility = System.Windows.Visibility.Hidden;
+                        }
+                        isButtonActive = false;
+                    }
+                    kinectRegion.Visibility = System.Windows.Visibility.Hidden;
+
+                    return true;
+                }
+            }
+            kinectRegion.Visibility = System.Windows.Visibility.Visible;
+            xZoom = -1;
+            return false;
+        }
+
+        //Methode pour un zoom/dezoom 'fluide'
+        public void ZoomDezoom()
+        {
+            Point handR = new Point();
+            Point handL = new Point();
+            
+            if (kinect.handsTracked[0].HandType == HandType.Right)
+            {
+                handR = kinect.handsTracked[0].GetPosition(kinectRegion);
+                handL = kinect.handsTracked[1].GetPosition(kinectRegion);
+            }
+            else
+            {
+                handL = kinect.handsTracked[0].GetPosition(kinectRegion);
+                handR = kinect.handsTracked[1].GetPosition(kinectRegion);
+            }
+            Double diff = System.Math.Abs((handL.X + handR.X - kinectRegion.Width));
+            // Coordonnée en X 'centré'
+            if (diff < kinectRegion.Width*0.4)
+            {
+                Double xEcart = handR.X - handL.X;
+
+                if (xZoom < 0)
+                {
+                    xZoom = xEcart;
+                    return;
+                }
+                else if (System.Math.Abs(xEcart - xZoom) > kinectRegion.Width * 0.05)
+                {
+                    // System.Console.WriteLine("mode zoom");
+                    this.timer.Tick += new EventHandler(this.TimerStop);
+                    if (!this.timer.Enabled)
+                    {
+                        this.timer.Interval = 100;
+                        this.timer.Start();
+                        camera.zoomOnOff(4*(xEcart - xZoom));
+
+                        System.Console.WriteLine("je fais un zoom de " + 4*(xEcart - xZoom));
+                        xZoom = xEcart;
+                    }
+                    return;
+                }
+            }
+            return;
         }
 
         public void quit_onClick(object sender, RoutedEventArgs e)

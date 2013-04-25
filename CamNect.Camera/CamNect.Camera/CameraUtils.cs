@@ -76,17 +76,17 @@ namespace CamNect.Camera
             result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?move=downright", config.Id, config.Pass);
         }
 
-        public void zoomOn()
+        public void zoomOnOff(Double z)
         {
             String result;
-            result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom=300", config.Id, config.Pass);
+            result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom="+z, config.Id, config.Pass);
         }
 
-        public void zoomOff()
-        {
-            String result;
-            result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom=-300", config.Id, config.Pass);
-        }
+      //  public void zoomOff()
+     //   {
+     //       String result;
+     //       result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom=-300", config.Id, config.Pass);
+      //  }
     }
 
 }
