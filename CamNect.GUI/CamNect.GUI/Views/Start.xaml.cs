@@ -21,7 +21,7 @@ namespace CamNect.GUI.Views
         public KinectSensorChooser sensorChooser;
         public static ConfigCamWindow configCamWin;
         public static int maxFenetre;
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        DispatcherTimer dispatcherTimer;
 
 
         public Start()
@@ -35,11 +35,12 @@ namespace CamNect.GUI.Views
             CameraOne.loadDatabase();
             configCamWin = new ConfigCamWindow();
 
-            //maxFenetre;
-
             Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
             disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
             disc.Start();
+
+            // Timer 
+             dispatcherTimer = new DispatcherTimer();
         }
 
         private void Window_Loaded(Object sender, RoutedEventArgs e)
@@ -54,25 +55,16 @@ namespace CamNect.GUI.Views
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             dispatcherTimer.Stop();
+
+            this.Content = null;
             Views.Menu MenuPage = new Menu(kinect.sensorChooser);
             this.Content = MenuPage;
         }
 
         private void Config(object sender, RoutedEventArgs e)
         {
-
-            //Views.ConfigCam ConfigCamPage = new Views.ConfigCam();
-           //Var ConfigCamWindow = new NewWindow();
-            //this.Content = ConfigCamPage;
-            configCamWin.Show();
-            
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
             dispatcherTimer.Stop();
-            Views.Error ErrorPage = new Error(kinect.sensorChooser);
-            this.Content = ErrorPage;
+            configCamWin.Show();
         }
 
     }

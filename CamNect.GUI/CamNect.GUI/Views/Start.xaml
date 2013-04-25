@@ -117,7 +117,6 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Button Content="Erreur" HorizontalAlignment="Left" Margin="29,-126,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" />
         </Grid>
 
     </Grid>

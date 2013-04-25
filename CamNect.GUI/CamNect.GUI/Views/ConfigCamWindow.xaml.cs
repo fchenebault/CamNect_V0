@@ -24,21 +24,13 @@ using System.Collections.ObjectModel;
 
 namespace CamNect.GUI.Views
 {
-    /// <summary>
-    /// Logique d'interaction pour ConfigCamWindow.xaml
-    /// </summary>
-    
    
     public partial class ConfigCamWindow : Window
     {
+        // Variables
         private static System.Windows.Controls.DataGrid dgCam;
         public static ObservableCollection<CamConfig> ligne { get; set; }
-        
         public static int maxFenetre = 1;
-
-        
-
-
 
         public static DataGrid getDg
         {
@@ -74,11 +66,6 @@ namespace CamNect.GUI.Views
        }
 
 
-
-     
-
-
-
         public ConfigCamWindow()
         {
             InitializeComponent();
@@ -107,7 +94,7 @@ namespace CamNect.GUI.Views
         }
         
 
-        //Deplacer la fenetre car sans bordure :
+        // To move the window 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
@@ -118,20 +105,18 @@ namespace CamNect.GUI.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Hide();
-
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             StreamWriter jsonfile = new StreamWriter("../../Ressources/Config/config.json", false);
 
-           
-
             string json = JsonConvert.SerializeObject(ligne, Formatting.Indented);
             jsonfile.WriteLine(json);
             jsonfile.Close();
 
-            this.Hide();
+            this.Close();
+
         }
 
         public static void AddCam(CamConfig cfg)

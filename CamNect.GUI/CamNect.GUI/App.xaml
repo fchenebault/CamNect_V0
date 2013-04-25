@@ -39,8 +39,8 @@
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
             </Style.Triggers>
-            
-            
+
+
         </Style>
 
         
