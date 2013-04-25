@@ -74,5 +74,10 @@ namespace CamNect.GUI.Views
             configCamWin.Show();
         }
 
+        private void quitOnClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
     }
 }

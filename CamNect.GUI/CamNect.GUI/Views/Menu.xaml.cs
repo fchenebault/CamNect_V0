@@ -27,6 +27,8 @@ namespace CamNect.GUI.Views
         private Image[] imageArray;
         private MjpegReader[] readerArray;
         int nbCamera;
+        private static ConfigCamWindow configCamWin;
+
 
 
         public Menu(KinectSensorChooser sensorChooser)
@@ -36,6 +38,10 @@ namespace CamNect.GUI.Views
             // Sensor initialisation
             this.sensorChooser = sensorChooser;
             kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+
+            // Configuration panel initialisation
+            configCamWin = new ConfigCamWindow();
+            configCamWin.Closed += onCloseConfig;
 
             // Variables initialisation
             nbCamera = CameraOne.cameraList.Count;
@@ -48,6 +54,8 @@ namespace CamNect.GUI.Views
             InitCam();
             message.Content = CameraOne.cameraList.Count;
         }
+
+
 
 
         public void InitCam()
@@ -161,6 +169,20 @@ namespace CamNect.GUI.Views
             System.Windows.Application.Current.Shutdown();
         }
 
+        private void onCloseConfig(object sender, EventArgs e)
+        {
+            this.Content = null;
+            cameraArray = null;
+            kinectButtonArray = null;
+            imageArray = null;
+
+            cleanStreamViews();
+
+            Views.Menu Menu = new Views.Menu(this.sensorChooser);
+            this.Content = Menu;
+        }
+
+
         private void reloadOnClick(object sender, RoutedEventArgs e)
         {
             this.Content = null;
@@ -172,6 +194,11 @@ namespace CamNect.GUI.Views
 
             Views.Menu Menu = new Views.Menu(this.sensorChooser);
             this.Content = Menu;
+        }
+
+        private void configOnClick(object sender, RoutedEventArgs e)
+        {
+            configCamWin.Show();
         }
 
         private void cleanStreamViews()

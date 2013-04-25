@@ -22,8 +22,11 @@
                 <k:KinectTileButton Height="154" Width="Auto" Click="quitOnClick" Background=" Transparent" BorderBrush="Transparent" Margin="1339,858,446,68" >
                     <Image x:Name="imageMenuQuit" Source="/Ressources/Images/exit.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
                 </k:KinectTileButton>
-                <k:KinectTileButton Height="Auto" Width="Auto" Click="reloadOnClick" Background=" Transparent" BorderBrush="Transparent" Margin="1102,858,656,68" RenderTransformOrigin="0.802,0.918" >
+                <k:KinectTileButton Height="Auto" Width="Auto" Click="reloadOnClick" Background=" Transparent" BorderBrush="Transparent" Margin="1104,858,654,68" RenderTransformOrigin="0.802,0.918" >
                     <Image x:Name="imageMenuReload" Source="/Ressources/Images/reload.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
+                </k:KinectTileButton>
+                <k:KinectTileButton Height="Auto" Width="Auto" Click="configOnClick" Background=" Transparent" BorderBrush="Transparent" Margin="874,858,890,68" RenderTransformOrigin="0.802,0.918" >
+                    <Image x:Name="imageMenuConfig" Source="/Ressources/Images/toolButton.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
                 </k:KinectTileButton>
                 <k:KinectScrollViewer Height="600" Margin="0,176,0,304" Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                     <WrapPanel VerticalAlignment="Center" x:Name="wrapPanel" Orientation="Vertical" >

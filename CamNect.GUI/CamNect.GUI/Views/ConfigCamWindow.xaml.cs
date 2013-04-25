@@ -102,12 +102,12 @@ namespace CamNect.GUI.Views
         }
 
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void onCancelClick(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void onOkayClick(object sender, RoutedEventArgs e)
         {
             StreamWriter jsonfile = new StreamWriter("../../Ressources/Config/config.json", false);
 

@@ -7,23 +7,30 @@
 
 
     <Grid Loaded="Window_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="127*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="../Ressources/Images/background.png" />
         </Grid.Background>
 
-        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi" />
+        <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="890,0" Grid.RowSpan="2" />
+        <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi" Margin="936,0" />
 
-        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" Margin="27,-18,-35,10">
+        <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" Margin="27,-18,-35,10" Grid.RowSpan="2">
 
             <Grid>
-                <Image  Source="/Ressources/Images/config.png" Canvas.Left="1506" Canvas.Top="20" Margin="105,108,1621,810"  />
-
-                <k:KinectTileButton HorizontalAlignment="Left" VerticalAlignment="Top" Height="162" Width="194" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="105,108,0,0" RenderTransformOrigin="-1.88,0.062"/>
+                <k:KinectTileButton Height="Auto" Width="Auto" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="853,876,911,50" RenderTransformOrigin="0.802,0.918" >
+                    <Image x:Name="imageMenuConfig" Source="/Ressources/Images/toolButton.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
+                </k:KinectTileButton>
+                <k:KinectTileButton Height="154" Width="Auto" Click="quitOnClick" Background=" Transparent" BorderBrush="Transparent" Margin="1343,876,442,50" >
+                    <Image x:Name="imageMenuQuit" Source="/Ressources/Images/exit.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
+                </k:KinectTileButton>
             </Grid>
         </k:KinectRegion>
 
-        <TextBlock HorizontalAlignment="Left" Margin="785,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="115" Width="600" FontSize="50" RenderTransformOrigin="0.5,0.5" FontFamily="Gisha">
+        <TextBlock HorizontalAlignment="Left" Margin="785,437.299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="115" Width="600" FontSize="50" RenderTransformOrigin="0.5,0.5" FontFamily="Gisha" Grid.Row="1">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -32,11 +39,15 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBlock.RenderTransform><Run Language="fr-fr" Text="Camera control over Kinect "/></TextBlock>
-        <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="197" Width="741" FontFamily="Gisha" FontSize="140" Foreground="#FF662D91" Margin="547,357,624,0" FontWeight="Bold"><Run Language="fr-fr" Text="CAMNECT"/></TextBlock>
-        <Image HorizontalAlignment="Left" Height="252" Margin="1595,10,-35,0" VerticalAlignment="Top" Width="352" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png"/>
-        <Grid Margin="-10,139,10,-77">
-            <CircularAnimations_Examples:BlueDot Width="40" Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00'/>
-            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.2'>
+        <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="197" Width="741" FontFamily="Gisha" FontSize="140" Foreground="#FF662D91" Margin="547,301.299,624,0" FontWeight="Bold" Grid.Row="1"><Run Language="fr-fr" Text="CAMNECT"/></TextBlock>
+        <Image HorizontalAlignment="Left" Height="252" Margin="1595,10,-35,0" VerticalAlignment="Top" Width="352" Source="/CamNect.GUI;component/Ressources/Images/cameraImageViolet.png" Grid.RowSpan="2"/>
+        <Grid Margin="-10,83.299,10,-77" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <CircularAnimations_Examples:BlueDot Width="40" Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00' Grid.Column="1" Margin="697.164,485,936,484.701"/>
+            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.2' Grid.Column="1" Margin="697.164,485,936,484.701">
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -46,7 +57,7 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
-            <CircularAnimations_Examples:BlueDot  Width="40" Height="40"  RenderTransformOrigin="0.508,2" BeginTime='00:00:00.4'>
+            <CircularAnimations_Examples:BlueDot  Width="40" Height="40"  RenderTransformOrigin="0.508,2" BeginTime='00:00:00.4' Grid.Column="1" Margin="697.164,485,936,484.701">
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -56,7 +67,7 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
-            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.6'>
+            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.6' Grid.Column="1" Margin="697.164,485,936,484.701">
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -66,7 +77,7 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
-            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.8'>
+            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:00.8' Grid.Column="1" Margin="697.164,485,936,484.701">
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -76,7 +87,7 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
-            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:01'>
+            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:01' Grid.Column="1" Margin="697.164,485,936,484.701">
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -86,7 +97,7 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
-            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:01.2'>
+            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:01.2' Grid.Column="1" Margin="697.164,485,936,484.701">
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -96,7 +107,7 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
-            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:01.4'>
+            <CircularAnimations_Examples:BlueDot Width="40"  Height="40" RenderTransformOrigin="0.508,2" BeginTime='00:00:01.4' Grid.Column="1" Margin="697.164,485,936,484.701">
                 <CircularAnimations_Examples:BlueDot.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -106,8 +117,8 @@
                     </TransformGroup>
                 </CircularAnimations_Examples:BlueDot.RenderTransform>
             </CircularAnimations_Examples:BlueDot>
-            <Image HorizontalAlignment="Left" Height="206" Margin="1588,720,0,0" VerticalAlignment="Top" Width="324" Source="/CamNect.GUI;component/Ressources/Images/logo1.png" RenderTransformOrigin="0.509,0.019"/>
-            <Image HorizontalAlignment="Left" Height="172" Margin="56,729,0,0" VerticalAlignment="Top" Width="429" Source="/CamNect.GUI;component/Ressources/Images/kinectS8.png" RenderTransformOrigin="0.492,0.49">
+            <Image HorizontalAlignment="Left" Height="206" Margin="1349.164,720,0,0" VerticalAlignment="Top" Width="324" Source="/CamNect.GUI;component/Ressources/Images/logo1.png" RenderTransformOrigin="0.509,0.019" Grid.Column="1"/>
+            <Image HorizontalAlignment="Left" Height="172" Margin="56,729,0,0" VerticalAlignment="Top" Width="429" Source="/CamNect.GUI;component/Ressources/Images/kinectS8.png" RenderTransformOrigin="0.492,0.49" Grid.ColumnSpan="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
