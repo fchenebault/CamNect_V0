@@ -141,6 +141,7 @@ namespace CamNect.GUI.Views
                         System.Console.WriteLine(a.Device.SerialNumber.ToString());
 
                         cfg.Serie = a.Device.SerialNumber.ToString();
+                        cfg.UDN = a.Device.UniqueDeviceName.ToString();
                         cfg.Plugged= true;
                         //cfg.Fenetre = fenetre;
 
@@ -169,6 +170,18 @@ namespace CamNect.GUI.Views
             /*if (cameraArray[0] is CameraPTZ)
             ((CameraPTZ)cameraArray[0]).zoomOn();*/
 
+        }
+
+        public static void discDeviceRemoved(object sender, DeviceRemovedEventArgs a)
+        {
+            foreach (CameraUtils cam in cameraList)
+            {
+                if (cam.Config.UDN == a.UDN.ToString())
+                {
+                    cameraList.Remove(cam);
+                    break;
+                }
+            }
         }
 
         public void TimerStop(Object myObject, EventArgs myEventArgs)
