@@ -162,5 +162,22 @@ namespace CamNect.GUI.Views
             message.Content = "valeur" + i;
             
         }
+
+        private void sound1_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(6);
+        }
+        private void sound2_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(7);
+        }
+        private void sound3_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(8);
+        }
+        private void sound4_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(9);
+        }
     }
 }

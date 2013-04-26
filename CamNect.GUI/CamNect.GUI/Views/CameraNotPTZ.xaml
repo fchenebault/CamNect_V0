@@ -56,16 +56,24 @@
 
         <k:KinectRegion x:Name="kinectRegion" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent" Height="1080">
 
-            <Grid x:Name="kinectRegionGrid" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="15*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <Grid x:Name="kinectRegionGrid" Height="1080" Width="1920">
 
-                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightIncreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageLeftEnabled}" Margin="1752,-504,68,660" Grid.ColumnSpan="2" />
-                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1752,48,68,108" Grid.ColumnSpan="2" />
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,-602,126,0">
-                    <Image x:Name="exit" Source="/Ressources/Images/exit.png" Canvas.Left="1506" Canvas.Top="20" Opacity="0.5" />
+                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightIncreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageLeftEnabled}" Margin="1752,174,68,606" />
+                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1752,678,68,102" />
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,40,282,0" RenderTransformOrigin="0.182,0.247">
+                    <Image x:Name="exit" Source="/Ressources/Images/exit.png" Opacity="0.5" />
+                </k:KinectTileButton>
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound1_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,291,1716,0">
+                    <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
+                </k:KinectTileButton>
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound2_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,609,1716,0" RenderTransformOrigin="0.551,0.929">
+                    <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
+                </k:KinectTileButton>
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="154" Width="187" Click="sound3_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,0,1716,158">
+                    <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
+                </k:KinectTileButton>
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound4_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,450,1716,0">
+                    <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
                 </k:KinectTileButton>
             </Grid>
         </k:KinectRegion>
