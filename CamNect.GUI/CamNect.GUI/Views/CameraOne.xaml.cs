@@ -224,7 +224,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
                 message.Content = "Button Right";
@@ -238,7 +238,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Left");
                 message.Content = "Button Left";
@@ -252,7 +252,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Top");
                 message.Content = "Button Up";
@@ -268,7 +268,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
                 message.Content = "Button UpLeft";
@@ -284,7 +284,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopRight");
                 message.Content = "Button UpRight";
@@ -299,7 +299,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Down");
                 message.Content = "Button Down";
@@ -315,7 +315,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button DownRight");
                 message.Content = "Button DownRight";
@@ -332,7 +332,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button DownLeft");
                 message.Content = "Button  DownLeft";
