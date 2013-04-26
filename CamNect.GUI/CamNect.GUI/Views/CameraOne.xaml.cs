@@ -370,8 +370,8 @@ namespace CamNect.GUI.Views
                         isButtonActive = false;
                     }
                     kinectRegion.Visibility = System.Windows.Visibility.Hidden;
-           //         im_handL.Visibility = System.Windows.Visibility.Visible;
-           //         im_handR.Visibility = System.Windows.Visibility.Visible;
+        //            im_handL.Visibility = System.Windows.Visibility.Visible;
+         //           im_handR.Visibility = System.Windows.Visibility.Visible;
                     im_modeZoom.Visibility = System.Windows.Visibility.Visible;
                     text_modeZoom.Visibility = System.Windows.Visibility.Visible;
                     return true;
@@ -379,8 +379,8 @@ namespace CamNect.GUI.Views
                 }
             }
             kinectRegion.Visibility = System.Windows.Visibility.Visible;
-         //   im_handL.Visibility = System.Windows.Visibility.Hidden;
-         //   im_handR.Visibility = System.Windows.Visibility.Hidden;
+      //     im_handL.Visibility = System.Windows.Visibility.Hidden;
+      //      im_handR.Visibility = System.Windows.Visibility.Hidden;
             im_modeZoom.Visibility = System.Windows.Visibility.Hidden;
             text_modeZoom.Visibility = System.Windows.Visibility.Hidden;
             xZoom = 0;
@@ -404,8 +404,8 @@ namespace CamNect.GUI.Views
                 handR = kinect.handsTracked[1].GetPosition(kinectRegion);
             }
 
-         //   Canvas.SetTop(im_handL,handL.Y- kinectRegion.Height / 2);
-         //   Canvas.SetTop(im_handR, handR.Y - kinectRegion.Height / 2);
+         //   Canvas.SetTop(im_handL,handL.Y);
+         //   Canvas.SetTop(im_handR, handR.Y);
 
             Double diff = System.Math.Abs((handL.X + handR.X - kinectRegion.Width));
             // Coordonnée en X 'centré'
