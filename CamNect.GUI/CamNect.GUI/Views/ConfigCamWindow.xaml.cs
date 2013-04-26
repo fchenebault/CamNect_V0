@@ -115,7 +115,7 @@ namespace CamNect.GUI.Views
             jsonfile.WriteLine(json);
             jsonfile.Close();
 
-            this.Close();
+            this.Hide();
 
         }
 
