@@ -14,13 +14,26 @@ namespace CamNect.Camera
             req.Credentials = new NetworkCredential(id, pwd);
             string result = null;
 
-            HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
 
-            StreamReader reader = new StreamReader(resp.GetResponseStream());
-            result = reader.ReadToEnd();
+            // TODO Gérer l'erreur et la faire remonter
+            //try
+            //{
+                HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
 
-            resp.Close();
-            reader.Close();
+                StreamReader reader = new StreamReader(resp.GetResponseStream());
+                result = reader.ReadToEnd();
+
+                resp.Close();
+                reader.Close();
+
+            //}
+            //catch (Exception e)
+            //{
+            //    String erreur = "Requête HTTP n'a pas reçu de réponse";
+            //    System.Console.WriteLine(erreur);
+                
+            //}
+
 
             return result;
         }
