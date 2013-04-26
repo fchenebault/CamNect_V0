@@ -1,7 +1,7 @@
 [
   {
     "PtzOn": true,
-    "Afficher": false,
+    "Afficher": true,
     "Nom": "AXIS M1054",
     "Id": "root",
     "Pass": "root",
@@ -33,7 +33,7 @@
   },
   {
     "PtzOn": true,
-    "Afficher": false,
+    "Afficher": true,
     "Nom": "AXIS M1054",
     "Id": "root",
     "Pass": "root",
