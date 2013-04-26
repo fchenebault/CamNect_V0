@@ -16,8 +16,8 @@ namespace CamNect.Camera
 
 
             // TODO Gérer l'erreur et la faire remonter
-            //try
-            //{
+            try
+            {
                 HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
 
                 StreamReader reader = new StreamReader(resp.GetResponseStream());
@@ -25,14 +25,12 @@ namespace CamNect.Camera
 
                 resp.Close();
                 reader.Close();
-
-            //}
-            //catch (Exception e)
-            //{
-            //    String erreur = "Requête HTTP n'a pas reçu de réponse";
-            //    System.Console.WriteLine(erreur);
-                
-            //}
+            }
+            catch
+            {
+                string erreur = "requête http n'a pas reçu de réponse";
+                System.Console.WriteLine(erreur);
+            }
 
 
             return result;
