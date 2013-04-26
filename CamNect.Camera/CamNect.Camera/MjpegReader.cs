@@ -17,12 +17,14 @@ namespace CamNect.Camera
         // Variables
         private Image reader;
         private MjpegDecoder _mjpeg;
+        private CameraUtils camera;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         public MjpegReader(CameraUtils camera, Image reader)
         {
             _mjpeg = new MjpegDecoder();
             this.reader = reader;
+            this.camera = camera;
             String url = "http://" + camera.Ip + "/mjpg/video.mjpg";
 
             _mjpeg.FrameReady += mjpeg_FrameReady;
@@ -55,6 +57,8 @@ namespace CamNect.Camera
             _mjpeg.StopStream();
             Uri uri = new Uri("/Ressources/Images/warning_big.png", UriKind.Relative);
             ImageSource bi = new BitmapImage(uri);
+
+            this.camera.Config.Plugged = false;
             reader.Source = bi;
         }
 
