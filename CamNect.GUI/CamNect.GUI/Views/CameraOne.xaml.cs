@@ -39,11 +39,14 @@ namespace CamNect.GUI.Views
 //        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
+
+        private List<CameraUtils> cameraListTMP;
+        private int indice;
         private CameraUtils camera;
 
         private Double xZoom=-1;
 
-        public CameraOne(KinectSensorChooser sensorChooser, CameraUtils camera)
+        public CameraOne(KinectSensorChooser sensorChooser, List<CameraUtils> cameraListTMP, int indice)
         {
             InitializeComponent();
             polygons = new List<Polygon> { polygonOverDownLeft, polygonDown, polygonUp, polygonOverDownRight, polygonLeft, polygonRight, polygonOverUpLeft, polygonOverUpRight, polygonFlecheDown, polygonFlecheDownLeft, polygonFlecheDownRight, polygonFlecheLeft, polygonFlecheRight, polygonFlecheUp, polygonFlecheUpLeft, polygonFlecheUpRight };
@@ -58,12 +61,15 @@ namespace CamNect.GUI.Views
             this.sensorChooser = sensorChooser;
 
             // Camera Initialisation
+            this.camera = cameraListTMP[indice];
+            this.cameraListTMP = cameraListTMP;
+            this.indice = indice;
             reader = new MjpegReader(camera, CameraOnePlayer);
-            this.camera = camera;
+
 
             // Events for gestures
-            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
-            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);
+            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);
+            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(swipeRightAction);
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
 
             // Events for grip buttons
@@ -99,9 +105,55 @@ namespace CamNect.GUI.Views
             this.Content = Menu;
         }
 
-        public void writeMessage()
+        public void swipeLeftAction()
         {
-            message.Content = "Geste";
+            int nb = cameraListTMP.Count;
+            indice--;
+            if (indice < 0)
+                indice = nb - 1;
+
+
+            // Select if the camera is PTZ
+            if (cameraListTMP[indice].Config.isPtz)
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                this.Content = CameraOnePage;
+            }
+            else
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                this.Content = cameraNotPTZPage;
+            }
+
+        }
+
+        public void swipeRightAction()
+        {
+            int nb = cameraListTMP.Count;
+            indice++;
+            if (indice > nb-1)
+                indice = 0;
+
+
+            // Select if the camera is PTZ
+            if (cameraListTMP[indice].Config.isPtz)
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                this.Content = CameraOnePage;
+            }
+            else
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                this.Content = cameraNotPTZPage;
+            }
         }
        
 
@@ -455,7 +507,11 @@ namespace CamNect.GUI.Views
 
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            this.Content = null;
+            reader.MjpegReaderStop();
+
+            Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
+            this.Content = Menu;
         }
                
         public void activeButtons()
