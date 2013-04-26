@@ -39,11 +39,14 @@ namespace CamNect.GUI.Views
 //        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
+
+        private List<CameraUtils> cameraListTMP;
+        private int indice;
         private CameraUtils camera;
 
         private Double xZoom=-1;
 
-        public CameraOne(KinectSensorChooser sensorChooser, CameraUtils camera)
+        public CameraOne(KinectSensorChooser sensorChooser, List<CameraUtils> cameraListTMP, int indice)
         {
             InitializeComponent();
             polygons = new List<Polygon> { polygonOverDownLeft, polygonDown, polygonUp, polygonOverDownRight, polygonLeft, polygonRight, polygonOverUpLeft, polygonOverUpRight, polygonFlecheDown, polygonFlecheDownLeft, polygonFlecheDownRight, polygonFlecheLeft, polygonFlecheRight, polygonFlecheUp, polygonFlecheUpLeft, polygonFlecheUpRight };
@@ -58,12 +61,15 @@ namespace CamNect.GUI.Views
             this.sensorChooser = sensorChooser;
 
             // Camera Initialisation
+            this.camera = cameraListTMP[indice];
+            this.cameraListTMP = cameraListTMP;
+            this.indice = indice;
             reader = new MjpegReader(camera, CameraOnePlayer);
-            this.camera = camera;
+
 
             // Events for gestures
-            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);
-            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(writeMessage);
+            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);
+            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(swipeRightAction);
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
 
             // Events for grip buttons
@@ -99,9 +105,55 @@ namespace CamNect.GUI.Views
             this.Content = Menu;
         }
 
-        public void writeMessage()
+        public void swipeLeftAction()
         {
-            message.Content = "Geste";
+            int nb = cameraListTMP.Count;
+            indice--;
+            if (indice < 0)
+                indice = nb - 1;
+
+
+            // Select if the camera is PTZ
+            if (cameraListTMP[indice].Config.isPtz)
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                this.Content = CameraOnePage;
+            }
+            else
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                this.Content = cameraNotPTZPage;
+            }
+
+        }
+
+        public void swipeRightAction()
+        {
+            int nb = cameraListTMP.Count;
+            indice++;
+            if (indice > nb-1)
+                indice = 0;
+
+
+            // Select if the camera is PTZ
+            if (cameraListTMP[indice].Config.isPtz)
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                this.Content = CameraOnePage;
+            }
+            else
+            {
+                this.Content = null;
+                reader.MjpegReaderStop();
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                this.Content = cameraNotPTZPage;
+            }
         }
        
 
@@ -175,20 +227,6 @@ namespace CamNect.GUI.Views
 
         }
 
-        public static void discDeviceRemoved(object sender, DeviceRemovedEventArgs a)
-        {
-            System.Console.WriteLine("--deviceremoved--");
-            foreach (CameraUtils cam in cameraList)
-            {
-                if (cam.Config.UDN == a.UDN.ToString())
-                {
-                    System.Console.WriteLine("-- REMOVE --" + cam.Config.Nom + " " + cameraList.Count.ToString());
-                    cameraList.Remove(cam);
-                    System.Console.WriteLine(cameraList.Count.ToString());
-                    break;
-                }
-            }
-        }
 
         public void TimerStop(Object myObject, EventArgs myEventArgs)
         {
@@ -224,7 +262,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
                 message.Content = "Button Right";
@@ -238,7 +276,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Left");
                 message.Content = "Button Left";
@@ -252,7 +290,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Top");
                 message.Content = "Button Up";
@@ -268,7 +306,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
                 message.Content = "Button UpLeft";
@@ -284,7 +322,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopRight");
                 message.Content = "Button UpRight";
@@ -299,7 +337,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 2000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Down");
                 message.Content = "Button Down";
@@ -315,7 +353,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button DownRight");
                 message.Content = "Button DownRight";
@@ -332,7 +370,7 @@ namespace CamNect.GUI.Views
             this.timer.Tick += new EventHandler(this.TimerStop);
             if (!this.timer.Enabled)
             {
-                this.timer.Interval = 3000;
+                this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button DownLeft");
                 message.Content = "Button  DownLeft";
@@ -384,8 +422,8 @@ namespace CamNect.GUI.Views
                         isButtonActive = false;
                     }
                     kinectRegion.Visibility = System.Windows.Visibility.Hidden;
-           //         im_handL.Visibility = System.Windows.Visibility.Visible;
-           //         im_handR.Visibility = System.Windows.Visibility.Visible;
+        //            im_handL.Visibility = System.Windows.Visibility.Visible;
+         //           im_handR.Visibility = System.Windows.Visibility.Visible;
                     im_modeZoom.Visibility = System.Windows.Visibility.Visible;
                     text_modeZoom.Visibility = System.Windows.Visibility.Visible;
                     return true;
@@ -393,8 +431,8 @@ namespace CamNect.GUI.Views
                 }
             }
             kinectRegion.Visibility = System.Windows.Visibility.Visible;
-         //   im_handL.Visibility = System.Windows.Visibility.Hidden;
-         //   im_handR.Visibility = System.Windows.Visibility.Hidden;
+      //     im_handL.Visibility = System.Windows.Visibility.Hidden;
+      //      im_handR.Visibility = System.Windows.Visibility.Hidden;
             im_modeZoom.Visibility = System.Windows.Visibility.Hidden;
             text_modeZoom.Visibility = System.Windows.Visibility.Hidden;
             xZoom = 0;
@@ -418,8 +456,8 @@ namespace CamNect.GUI.Views
                 handR = kinect.handsTracked[1].GetPosition(kinectRegion);
             }
 
-         //   Canvas.SetTop(im_handL,handL.Y- kinectRegion.Height / 2);
-         //   Canvas.SetTop(im_handR, handR.Y - kinectRegion.Height / 2);
+         //   Canvas.SetTop(im_handL,handL.Y);
+         //   Canvas.SetTop(im_handR, handR.Y);
 
             Double diff = System.Math.Abs((handL.X + handR.X - kinectRegion.Width));
             // Coordonnée en X 'centré'
@@ -455,7 +493,11 @@ namespace CamNect.GUI.Views
 
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            this.Content = null;
+            reader.MjpegReaderStop();
+
+            Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
+            this.Content = Menu;
         }
                
         public void activeButtons()

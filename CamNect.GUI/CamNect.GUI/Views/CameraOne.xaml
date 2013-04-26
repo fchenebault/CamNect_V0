@@ -132,8 +132,8 @@
 
             <Ellipse x:Name="im_modeZoom" HorizontalAlignment="Left" Height="142" Canvas.Left="1500" Canvas.Top="16" Opacity="0.5" Stroke="Black" VerticalAlignment="Top" Width="135" Fill="#FFF4F4F5" Visibility="Hidden" />
             <TextBox x:Name="text_modeZoom" Height="30" TextWrapping="WrapWithOverflow" Text="Mode Zoom" Width="120" Canvas.Left="1505" Canvas.Top="70" FontWeight="Bold" FontStyle="Italic" FontSize="18" TextAlignment="Center" Visibility="Hidden"/>
-         <!--   <Ellipse x:Name="im_handL" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="548,394,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Visibility="Hidden" />
-            <Ellipse x:Name="im_handR" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="866,434,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>-->
+            <Ellipse x:Name="im_handL" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Visibility="Hidden" Canvas.Left="-46" Canvas.Top="495" />
+            <Ellipse x:Name="im_handR" Fill="#FFF4F4F5" HorizontalAlignment="Right" Height="100" Stroke="Black"  Width="100" Visibility="Hidden" Canvas.Left="1870" Canvas.Top="495"/>
         </Canvas>
 
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,10,0,0" />
@@ -162,7 +162,7 @@
 
         </k:KinectRegion>
         <Image x:Name="player" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1920" Height="1080" Margin="-954,-536,954,536" />
-    
+
 
     </Grid>
 </UserControl>
