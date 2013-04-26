@@ -150,7 +150,6 @@ namespace CamNect.GUI.Views
             {
                 this.Content = null;
                 cleanStreamViews();
-
                 Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, CameraOne.cameraList, j);
                 this.Content = CameraOnePage;
             }
@@ -158,7 +157,6 @@ namespace CamNect.GUI.Views
             {
                 this.Content = null;
                 cleanStreamViews();
-
                 Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, CameraOne.cameraList, j);
                 this.Content = cameraNotPTZPage;
             }
