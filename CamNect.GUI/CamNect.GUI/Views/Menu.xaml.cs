@@ -190,6 +190,22 @@ namespace CamNect.GUI.Views
             kinectButtonArray = null;
             imageArray = null;
 
+            bool listEnd = false;
+
+            while (!listEnd) {
+                listEnd = true;
+
+                foreach (CameraUtils cam in CameraOne.cameraList)
+                {
+                    if (cam.Config.Plugged == false)
+                    {
+                        CameraOne.cameraList.Remove(cam);
+                        listEnd = false;
+                        break;
+                    }
+                }
+            }
+
             cleanStreamViews();
 
             Views.Menu Menu = new Views.Menu(this.sensorChooser);
