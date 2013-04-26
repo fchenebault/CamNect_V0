@@ -30,7 +30,6 @@ namespace CamNect.GUI.Views
         private static ConfigCamWindow configCamWin;
 
 
-
         public Menu(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
@@ -62,21 +61,24 @@ namespace CamNect.GUI.Views
         {
             for (int i = 0; i < CameraOne.cameraList.Count; i++)
             {
-                kinectButtonArray[i] = new KinectTileButton();
-                kinectButtonArray[i].Width = 800;
-                kinectButtonArray[i].Height = 600;
-                imageArray[i] = new Image();
-                imageArray[i].Height = 600;
-                imageArray[i].Width = 800;
-                kinectButtonArray[i].Content = imageArray[i];
-                kinectButtonArray[i].Click += KinectTileButtonClick;
-                wrapPanel.Children.Add(kinectButtonArray[i]);
-            }
-
-            for (int i = 0; i < CameraOne.cameraList.Count; i++)
-            {
-                kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
-                this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
+                if (CameraOne.cameraList[i].Config.Afficher)
+                {
+                    kinectButtonArray[i] = new KinectTileButton();
+                    kinectButtonArray[i].Width = 800;
+                    kinectButtonArray[i].Height = 600;
+                    imageArray[i] = new Image();
+                    imageArray[i].Height = 600;
+                    imageArray[i].Width = 800;
+                    kinectButtonArray[i].Content = imageArray[i];
+                    kinectButtonArray[i].Click += KinectTileButtonClick;
+                    wrapPanel.Children.Add(kinectButtonArray[i]);
+                    kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
+                    this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
+                }
+                else
+                {
+                    nbCamera--;
+                }
             }
         }
 
@@ -151,7 +153,7 @@ namespace CamNect.GUI.Views
                 this.Content = null;
                 cleanStreamViews();
 
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, CameraOne.cameraList[j]);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, CameraOne.cameraList, j);
                 this.Content = CameraOnePage;
             }
             else
@@ -159,7 +161,7 @@ namespace CamNect.GUI.Views
                 this.Content = null;
                 cleanStreamViews();
 
-                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, CameraOne.cameraList[j]);
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, CameraOne.cameraList, j);
                 this.Content = cameraNotPTZPage;
             }
        }

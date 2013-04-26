@@ -30,10 +30,12 @@ namespace CamNect.GUI.Views
         private int i;
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
+        private List<CameraUtils> cameraListTMP;
+        private int indice;
         private CameraUtils camera;
         private MjpegReader reader;
 
-        public CameraNotPTZ(KinectSensorChooser sensorChooser, CameraUtils camera)
+        public CameraNotPTZ(KinectSensorChooser sensorChooser, List<CameraUtils> cameraListTMP, int indice)
         {
             InitializeComponent();
 
@@ -42,9 +44,15 @@ namespace CamNect.GUI.Views
             this.sensorChooser = sensorChooser;
 
             // Camera Initialisation
+            this.camera = cameraListTMP[indice];
+            this.cameraListTMP = cameraListTMP;
+            this.indice = indice;
             reader = new MjpegReader(camera, CameraNotPTZPlayer);
-            this.camera = camera;
 
+
+            kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);
+            kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(swipeRightAction);
+            kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
             // Light initialisation
             i = 0;
             lumiereEllipse.StrokeThickness = 100;
@@ -67,10 +75,67 @@ namespace CamNect.GUI.Views
             }
         }
 
+        public void retourMenu()
+        {
+            this.Content = null;
+            reader.MjpegReaderStop();
+
+            Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
+            this.Content = Menu;
+        }
+
+        public void swipeLeftAction()
+        {
+            int nb = cameraListTMP.Count;
+            indice--;
+            if (indice < 0)
+                indice = nb - 1;
+            this.Content = null;
+            reader.MjpegReaderStop();
+
+            // Select if the camera is PTZ
+            if (cameraListTMP[indice].Config.isPtz)
+            {
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                this.Content = CameraOnePage;
+            }
+            else
+            {
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                this.Content = cameraNotPTZPage;
+            }
+
+        }
+
+        public void swipeRightAction()
+        {
+            int nb = cameraListTMP.Count;
+            indice++;
+            if (indice > nb - 1)
+                indice = 0;
+            this.Content = null;
+            reader.MjpegReaderStop();
+
+            // Select if the camera is PTZ
+            if (cameraListTMP[indice].Config.isPtz)
+            {
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                this.Content = CameraOnePage;
+            }
+            else
+            {
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                this.Content = cameraNotPTZPage;
+            }
+        }
+
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
-            camera.light(0);
-            System.Windows.Application.Current.Shutdown();
+            this.Content = null;
+            reader.MjpegReaderStop();
+
+            Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
+            this.Content = Menu;
         }
 
 
@@ -96,6 +161,23 @@ namespace CamNect.GUI.Views
             camera.light(i);
             message.Content = "valeur" + i;
             
+        }
+
+        private void sound1_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(6);
+        }
+        private void sound2_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(7);
+        }
+        private void sound3_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(8);
+        }
+        private void sound4_onClick(object sender, RoutedEventArgs e)
+        {
+            camera.playMediaClip(9);
         }
     }
 }
