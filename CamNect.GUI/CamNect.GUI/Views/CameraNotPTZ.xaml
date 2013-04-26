@@ -66,13 +66,13 @@
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound1_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,291,1716,0">
                     <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
                 </k:KinectTileButton>
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound2_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,609,1716,0" RenderTransformOrigin="0.551,0.929">
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound2_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,455,1716,0" RenderTransformOrigin="0.551,0.929">
                     <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
                 </k:KinectTileButton>
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="154" Width="187" Click="sound3_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,0,1716,158">
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="154" Width="187" Click="sound3_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,0,1716,317">
                     <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
                 </k:KinectTileButton>
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound4_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,450,1716,0">
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound4_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,768,1716,0">
                     <Image Source="/Ressources/Images/exit.png" Opacity="0.5" />
                 </k:KinectTileButton>
             </Grid>
