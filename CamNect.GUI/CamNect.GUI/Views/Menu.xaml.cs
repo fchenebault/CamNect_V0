@@ -22,50 +22,62 @@ namespace CamNect.GUI.Views
         /* Variables */
         private KinectMain kinect;
         public KinectSensorChooser sensorChooser;
-        private static CamNect.Camera.CameraUtils[] cameraArray = new CamNect.Camera.CameraUtils[3];
-        private KinectTileButton[] kinectButtonArray = new KinectTileButton[CameraOne.cameraList.Count];
-        private Image[] imageArray = new Image[CameraOne.cameraList.Count];
-        private MjpegReader[] readerArray = new MjpegReader[CameraOne.cameraList.Count];
+        private static CameraUtils[] cameraArray;
+        private KinectTileButton[] kinectButtonArray;
+        private Image[] imageArray;
+        private MjpegReader[] readerArray;
+        int nbCamera;
+        private static ConfigCamWindow configCamWin;
+
+
 
         public Menu(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
-            
+
             // Sensor initialisation
             this.sensorChooser = sensorChooser;
-            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+            kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
+            // Configuration panel initialisation
+            configCamWin = new ConfigCamWindow();
+            configCamWin.Closed += onCloseConfig;
+
+            // Variables initialisation
+            nbCamera = CameraOne.cameraList.Count;
+            cameraArray = new CamNect.Camera.CameraUtils[nbCamera];
+            kinectButtonArray = new KinectTileButton[nbCamera];
+            imageArray = new Image[nbCamera];
+            readerArray = new MjpegReader[nbCamera];
+
+            // Initialise the number of images depending on camera(s)
             InitCam();
+            message.Content = CameraOne.cameraList.Count;
         }
 
 
-       public void InitCam()
-        {
-            // Pour chaque caméra de la liste, on crée la zone d'affichage et lance le player.          
-            
-            System.Console.WriteLine("nb de cam: "+CameraOne.cameraList.Count.ToString());
 
-            for (int i = 0 ; i < CameraOne.cameraList.Count ; i++) 
+
+        public void InitCam()
+        {
+            for (int i = 0; i < CameraOne.cameraList.Count; i++)
             {
-               
                 kinectButtonArray[i] = new KinectTileButton();
                 kinectButtonArray[i].Width = 800;
-                kinectButtonArray[i].Height = 600;          
+                kinectButtonArray[i].Height = 600;
                 imageArray[i] = new Image();
                 imageArray[i].Height = 600;
                 imageArray[i].Width = 800;
-                kinectButtonArray[i].Content = imageArray[i];                            
-                kinectButtonArray[i].Click += KinectTileButtonClick;               
-                wrapPanel.Children.Add(kinectButtonArray[i]);                   
+                kinectButtonArray[i].Content = imageArray[i];
+                kinectButtonArray[i].Click += KinectTileButtonClick;
+                wrapPanel.Children.Add(kinectButtonArray[i]);
             }
 
             for (int i = 0; i < CameraOne.cameraList.Count; i++)
             {
-              //  int j = CameraOne.cameraList[i].Config.Fenetre;
                 kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
                 this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
             }
-
         }
 
 
@@ -119,47 +131,82 @@ namespace CamNect.GUI.Views
             }
         }
 
-        ////When the window is loaded
-        private void Menu_Window_Loaded(Object sender, RoutedEventArgs e)
-        {
-           
-        }
-
-
 
         private void KinectTileButtonClick(object sender, RoutedEventArgs e)
         {
             KinectTileButton boutonClick = (KinectTileButton)sender;
-            int i,j=0;
-            //reconnaissance du bouton
+            int i, j = 0;
+            // Find the selected camera
             for (i = 0; i < kinectButtonArray.Length; i++)
             {
                 if (boutonClick == kinectButtonArray[i])
                 {
                     j = i;
                 }
-                this.readerArray[i].MjpegReaderStop();
             }
 
-            //La caméra selectionnée est-elle PTZ ?
+            // Select if the camera is PTZ
             if (CameraOne.cameraList[j].Config.isPtz)
             {
+                this.Content = null;
+                cleanStreamViews();
+
                 Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, CameraOne.cameraList[j]);
                 this.Content = CameraOnePage;
             }
             else
             {
+                this.Content = null;
+                cleanStreamViews();
+
                 Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, CameraOne.cameraList[j]);
                 this.Content = cameraNotPTZPage;
             }
+       }
 
-            message.Content = "Camera numero"+i.ToString(); 
-            
-        }
-
-        private void quit_onClick(object sender, RoutedEventArgs e)
+        private void quitOnClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void onCloseConfig(object sender, EventArgs e)
+        {
+            this.Content = null;
+            cameraArray = null;
+            kinectButtonArray = null;
+            imageArray = null;
+
+            cleanStreamViews();
+
+            Views.Menu Menu = new Views.Menu(this.sensorChooser);
+            this.Content = Menu;
+        }
+
+
+        private void reloadOnClick(object sender, RoutedEventArgs e)
+        {
+            this.Content = null;
+            cameraArray = null;
+            kinectButtonArray = null;
+            imageArray = null;
+
+            cleanStreamViews();
+
+            Views.Menu Menu = new Views.Menu(this.sensorChooser);
+            this.Content = Menu;
+        }
+
+        private void configOnClick(object sender, RoutedEventArgs e)
+        {
+            configCamWin.Show();
+        }
+
+        private void cleanStreamViews()
+        {
+            for (int i = 0; i < nbCamera; i++)
+            {
+                this.readerArray[i].MjpegReaderStop();
+            }
         }
 
     }

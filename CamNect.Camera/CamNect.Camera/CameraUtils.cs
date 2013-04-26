@@ -28,14 +28,9 @@ namespace CamNect.Camera
             get { return ip;}
         }
 
-        public void lightOn()
+        public void light(int value)
         {
-            HttpReq.HttpGet("http://" + ip + "/axis-cgi/io/lightcontrol.cgi?action=L1:-100", config.Id, config.Pass);
-        }
-
-        public void lightOff()
-        {
-            HttpReq.HttpGet("http://" + ip + "/axis-cgi/io/lightcontrol.cgi?action=L1:-0", config.Id, config.Pass);
+            HttpReq.HttpGet("http://" + ip + "/axis-cgi/lightcontrol.cgi?level=" + value, config.Id, config.Pass);
         }
 
         public void playMediaClip(int idMediaClip)
@@ -96,17 +91,17 @@ namespace CamNect.Camera
             result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?move=downright", config.Id, config.Pass);
         }
 
-        public void zoomOn()
+        public void zoomOnOff(Double z)
         {
             String result;
-            result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom=300", config.Id, config.Pass);
+            result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom="+z, config.Id, config.Pass);
         }
 
-        public void zoomOff()
-        {
-            String result;
-            result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom=-300", config.Id, config.Pass);
-        }
+      //  public void zoomOff()
+     //   {
+     //       String result;
+     //       result = HttpReq.HttpGet("http://" + ip + "/axis-cgi/com/ptz.cgi?rzoom=-300", config.Id, config.Pass);
+      //  }
     }
 
 }
