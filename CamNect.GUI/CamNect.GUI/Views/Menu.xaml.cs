@@ -77,7 +77,7 @@ namespace CamNect.GUI.Views
                     kinectButtonArray[i].Click += KinectTileButtonClick;
                     wrapPanel.Children.Add(kinectButtonArray[i]);
                     kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
-                    this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
+                    this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i], CameraOne.cameraList[i].Config.HighRes);
                 }
                 else
                 {
