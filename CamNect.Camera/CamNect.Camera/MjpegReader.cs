@@ -25,8 +25,8 @@ namespace CamNect.Camera
             _mjpeg = new MjpegDecoder();
             this.reader = reader;
             this.camera = camera;
-            String url = camera.VideoUrl + "?resolution=" + resolution;
-            //String url = "http://" + camera.Ip + "/mjpg/video.mjpg";
+            //String url = camera.VideoUrl + "?resolution=" + resolution;
+            String url = "http://" + camera.Ip + "/mjpg/video.mjpg?resolution=" + resolution;
 
             _mjpeg.FrameReady += mjpeg_FrameReady;
             _mjpeg.Error += mjpeg_Error;

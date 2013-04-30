@@ -16,7 +16,7 @@
   {
     "Afficher": false,
     "Nom": "AXIS M1054",
-	"HighRes": "640*480",
+	"HighRes": "640x480",
 	"MediumRes": "352x288",
 	"LowRes": "176x144",
     "Id": "root",
