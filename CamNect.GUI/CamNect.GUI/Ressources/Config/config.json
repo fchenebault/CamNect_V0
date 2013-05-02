@@ -13,7 +13,7 @@
     "Zoom": true,
     "Modele": "AXIS M1054",
     "Serie": "00408CDBEB07",
-    "Plugged": true
+    "Plugged": false
   },
   {
     "PtzOn": true,
@@ -29,6 +29,6 @@
     "Zoom": false,
     "Modele": "AXIS 214",
     "Serie": "00408CAB62FA",
-    "Plugged": true
+    "Plugged": false
   }
 ]

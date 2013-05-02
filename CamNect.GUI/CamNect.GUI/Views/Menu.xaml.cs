@@ -28,6 +28,7 @@ namespace CamNect.GUI.Views
         private MjpegReader[] readerArray;
         int nbCamera;
         private ConfigCamWindow configCamWin;
+        public static List<CameraUtils> cameraList;
 
 
         public Menu(KinectSensorChooser sensorChooser)
@@ -42,11 +43,9 @@ namespace CamNect.GUI.Views
            // configCamWin = new ConfigCamWindow();
             configCamWin = Views.Start.configCamWin;
             configCamWin.Closed += onCloseConfig;
-            
-
 
             // Variables initialisation
-            nbCamera = CameraOne.cameraList.Count;
+            nbCamera = Start.cameraList.Count;
             cameraArray = new CamNect.Camera.CameraUtils[nbCamera];
             kinectButtonArray = new KinectTileButton[nbCamera];
             imageArray = new Image[nbCamera];
@@ -54,18 +53,46 @@ namespace CamNect.GUI.Views
 
             // Initialise the number of images depending on camera(s)
             InitCam();
-            message.Content = CameraOne.cameraList.Count;
+            message.Content = Start.cameraList.Count;
         }
 
+        public Menu(KinectSensorChooser sensorChooser, List<CameraUtils> cameraListArg, ConfigCamWindow configCamWinArg)
+        {
+            InitializeComponent();
 
+            // Sensor initialisation
+            this.sensorChooser = sensorChooser;
+            kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+
+            // Configuration panel initialisation
+            cameraList = cameraListArg;
+            configCamWin = configCamWinArg;
+            configCamWin.Closed += onCloseConfig;
+
+            // Variables initialisation
+            nbCamera = cameraList.Count;
+            cameraArray = new CamNect.Camera.CameraUtils[nbCamera];
+            kinectButtonArray = new KinectTileButton[nbCamera];
+            imageArray = new Image[nbCamera];
+            readerArray = new MjpegReader[nbCamera];
+
+            // Initialise the number of images depending on camera(s)
+            InitCam();
+            message.Content = cameraList.Count;
+        }
+
+        private void initMenu()
+        {
+
+        }
 
 
         public void InitCam()
         {
-            System.Console.WriteLine(CameraOne.cameraList.Count);
-            for (int i = 0; i < CameraOne.cameraList.Count; i++)
+            System.Console.WriteLine(cameraList.Count);
+            for (int i = 0; i < cameraList.Count; i++)
             {
-                if (CameraOne.cameraList[i].Config.Afficher)
+                if (Start.cameraList[i].Config.Afficher)
                 {
                     kinectButtonArray[i] = new KinectTileButton();
                     kinectButtonArray[i].Width = 800;
@@ -76,8 +103,8 @@ namespace CamNect.GUI.Views
                     kinectButtonArray[i].Content = imageArray[i];
                     kinectButtonArray[i].Click += KinectTileButtonClick;
                     wrapPanel.Children.Add(kinectButtonArray[i]);
-                    kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
-                    this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i], CameraOne.cameraList[i].Config.HighRes);
+                    kinectButtonArray[i].Label = cameraList[i].Config.Nom;
+                    this.readerArray[i] = new MjpegReader(cameraList[i], imageArray[i], cameraList[i].Config.HighRes);
                 }
                 else
                 {
@@ -152,18 +179,18 @@ namespace CamNect.GUI.Views
             }
 
             // Select if the camera is PTZ
-            if (CameraOne.cameraList[j].Config.isPtz)
+            if (cameraList[j].Config.isPtz)
             {
                 this.Content = null;
                 cleanStreamViews();
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, CameraOne.cameraList, j);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraList, j);
                 this.Content = CameraOnePage;
             }
             else
             {
                 this.Content = null;
                 cleanStreamViews();
-                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, CameraOne.cameraList, j);
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraList, j);
                 this.Content = cameraNotPTZPage;
             }
        }
@@ -199,11 +226,11 @@ namespace CamNect.GUI.Views
             while (!listEnd) {
                 listEnd = true;
 
-                foreach (CameraUtils cam in CameraOne.cameraList)
+                foreach (CameraUtils cam in cameraList)
                 {
                     if (cam.Config.Plugged == false)
                     {
-                        CameraOne.cameraList.Remove(cam);
+                        cameraList.Remove(cam);
                         listEnd = false;
                         break;
                     }

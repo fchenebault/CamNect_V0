@@ -94,8 +94,8 @@
     <Compile Include="Views\CameraNotPTZ.xaml.cs">
       <DependentUpon>CameraNotPTZ.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CameraOne.xaml.cs">
-      <DependentUpon>CameraOne.xaml</DependentUpon>
+    <Compile Include="Views\CameraPTZ.xaml.cs">
+      <DependentUpon>CameraPTZ.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfigCamWindow.xaml.cs" />
     <Compile Include="Views\Error.xaml.cs">
@@ -129,7 +129,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CameraOne.xaml">
+    <Page Include="Views\CameraPTZ.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
