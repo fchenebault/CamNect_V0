@@ -38,10 +38,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ManagedUPnP">
-      <HintPath>..\..\CamNect.GUI\CamNect.GUI\bin\Debug\ManagedUPnP.dll</HintPath>
+      <HintPath>..\..\..\..\Essaiflo\Needed_libs\CamNect.Kinect\ManagedUPnP.dll</HintPath>
     </Reference>
     <Reference Include="MjpegProcessor">
       <HintPath>..\..\Needed_libs\CamNect.Camera\MjpegProcessor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Needed_libs\CamNect.GUI\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -59,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CamConfig.cs" />
+    <Compile Include="CameraDiscovery.cs" />
     <Compile Include="CameraUtils.cs" />
     <Compile Include="HttpReq.cs" />
     <Compile Include="MjpegReader.cs" />

@@ -17,17 +17,9 @@
 
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="890,0" Grid.RowSpan="2" />
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" Name="sensorChooserUi" Margin="936,0" />
-
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" Margin="27,-18,-35,10" Grid.RowSpan="2">
 
-            <Grid>
-                <k:KinectTileButton Height="Auto" Width="Auto" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="853,876,911,50" RenderTransformOrigin="0.802,0.918" >
-                    <Image x:Name="imageMenuConfig" Source="/Ressources/Images/toolButton.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
-                </k:KinectTileButton>
-                <k:KinectTileButton Height="154" Width="Auto" Click="quitOnClick" Background=" Transparent" BorderBrush="Transparent" Margin="1343,876,442,50" >
-                    <Image x:Name="imageMenuQuit" Source="/Ressources/Images/exit.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
-                </k:KinectTileButton>
-            </Grid>
+            <Grid/>
         </k:KinectRegion>
 
         <TextBlock HorizontalAlignment="Left" Margin="785,437.299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="115" Width="600" FontSize="50" RenderTransformOrigin="0.5,0.5" FontFamily="Gisha" Grid.Row="1">

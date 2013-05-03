@@ -9,6 +9,8 @@ namespace CamNect.Camera
         private String ip = null;
         private String videoUrl;
         private CamConfig config;
+        private MjpegReader reader;
+
         // protected VlcPlayer vlcPlayer;
 
         public CameraUtils(string ip, CamConfig cfg)
@@ -16,6 +18,13 @@ namespace CamNect.Camera
             this.ip = ip;
             this.videoUrl = "http://" + cfg.Id + ":" + cfg.Pass + "@" + ip + cfg.Uri;
             this.config = cfg;
+            this.reader = new MjpegReader();
+        }
+
+        public void startReader(Image imageReader)
+        {
+            reader.MjpegReaderStop();
+            reader.setReader(imageReader, config, ip);  
         }
 
         public CamConfig Config

@@ -63,7 +63,7 @@ namespace CamNect.GUI.Views
             this.camera = cameraListTMP[indice];
             this.cameraListTMP = cameraListTMP;
             this.indice = indice;
-            reader = new MjpegReader(camera, CameraOnePlayer, camera.Config.HighRes);
+            //reader = new MjpegReader(camera, CameraOnePlayer, camera.Config.HighRes);
 
             // Events for gestures
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);

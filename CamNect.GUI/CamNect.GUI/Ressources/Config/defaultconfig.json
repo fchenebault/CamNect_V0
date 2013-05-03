@@ -1,6 +1,6 @@
 [
   {
-    "Afficher": false,
+    "Afficher": true,
     "Nom": "AXIS 214",
     "Id": "root",
     "Pass": "root",
@@ -14,7 +14,7 @@
     "Modele": "AXIS 214",
   },
   {
-    "Afficher": false,
+    "Afficher": true,
     "Nom": "AXIS M1054",
 	"HighRes": "640x480",
 	"MediumRes": "352x288",

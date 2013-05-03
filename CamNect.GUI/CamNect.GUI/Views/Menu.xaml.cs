@@ -13,9 +13,8 @@ using System.Windows.Shapes;
 
 namespace CamNect.GUI.Views
 {
-    /// <summary>
-    /// Logique d'interaction pour Menu.xaml
-    /// </summary>
+
+
     public partial class Menu : UserControl
     {
 
@@ -25,11 +24,9 @@ namespace CamNect.GUI.Views
         private static CameraUtils[] cameraArray;
         private KinectTileButton[] kinectButtonArray;
         private Image[] imageArray;
-        private MjpegReader[] readerArray;
         int nbCamera;
         private ConfigCamWindow configCamWin;
-        public static List<CameraUtils> cameraList;
-
+        private List<CameraUtils> cameraList;
 
         public Menu(KinectSensorChooser sensorChooser)
         {
@@ -39,24 +36,25 @@ namespace CamNect.GUI.Views
             this.sensorChooser = sensorChooser;
             kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
-            // Configuration panel initialisation
-           // configCamWin = new ConfigCamWindow();
+            //Configuration panel initialisation
+            configCamWin = new ConfigCamWindow();
             configCamWin = Views.Start.configCamWin;
             configCamWin.Closed += onCloseConfig;
 
-            // Variables initialisation
-            nbCamera = Start.cameraList.Count;
-            cameraArray = new CamNect.Camera.CameraUtils[nbCamera];
-            kinectButtonArray = new KinectTileButton[nbCamera];
-            imageArray = new Image[nbCamera];
-            readerArray = new MjpegReader[nbCamera];
+            CameraDiscovery.Instance().CameraListModified += Menu_CameraListModified;
 
             // Initialise the number of images depending on camera(s)
-            InitCam();
-            message.Content = Start.cameraList.Count;
+           InitCam(CameraDiscovery.Instance().CameraList);
+            
         }
 
-        public Menu(KinectSensorChooser sensorChooser, List<CameraUtils> cameraListArg, ConfigCamWindow configCamWinArg)
+        private void Menu_CameraListModified(List<CameraUtils> cameraList)
+        {
+            InitCam(cameraList);
+        }
+
+
+        public Menu(KinectSensorChooser sensorChooser, ConfigCamWindow configCamWinArg)
         {
             InitializeComponent();
 
@@ -65,35 +63,37 @@ namespace CamNect.GUI.Views
             kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
             // Configuration panel initialisation
-            cameraList = cameraListArg;
             configCamWin = configCamWinArg;
             configCamWin.Closed += onCloseConfig;
 
-            // Variables initialisation
-            nbCamera = cameraList.Count;
-            cameraArray = new CamNect.Camera.CameraUtils[nbCamera];
-            kinectButtonArray = new KinectTileButton[nbCamera];
-            imageArray = new Image[nbCamera];
-            readerArray = new MjpegReader[nbCamera];
+            //configCamWin = configCamWinArg;
+            //configCamWin.Closed += onCloseConfig;
+            CameraDiscovery.Instance().CameraListModified += Menu_CameraListModified;
 
             // Initialise the number of images depending on camera(s)
-            InitCam();
+            InitCam(CameraDiscovery.Instance().CameraList);
+        }
+
+
+        public void InitCam(List<CameraUtils> cameraList)
+        {
+            this.cameraList = cameraList;
+            // Clear out content ScrollViewer
+            this.wrapPanel.Children.Clear();
+
+            // ReInit variables (attention à l'ordre)
+            nbCamera = cameraList.Count;
+            kinectButtonArray = new KinectTileButton[nbCamera];
+            imageArray = new Image[nbCamera];
+            cameraArray = new CamNect.Camera.CameraUtils[nbCamera];
+
+            // Message
             message.Content = cameraList.Count;
-        }
 
-        private void initMenu()
-        {
-
-        }
-
-
-        public void InitCam()
-        {
-            System.Console.WriteLine(cameraList.Count);
             for (int i = 0; i < cameraList.Count; i++)
             {
-                if (Start.cameraList[i].Config.Afficher)
-                {
+               if (cameraList[i].Config.Afficher)
+               {
                     kinectButtonArray[i] = new KinectTileButton();
                     kinectButtonArray[i].Width = 800;
                     kinectButtonArray[i].Height = 600;
@@ -104,7 +104,7 @@ namespace CamNect.GUI.Views
                     kinectButtonArray[i].Click += KinectTileButtonClick;
                     wrapPanel.Children.Add(kinectButtonArray[i]);
                     kinectButtonArray[i].Label = cameraList[i].Config.Nom;
-                    this.readerArray[i] = new MjpegReader(cameraList[i], imageArray[i], cameraList[i].Config.HighRes);
+                    cameraList[i].startReader(imageArray[i]);
                 }
                 else
                 {
@@ -113,12 +113,11 @@ namespace CamNect.GUI.Views
             }
         }
 
+        private void InitMenu()
+        {
 
-        /// <summary>
-        /// Called when the KinectSensorChooser gets a new sensor
-        /// </summary>
-        /// <param name="sender">sender of the event</param>
-        /// <param name="args">event arguments</param>
+        }
+
         private static void SensorChooserOnKinectChanged(object sender, KinectChangedEventArgs args)
         {
             if (args.OldSensor != null)
@@ -182,14 +181,12 @@ namespace CamNect.GUI.Views
             if (cameraList[j].Config.isPtz)
             {
                 this.Content = null;
-                cleanStreamViews();
                 Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraList, j);
                 this.Content = CameraOnePage;
             }
             else
             {
                 this.Content = null;
-                cleanStreamViews();
                 Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraList, j);
                 this.Content = cameraNotPTZPage;
             }
@@ -202,28 +199,20 @@ namespace CamNect.GUI.Views
 
         private void onCloseConfig(object sender, EventArgs e)
         {
-            this.Content = null;
-            cameraArray = null;
-            kinectButtonArray = null;
-            imageArray = null;
+            //this.Content = null;
+            //cameraArray = null;
+            //kinectButtonArray = null;
+            //imageArray = null;
 
-            cleanStreamViews();
+            //cleanStreamViews();
 
-            Views.Menu Menu = new Views.Menu(this.sensorChooser);
-            this.Content = Menu;
-        }
-
-
-        private void reloadOnClick(object sender, RoutedEventArgs e)
-        {
-            this.Content = null;
-            cameraArray = null;
-            kinectButtonArray = null;
-            imageArray = null;
+            //Views.Menu Menu = new Views.Menu(this.sensorChooser);
+            //this.Content = Menu;
 
             bool listEnd = false;
 
-            while (!listEnd) {
+            while (!listEnd)
+            {
                 listEnd = true;
 
                 foreach (CameraUtils cam in cameraList)
@@ -237,23 +226,43 @@ namespace CamNect.GUI.Views
                 }
             }
 
-            cleanStreamViews();
+            CameraDiscovery.Instance().Start();
+        }
 
-            Views.Menu Menu = new Views.Menu(this.sensorChooser);
-            this.Content = Menu;
+
+        private void reloadOnClick(object sender, RoutedEventArgs e)
+        {
+            CameraDiscovery.Instance().Start();
+            //this.Content = null;
+            //cameraArray = null;
+            //kinectButtonArray = null;
+            //imageArray = null;
+            Console.WriteLine(".............. Start search");
+            while (CameraDiscovery.Instance().isSearching)
+            {
+                
+            }
+            Console.WriteLine("............... Search complete");
+
+            bool listEnd = false;
+            while (!listEnd) {
+                listEnd = true;
+
+                foreach (CameraUtils cam in cameraList)
+                {
+                    if (cam.Config.Plugged == false)
+                    {
+                        cameraList.Remove(cam);
+                        listEnd = false;
+                        break;
+                    }
+                }
+            }
         }
 
         private void configOnClick(object sender, RoutedEventArgs e)
         {
             configCamWin.Show();
-        }
-
-        private void cleanStreamViews()
-        {
-            for (int i = 0; i < nbCamera; i++)
-            {
-                this.readerArray[i].MjpegReaderStop();
-            }
         }
 
     }

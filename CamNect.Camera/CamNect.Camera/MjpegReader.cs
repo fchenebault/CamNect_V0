@@ -17,26 +17,27 @@ namespace CamNect.Camera
         // Variables
         private Image reader;
         private MjpegDecoder _mjpeg;
-        private CameraUtils camera;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
-        public MjpegReader(CameraUtils camera, Image reader, String resolution)
+        public MjpegReader()
         {
             _mjpeg = new MjpegDecoder();
+        }
+
+        public void setReader(Image reader, CamConfig config, String Ip)
+        {
+            String url = "http://" + Ip + "/mjpg/video.mjpg?resolution=" + config.LowRes;
+
             this.reader = reader;
-            this.camera = camera;
-            //String url = camera.VideoUrl + "?resolution=" + resolution;
-
-            String url = "http://" + camera.Ip + "/mjpg/video.mjpg?resolution=" + resolution;
-
 
             _mjpeg.FrameReady += mjpeg_FrameReady;
             _mjpeg.Error += mjpeg_Error;
-            _mjpeg.ParseStream(new Uri(url), camera.Config.Id, camera.Config.Pass);
+            _mjpeg.ParseStream(new Uri(url), config.Id, config.Pass);
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(3000);
         }
+
 
         // In case of Errors
         void mjpeg_Error(object sender, ErrorEventArgs e)
@@ -61,7 +62,6 @@ namespace CamNect.Camera
             Uri uri = new Uri("/Ressources/Images/warning_big.png", UriKind.Relative);
             ImageSource bi = new BitmapImage(uri);
 
-            this.camera.Config.Plugged = false;
             reader.Source = bi;
         }
 

@@ -24,9 +24,15 @@ namespace CamNect.Camera
         public bool Zoom { get; set; }
         public string Modele { get; set; }
         public string Serie { get; set; }
-        public bool Plugged  { get; set; }
-     
-       
+        public bool Plugged
+        {
+            get
+            {
+                return CameraDiscovery.Instance().IsCameraPlugged(Id);
+            }
+        }
+
+
 
         public CamConfig()
         {
@@ -43,7 +49,6 @@ namespace CamNect.Camera
             this.Uri = uri;
             this.isPtz = isPtz;
             this.Zoom = zoom;
-            this.Plugged = plugged;
         }
 
         public void Clone(CamConfig cfg)
@@ -61,7 +66,6 @@ namespace CamNect.Camera
             this.Zoom = cfg.Zoom;
             this.Modele = cfg.Modele;
             this.Serie = cfg.Serie;
-            this.Plugged = cfg.Plugged;
         }
     }
 }
