@@ -33,7 +33,7 @@ namespace CamNect.GUI.Views
 
             CameraOne.loadDatabase();
             configCamWin = new ConfigCamWindow();
-            configCamWin.Closed += OnCloseConfig;
+            configCamWin.Deactivated += OnCloseConfig;
 
             Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
             disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);

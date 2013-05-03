@@ -23,6 +23,11 @@ namespace CamNect.Camera
             get{return config;}
         }
 
+        public String VideoUrl
+        {
+            get { return ip; }
+        }
+
         public String Ip
         {
             get { return ip;}

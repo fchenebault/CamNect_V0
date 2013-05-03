@@ -173,7 +173,7 @@ namespace CamNect.GUI.Views
             foreach (CamConfig l in ligne)
             {
                 index = ligne.IndexOf(l);
-                l.Fenetre = index + 1;
+                //l.Fenetre = index + 1;
             }
             //
             dgCam.Items.Refresh();
