@@ -1,7 +1,7 @@
 [
   {
     "PtzOn": true,
-    "Afficher": false,
+    "Afficher": true,
     "Nom": "AXIS 214",
     "Id": "root",
     "Pass": "root",
@@ -48,4 +48,3 @@
     "Plugged": true
   }
 ]
-

@@ -104,7 +104,7 @@ namespace CamNect.GUI.Views
 
         private void onCancelClick(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         private void onOkayClick(object sender, RoutedEventArgs e)
@@ -115,7 +115,7 @@ namespace CamNect.GUI.Views
             jsonfile.WriteLine(json);
             jsonfile.Close();
 
-            this.Hide();
+            this.Close();
 
         }
 
