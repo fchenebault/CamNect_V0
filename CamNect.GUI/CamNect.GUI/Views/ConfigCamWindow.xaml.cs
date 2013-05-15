@@ -56,11 +56,6 @@ namespace CamNect.GUI.Views
            {
                json = File.ReadAllText("../../Ressources/Config/config.json");
                ligne = JsonConvert.DeserializeObject<ObservableCollection<CamConfig>>(json);
-               /*try
-               {
-                   maxFenetre = ligne.Max(a => a.Fenetre);
-               }
-               catch { }*/
            }
 
        }
@@ -69,26 +64,8 @@ namespace CamNect.GUI.Views
         public ConfigCamWindow()
         {
             InitializeComponent();
-
-
             dgCam = dgCamConfig;
             CamConfigCollection();
-
-            //Trie les objets en deux categirie, true/false, puis en fonction du numero de fenetre
-            //ligne = new ObservableCollection<CamConfig>(ligne.OrderByDescending(a => a.Plugged).ThenBy(a => a.Fenetre));
-            
-            //Reindex le numero de fenetre
-            /*int index;
-            foreach (CamConfig l in ligne)
-            {
-                index = ligne.IndexOf(l);
-                l.Fenetre = index + 1;
-                l.Plugged = false;
-            }*/
-
-
-
-
             dgCam.ItemsSource = ligne;
 
         }
@@ -142,33 +119,8 @@ namespace CamNect.GUI.Views
             dgCam.Items.Refresh();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            /*AddCam(new CamConfig(true, "cameraX", "122554", "hidden","URL", true, false, true, "21255", 5, true));
-            ligne = new ObservableCollection<CamConfig>(ligne.OrderByDescending(a => a.Plugged).ThenBy(a => a.Fenetre));
-            int index;
-            foreach (CamConfig l in ligne)
-            {
-                index = ligne.IndexOf(l);
-                l.Fenetre = index + 1;
-            }
-            //
-            dgCam.ItemsSource = ligne;*/
-            /*foreach (CameraUtils u in CameraOne.cameraList)
-            {
-                System.Console.WriteLine(u.Config.Nom);
-            }*/
-
-           // AddCam(new CamConfig(true, "AXIS M1054", "root", "hiddeb", "URL", true, false, true, "1236454215241", 5, true));
-
-            
-        }
-
         public static void reindexCam()
         {
-
-            //ligne = new ObservableCollection<CamConfig>(ligne.OrderByDescending(a => a.Show).ThenBy(a => a.Fenetre));
-            //Reindex le numero de fenetre
             int index;
             foreach (CamConfig l in ligne)
             {
@@ -179,10 +131,6 @@ namespace CamNect.GUI.Views
             dgCam.Items.Refresh();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 
     public class ResolutionList : List<string>
