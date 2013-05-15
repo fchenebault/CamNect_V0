@@ -35,9 +35,10 @@ namespace CamNect.GUI.Views
             configCamWin = new ConfigCamWindow();
            // configCamWin.Closed += OnCloseConfig;
 
-            Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
-            disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
-            disc.Start();
+                Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
+                disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
+                disc.Start();
+
 
             // Timer 
              dispatcherTimer = new DispatcherTimer();

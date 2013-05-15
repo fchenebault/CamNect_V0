@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ManagedUPnP">
-      <HintPath>..\..\CamNect.GUI\CamNect.GUI\bin\Debug\ManagedUPnP.dll</HintPath>
+      <HintPath>..\..\..\..\Essaiflo\Needed_libs\CamNect.Kinect\ManagedUPnP.dll</HintPath>
     </Reference>
     <Reference Include="MjpegProcessor">
       <HintPath>..\..\Needed_libs\CamNect.Camera\MjpegProcessor.dll</HintPath>
