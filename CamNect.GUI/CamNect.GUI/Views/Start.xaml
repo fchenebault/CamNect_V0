@@ -21,9 +21,6 @@
         <k:KinectRegion x:Name="kinectRegion" Height="1080" Width="1920" Margin="27,-18,-35,10" Grid.RowSpan="2">
 
             <Grid>
-                <k:KinectTileButton Height="Auto" Width="Auto" Click="Config" Background=" Transparent" BorderBrush="Transparent" Margin="853,876,911,50" RenderTransformOrigin="0.802,0.918" >
-                    <Image x:Name="imageMenuConfig" Source="/Ressources/Images/toolButton.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
-                </k:KinectTileButton>
                 <k:KinectTileButton Height="154" Width="Auto" Click="quitOnClick" Background=" Transparent" BorderBrush="Transparent" Margin="1343,876,442,50" >
                     <Image x:Name="imageMenuQuit" Source="/Ressources/Images/exit.png"  Opacity="0.9" RenderTransformOrigin="0.758,0.628" />
                 </k:KinectTileButton>
