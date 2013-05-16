@@ -39,7 +39,7 @@ namespace CamNect.GUI.Views
 
             // Configuration panel initialisation
             configCamWin = Start.configCamWin;
-            configCamWin.Deactivated += onCloseConfig;
+            //configCamWin.Deactivated += onCloseConfig;
 
             // Variables initialisation
             nbCamera = CameraOne.cameraList.Count;
@@ -60,7 +60,7 @@ namespace CamNect.GUI.Views
          //   configCamWin = Start.configCamWin;
             for (int i = 0; i < CameraOne.cameraList.Count; i++)
             {
-                if (CameraOne.cameraList[i].Config.Afficher && CameraOne.cameraList[i].Config.Plugged)
+                if (CameraOne.cameraList[i].Config.Afficher)
                 {
                     kinectButtonArray[i] = new KinectTileButton();
                     kinectButtonArray[i].Width = 800;
@@ -183,16 +183,16 @@ namespace CamNect.GUI.Views
           //  cleanStreamViews();
           //  InitCam();
 
-            this.Content = null;
-            cameraArray = null;
-            kinectButtonArray = null;
-            imageArray = null;
+            //this.Content = null;
+            //cameraArray = null;
+            //kinectButtonArray = null;
+            //imageArray = null;
 
-            cleanStreamViews();
-            readerArray = null;
+            //cleanStreamViews();
+            //readerArray = null;
 
-            Views.Menu Menu = new Views.Menu(this.sensorChooser);
-            this.Content = Menu;
+            //Views.Menu Menu = new Views.Menu(this.sensorChooser);
+            //this.Content = Menu;
         }
 
 

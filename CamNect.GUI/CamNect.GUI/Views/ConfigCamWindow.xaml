@@ -7,7 +7,7 @@
     <Window.Background>
         <VisualBrush  >
             <VisualBrush.Visual>
-                <Image Source="C:\Users\I007-03\Documents\GitHub\CamNect_V0\CamNect.GUI\CamNect.GUI\Ressources\Images\bg2.png"></Image>
+                <Image Source="/Ressources/Images/bg2.png"></Image>
             </VisualBrush.Visual>
         </VisualBrush>
     </Window.Background>
