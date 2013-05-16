@@ -150,7 +150,8 @@ namespace CamNect.GUI.Views
             if (i < 96)
             {
                 i += 5;
-                lumiereEllipse.StrokeThickness = 100-i;
+                //lumiereEllipse.StrokeThickness = 100-i;
+                lightProgressBar.Value = i;
             }
             camera.light(i);
             message.Content = "valeur" + i;
@@ -162,7 +163,8 @@ namespace CamNect.GUI.Views
             if (i > 4)
             {
                 i -= 5;
-                lumiereEllipse.StrokeThickness = 100-i;
+                //lumiereEllipse.StrokeThickness = 100-i;
+                lightProgressBar.Value = i;
             }
             camera.light(i);
             message.Content = "valeur" + i;
