@@ -180,8 +180,8 @@ namespace CamNect.GUI.Views
             cleanStreamViews();
             Views.Menu Menu = new Views.Menu(this.sensorChooser);
             this.Content = Menu;*/
-            cleanStreamViews();
-            InitCam();
+          //  cleanStreamViews();
+          //  InitCam();
 
             this.Content = null;
             cameraArray = null;
