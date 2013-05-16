@@ -10,6 +10,7 @@
 
     <UserControl.Resources>
 
+        
         <Style x:Key="KinectHoverButtonStyle" TargetType="{x:Type GUI:KinectHoverButton}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Opacity" Value="0.35"/>
@@ -57,10 +58,13 @@
 
             <Grid x:Name="kinectRegionGrid" Height="1080" Width="1920">
                 <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="68" Width="225" FontFamily="Gisha" FontSize="50" Foreground="#FF662D91" Margin="17,174,1678,0" FontWeight="Bold"><Run Language="fr-fr" Text="SOUNDS"/></TextBlock>
-                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightIncreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageLeftEnabled}" Margin="1734,295,36,635" />
+
                 <Image x:Name="lightmax" Source="/Ressources/Images/lumiere.png" Height="150" Width="150" Opacity="0.8" Margin="1734,291,36,639" />
-                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1734,772,36,158" />
+                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightIncreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageLeftEnabled}" Margin="1734,295,36,635" />
+
                 <Image x:Name="lightmin" Source="/Ressources/Images/lumieremin.png" Height="150" Width="150" Opacity="0.8" Margin="1734,768,36,162" RenderTransformOrigin="1.28,1.78" />
+                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1734,772,36,158" />
+
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,40,282,0" RenderTransformOrigin="0.182,0.247">
                     <Image x:Name="exit" Source="/Ressources/Images/exit.png" Opacity="0.8" />
                 </k:KinectTileButton>
@@ -80,14 +84,32 @@
         </k:KinectRegion>
 
         <Ellipse x:Name="lumiereEllipse" Fill="#8000FF" HorizontalAlignment="Right" VerticalAlignment="Center" Height="100" Width="100" Stroke="Transparent" StrokeThickness="100" Opacity="0.9" RenderTransformOrigin="0.54,0.507" Margin="0,489,72,491" />
-        <ProgressBar x:Name="lightProgressBar" Width="30" Height="250" Background="Transparent" BorderBrush="Black" BorderThickness="2" Margin="1791,475,90,341">
-            <ProgressBar.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1.35" StartPoint="0.5,-0.3">
-                    <GradientStop Color="#FF67E206" Offset="0"/>
-                    <GradientStop Color="#FF209900" Offset="0.418"/>
-                    <GradientStop Color="#FF67E206" Offset="1"/>
-                </LinearGradientBrush>
-            </ProgressBar.Foreground>
+        <ProgressBar x:Name="lightProgressBar" Width="30" Height="250" BorderBrush="Black" BorderThickness="2" Margin="1791,475,90,341">
+            <ProgressBar.Template>
+                
+                <ControlTemplate>
+
+                    <Border x:Name="Root" BorderBrush="Transparent" >
+                        <Grid Name="PART_Track" Background="Transparent">
+                            <Rectangle Name="PART_Indicator" Fill="#500BC1"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ProgressBar.Orientation" Value="Vertical">
+                            <!-- Rotate the progressbar so the left edge is the bottom edge -->
+                            <Setter TargetName="Root" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="90" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Root" Property="Height" Value="250"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+
+            </ProgressBar.Template>
         </ProgressBar>
 
     </Grid>

@@ -55,6 +55,7 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
             // Light initialisation
             i = 0;
+            lightProgressBar.Orientation = Orientation.Vertical;
             lumiereEllipse.StrokeThickness = 100;
                        
         }
