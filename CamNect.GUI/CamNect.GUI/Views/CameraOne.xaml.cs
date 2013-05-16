@@ -64,7 +64,7 @@ namespace CamNect.GUI.Views
             this.camera = cameraListTMP[indice];
             this.cameraListTMP = cameraListTMP;
             this.indice = indice;
-            reader = new MjpegReader(camera, CameraOnePlayer);
+            reader = new MjpegReader(camera, CameraOnePlayer, camera.Config.HighRes);
 
 
             // Events for gestures
@@ -199,7 +199,6 @@ namespace CamNect.GUI.Views
                         System.Console.WriteLine(a.Device.SerialNumber.ToString());
 
                         cfg.Serie = a.Device.SerialNumber.ToString();
-                        cfg.UDN = a.Device.UniqueDeviceName.ToString();
                         cfg.Plugged= true;
                         //cfg.Fenetre = fenetre;
 

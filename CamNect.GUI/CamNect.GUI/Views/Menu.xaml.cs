@@ -60,7 +60,7 @@ namespace CamNect.GUI.Views
          //   configCamWin = Start.configCamWin;
             for (int i = 0; i < CameraOne.cameraList.Count; i++)
             {
-                if (CameraOne.cameraList[i].Config.Afficher)
+                if (CameraOne.cameraList[i].Config.Afficher && CameraOne.cameraList[i].Config.Plugged)
                 {
                     kinectButtonArray[i] = new KinectTileButton();
                     kinectButtonArray[i].Width = 800;
@@ -72,7 +72,7 @@ namespace CamNect.GUI.Views
                     kinectButtonArray[i].Click += KinectTileButtonClick;
                     wrapPanel.Children.Add(kinectButtonArray[i]);
                     kinectButtonArray[i].Label = CameraOne.cameraList[i].Config.Nom;
-                    this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i]);
+                    this.readerArray[i] = new MjpegReader(CameraOne.cameraList[i], imageArray[i], CameraOne.cameraList[i].Config.MediumRes);
                 }
                 else
                 {
