@@ -2,60 +2,64 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:staticData="clr-namespace:CamNect.GUI.Views"
-        Title="ConfigCamWindow" Height="700" Width="1136" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Background="Transparent"  AllowsTransparency="True" ShowInTaskbar="False"  WindowStyle="None" >
+        Title="ConfigCamWindow" Height="700" Width="1136" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  AllowsTransparency="True" ShowInTaskbar="False"  WindowStyle="None" >
+
+    <Window.Background>
+        <VisualBrush  >
+            <VisualBrush.Visual>
+                <Image Source="C:\Users\I007-03\Documents\GitHub\CamNect_V0\CamNect.GUI\CamNect.GUI\Ressources\Images\bg2.png"></Image>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </Window.Background>
 
     <Window.Resources>
-        <staticData:ResolutionList x:Key="ResolutionList"/>
+
+        <Style TargetType="DataGrid">
+
+            <Style.Resources>
+
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFAD96BF"/>
+
+
+
+            </Style.Resources>
+
+        </Style>
+
     </Window.Resources>
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="/Ressources/Images/background.png" />
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" Height="506"
+
+        <DataGrid AutoGenerateColumns="False" Height="474"
        
-        	HorizontalAlignment="Left" Margin="70,74,0,0" x:Name="dgCamConfig"  
+        	HorizontalAlignment="Left" Margin="70,115,0,0" x:Name="dgCamConfig"  
         	VerticalAlignment="Top" Width="980" 
         	ItemsSource="{Binding}" ColumnWidth="*" RowHeight="40"
         	SelectionMode="Single"    AllowDrop="True"  BorderThickness="0" GridLinesVisibility="None" HeadersVisibility="Column"
-        	CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="{x:Null}" Background="{x:Null}" CanUserAddRows="False" Grid.RowSpan="2" Foreground="#FF4E0CBA"  >
+        	CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="{x:Null}" Background="{x:Null}" CanUserAddRows="False" Grid.RowSpan="2" Foreground="#FF4E0CBA" SelectionChanged="dgCamConfig_SelectionChanged"  >
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Afficher}" Header="Afficher" Width="Auto"/>
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Nom}" Header="Nom" />
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Id}" Header="Identifiant" />
-                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Pass}" Header="Mot de passe" />
 
-
-                <DataGridTemplateColumn Header="Resolution" Width="100">
+                <DataGridTemplateColumn Header="Mot de passe">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Resolution}"/>
+                            <PasswordBox staticData:PasswordHelper.Attach="True" staticData:PasswordHelper.Password="{Binding Pass, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="Auto"/>
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox Height="22" 
-                                      ItemsSource="{StaticResource ResolutionList}"
-                                      SelectedItem="{Binding Resolution}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-
                 </DataGridTemplateColumn>
 
-
-                <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Move}" Header=" Mvt " Width="Auto"/>
-                <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Zoom}" Header=" Zoom " Width="Auto"/>
-                <DataGridCheckBoxColumn IsReadOnly="False" Binding="{Binding Son}" Header=" Son " Width="Auto"/>
+                <DataGridCheckBoxColumn IsReadOnly="True" Binding="{Binding isPtz}" Header=" Mvt " Width="Auto"/>
+                <DataGridCheckBoxColumn IsReadOnly="True" Binding="{Binding Zoom}" Header=" Zoom " Width="Auto"/>
+                <DataGridCheckBoxColumn IsReadOnly="True" Binding="{Binding Sound}" Header=" Son " Width="Auto"/>
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Serie}" Header="N° Serie"/>
-                <DataGridTextColumn IsReadOnly="true" Binding="{Binding Fenetre}" Header=" Fenetre " Width="Auto"/>
-                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Plugged}" Visibility="Hidden" Header="Show" />
-                <DataGridTemplateColumn Header="Supprimer">
 
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Plugged}" Visibility="Hidden" Header="Show" />
+
+
+                <DataGridTemplateColumn Header="Supprimer">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{x:Static DataGrid.DeleteCommand}"  Content="Supprimer"/>
@@ -67,9 +71,14 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Annuler" TextBlock.Foreground="White" HorizontalAlignment="Left" Margin="588,616,0,0" VerticalAlignment="Top" Width="75" Click="onCancelClick" Grid.RowSpan="2" RenderTransformOrigin="0.456,0.453" Background="#FF662D91"/>
-        <Button Content="OK" TextBlock.Foreground="White" HorizontalAlignment="Left" Height="22" Margin="466,616,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="onOkayClick" Background="#FF662D91"/>
-        <TextBlock Text="Configuration"  HorizontalAlignment="Left" Margin="424,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="311" FontFamily="Gisha" FontSize="45" FontWeight="Bold" RenderTransformOrigin="0.658,0.44" Foreground="#FF662D91"/>
+
+
+
+        <Button Content="Annuler" Margin="588,616,0,0" Click="onCancelClick" Grid.RowSpan="2" RenderTransformOrigin="0.456,0.453"/>
+        <Button Content="OK" Margin="466,616,0,0" Grid.RowSpan="2" Click="onOkayClick"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="425,46,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="272" FontFamily="Gisha" FontSize="45" FontWeight="Thin" RenderTransformOrigin="0.658,0.44" Foreground="#FF662D91"><Run Language="fr-fr" Text="configuration"/></TextBlock>
+
+        <TextBlock x:Name="plain" HorizontalAlignment="Left" Height="35" Margin="82,616,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244"/>
 
 
     </Grid>

@@ -125,22 +125,17 @@ namespace CamNect.GUI.Views
             foreach (CamConfig l in ligne)
             {
                 index = ligne.IndexOf(l);
-                l.Fenetre = index + 1;
+                //l.Fenetre = index + 1;
             }
             //
             dgCam.Items.Refresh();
         }
 
-    }
-
-    public class ResolutionList : List<string>
-    {
-        public ResolutionList()
+        private void dgCamConfig_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Add("1000x800");
-            this.Add("600x300");
-            this.Add("640x480");
+
         }
+
     }
 
 
