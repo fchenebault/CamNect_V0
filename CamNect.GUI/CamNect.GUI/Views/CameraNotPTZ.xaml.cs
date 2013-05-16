@@ -47,7 +47,7 @@ namespace CamNect.GUI.Views
             this.camera = cameraListTMP[indice];
             this.cameraListTMP = cameraListTMP;
             this.indice = indice;
-            reader = new MjpegReader(camera, CameraNotPTZPlayer);
+            reader = new MjpegReader(camera, CameraNotPTZPlayer, camera.Config.HighRes);
 
 
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);
@@ -55,6 +55,7 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
             // Light initialisation
             i = 0;
+            lightProgressBar.Orientation = Orientation.Vertical;
             lumiereEllipse.StrokeThickness = 100;
                        
         }
@@ -150,7 +151,8 @@ namespace CamNect.GUI.Views
             if (i < 96)
             {
                 i += 5;
-                lumiereEllipse.StrokeThickness = 100-i;
+                //lumiereEllipse.StrokeThickness = 100-i;
+                lightProgressBar.Value = i;
             }
             camera.light(i);
             message.Content = "valeur" + i;
@@ -162,7 +164,8 @@ namespace CamNect.GUI.Views
             if (i > 4)
             {
                 i -= 5;
-                lumiereEllipse.StrokeThickness = 100-i;
+                //lumiereEllipse.StrokeThickness = 100-i;
+                lightProgressBar.Value = i;
             }
             camera.light(i);
             message.Content = "valeur" + i;

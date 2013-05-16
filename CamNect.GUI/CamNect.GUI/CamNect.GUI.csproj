@@ -104,6 +104,7 @@
     <Compile Include="Views\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PasswordHelper.cs" />
     <Compile Include="Views\ShareConfiguration.cs" />
     <Compile Include="Views\Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
@@ -257,6 +258,9 @@
     <Resource Include="Ressources\Images\dog.png" />
     <Resource Include="Ressources\Images\intruder.png" />
     <Resource Include="Ressources\Images\psst.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Images\lumieremin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
