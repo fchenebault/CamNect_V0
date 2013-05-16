@@ -35,13 +35,14 @@ namespace CamNect.GUI.Views
         private CameraUtils camera;
         private MjpegReader reader;
 
-        public CameraNotPTZ(KinectSensorChooser sensorChooser, List<CameraUtils> cameraListTMP, int indice)
+        public CameraNotPTZ(KinectMain kinect, List<CameraUtils> cameraListTMP, int indice)
         {
             InitializeComponent();
 
             // Sensor initialisation
-            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
-            this.sensorChooser = sensorChooser;
+            this.kinect = kinect;
+            this.kinect.InitKinect(sensorChooserUi, kinectRegion);
+           // this.sensorChooser = sensorChooser;
 
             // Camera Initialisation
             this.camera = cameraListTMP[indice];
@@ -81,7 +82,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
+            Views.Menu Menu = new Views.Menu( kinect);
             this.Content = Menu;
         }
 
@@ -100,12 +101,12 @@ namespace CamNect.GUI.Views
             // Select if the camera is PTZ
             if (cameraListTMP[indice].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect, cameraListTMP, indice);
                 this.Content = CameraOnePage;
             }
             else
             {
-                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ( kinect, cameraListTMP, indice);
                 this.Content = cameraNotPTZPage;
             }
 
@@ -126,12 +127,12 @@ namespace CamNect.GUI.Views
             // Select if the camera is PTZ
             if (cameraListTMP[indice].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(this.sensorChooser, cameraListTMP, indice);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect, cameraListTMP, indice);
                 this.Content = CameraOnePage;
             }
             else
             {
-                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(this.sensorChooser, cameraListTMP, indice);
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ( kinect, cameraListTMP, indice);
                 this.Content = cameraNotPTZPage;
             }
         }
@@ -141,7 +142,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(this.kinect.sensorChooser);
+            Views.Menu Menu = new Views.Menu(kinect);
             this.Content = Menu;
         }
 
