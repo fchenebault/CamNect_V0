@@ -87,9 +87,12 @@ namespace CamNect.GUI.Views
         public void swipeLeftAction()
         {
             int nb = cameraListTMP.Count;
+            do {
             indice--;
             if (indice < 0)
                 indice = nb - 1;
+            } while (!cameraListTMP[indice].Config.Afficher);
+
             this.Content = null;
             reader.MjpegReaderStop();
 
@@ -110,9 +113,12 @@ namespace CamNect.GUI.Views
         public void swipeRightAction()
         {
             int nb = cameraListTMP.Count;
+            do {
             indice++;
             if (indice > nb - 1)
                 indice = 0;
+            } while (!cameraListTMP[indice].Config.Afficher);
+
             this.Content = null;
             reader.MjpegReaderStop();
 

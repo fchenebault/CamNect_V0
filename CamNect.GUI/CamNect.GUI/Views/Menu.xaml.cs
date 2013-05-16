@@ -29,7 +29,6 @@ namespace CamNect.GUI.Views
         int nbCamera;
         private static ConfigCamWindow configCamWin;
 
-
         public Menu(KinectSensorChooser sensorChooser)
         {
             InitializeComponent();
@@ -39,8 +38,8 @@ namespace CamNect.GUI.Views
             kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
             // Configuration panel initialisation
-            configCamWin = new ConfigCamWindow();
-            configCamWin.Closed += onCloseConfig;
+            configCamWin = Start.configCamWin;
+            configCamWin.Deactivated += onCloseConfig;
 
             // Variables initialisation
             nbCamera = CameraOne.cameraList.Count;
@@ -55,10 +54,10 @@ namespace CamNect.GUI.Views
         }
 
 
-
-
         public void InitCam()
         {
+            wrapPanel.Children.Clear();
+         //   configCamWin = Start.configCamWin;
             for (int i = 0; i < CameraOne.cameraList.Count; i++)
             {
                 if (CameraOne.cameraList[i].Config.Afficher)
@@ -172,13 +171,25 @@ namespace CamNect.GUI.Views
         }
 
         private void onCloseConfig(object sender, EventArgs e)
-        {
+        {          
+        /*    this.Content = null;
+            cameraArray = null;
+            kinectButtonArray = null;
+            imageArray = null;
+
+            cleanStreamViews();
+            Views.Menu Menu = new Views.Menu(this.sensorChooser);
+            this.Content = Menu;*/
+            cleanStreamViews();
+            InitCam();
+
             this.Content = null;
             cameraArray = null;
             kinectButtonArray = null;
             imageArray = null;
 
             cleanStreamViews();
+            readerArray = null;
 
             Views.Menu Menu = new Views.Menu(this.sensorChooser);
             this.Content = Menu;
@@ -193,6 +204,7 @@ namespace CamNect.GUI.Views
             imageArray = null;
 
             cleanStreamViews();
+            readerArray = null;
 
             Views.Menu Menu = new Views.Menu(this.sensorChooser);
             this.Content = Menu;
@@ -205,9 +217,11 @@ namespace CamNect.GUI.Views
 
         private void cleanStreamViews()
         {
-            for (int i = 0; i < nbCamera; i++)
+            for (int i = 0; i < readerArray.Length; i++)
             {
-                this.readerArray[i].MjpegReaderStop();
+             if(this.readerArray[i]!=null)
+                    this.readerArray[i].MjpegReaderStop();
+                
             }
         }
 
