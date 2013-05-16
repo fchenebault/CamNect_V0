@@ -213,18 +213,6 @@ namespace CamNect.GUI.Views
 
             ConfigCamWindow.CamRefresh();
 
-
-            // ConfigCamWindow.getDg.Item
-            //if (!camExist)
-
-
-            //cameraOne.initCamera(a.Device.RootHostAddresses[0].ToString());
-            //System.Console.WriteLine(a.Device.SerialNumber.ToString());
-
-            //cameraOne.Play();
-            /*if (cameraArray[0] is CameraPTZ)
-            ((CameraPTZ)cameraArray[0]).zoomOn();*/
-
         }
 
 
