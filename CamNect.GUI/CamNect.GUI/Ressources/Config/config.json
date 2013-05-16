@@ -13,12 +13,12 @@
     "Serie": "00408CAFA482",
     "UDN": "uuid:Upnp-BasicDevice-1_0-00408CAFA482",
     "Fenetre": 0,
-    "Plugged": false
+    "Plugged": true
   },
   {
     "PtzOn": true,
     "Afficher": true,
-    "Nom": "AXIS 214",
+    "Nom": "Camera PTZ",
     "Id": "root",
     "Pass": "root",
     "Resolution": "640x480",
@@ -29,12 +29,12 @@
     "Serie": "00408CAB62FA",
     "UDN": "uuid:Upnp-BasicDevice-1_0-00408CAB62FA",
     "Fenetre": 0,
-    "Plugged": false
+    "Plugged": true
   },
   {
     "PtzOn": true,
     "Afficher": true,
-    "Nom": "AXIS M1054",
+    "Nom": "Petite",
     "Id": "root",
     "Pass": "root",
     "Resolution": "640x480",
@@ -45,6 +45,6 @@
     "Serie": "00408CDBEB07",
     "UDN": "uuid:Upnp-BasicDevice-1_0-00408CDBEB07",
     "Fenetre": 0,
-    "Plugged": false
+    "Plugged": true
   }
 ]

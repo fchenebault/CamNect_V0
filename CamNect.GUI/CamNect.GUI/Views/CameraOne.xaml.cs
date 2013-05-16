@@ -108,10 +108,11 @@ namespace CamNect.GUI.Views
         public void swipeLeftAction()
         {
             int nb = cameraListTMP.Count;
+            do {
             indice--;
             if (indice < 0)
                 indice = nb - 1;
-
+            } while (!cameraListTMP[indice].Config.Afficher);
 
             // Select if the camera is PTZ
             if (cameraListTMP[indice].Config.isPtz)
@@ -134,10 +135,12 @@ namespace CamNect.GUI.Views
         public void swipeRightAction()
         {
             int nb = cameraListTMP.Count;
-            indice++;
-            if (indice > nb-1)
-                indice = 0;
-
+            do
+            {
+                indice++;
+                if (indice > nb - 1)
+                    indice = 0;
+            } while (!cameraListTMP[indice].Config.Afficher);
 
             // Select if the camera is PTZ
             if (cameraListTMP[indice].Config.isPtz)
