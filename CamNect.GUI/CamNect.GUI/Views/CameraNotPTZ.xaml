@@ -31,10 +31,12 @@
             <Style.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Opacity" Value="0.35"/>
+                    <Setter Property="Foreground" Value="Transparent"/>
 
                 </Trigger>
                 <Trigger Property="IsHandPointerOver" Value="True">
                     <Setter Property="Opacity" Value="0.55"/>
+                    <Setter Property="Foreground" Value="Transparent"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -69,16 +71,16 @@
                     <Image x:Name="exit" Source="/Ressources/Images/exit.png" Opacity="0.8" />
                 </k:KinectTileButton>
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound1_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,291,1716,0">
-                    <Image Source="/Ressources/Images/click.png" Opacity="0.8" />
+                    <Image Source="/Ressources/Images/click2.png" Opacity="0.8" />
                 </k:KinectTileButton>
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound2_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,455,1716,0" RenderTransformOrigin="0.551,0.929">
-                    <Image Source="/Ressources/Images/psst.png" Opacity="0.8" />
+                    <Image Source="/Ressources/Images/psst2.png" Opacity="0.8" />
                 </k:KinectTileButton>
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="154" Width="187" Click="sound3_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,0,1716,317">
-                    <Image Source="/Ressources/Images/intruder.png" Opacity="0.8" />
+                    <Image Source="/Ressources/Images/intruder2.png" Opacity="0.8" />
                 </k:KinectTileButton>
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound4_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,768,1716,0">
-                    <Image Source="/Ressources/Images/dog.png" Opacity="0.8" />
+                    <Image Source="/Ressources/Images/dog2.png" Opacity="0.8" />
                 </k:KinectTileButton>
             </Grid>
         </k:KinectRegion>
