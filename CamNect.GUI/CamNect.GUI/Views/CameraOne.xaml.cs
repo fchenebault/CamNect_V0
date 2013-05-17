@@ -102,7 +102,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(kinect);
+            Views.Menu Menu = new Views.Menu(kinect, false);
             this.Content = Menu;
         }
 
@@ -477,7 +477,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(kinect);
+            Views.Menu Menu = new Views.Menu(kinect, false);
             this.Content = Menu;
         }
                

@@ -71,11 +71,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-
-
-
-        <Button Content="Annuler" Margin="588,616,0,0" Click="onCancelClick" Grid.RowSpan="2" RenderTransformOrigin="0.456,0.453"/>
-        <Button Content="OK" Margin="466,616,0,0" Grid.RowSpan="2" Click="onOkayClick"/>
+        <Button Content="OK" Margin="532,616,0,0" Click="onOkayClick"/>
         <TextBlock  HorizontalAlignment="Left" Margin="425,46,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="272" FontFamily="Gisha" FontSize="45" FontWeight="Thin" RenderTransformOrigin="0.658,0.44" Foreground="#FF662D91"><Run Language="fr-fr" Text="configuration"/></TextBlock>
 
         <TextBlock x:Name="plain" HorizontalAlignment="Left" Height="35" Margin="82,616,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244"/>

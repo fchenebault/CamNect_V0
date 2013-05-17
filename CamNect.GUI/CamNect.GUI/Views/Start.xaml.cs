@@ -64,7 +64,7 @@ namespace CamNect.GUI.Views
         {
             dispatcherTimer.Stop();
             this.Content = null;
-            Views.Menu MenuPage = new Menu(kinect);
+            Views.Menu MenuPage = new Menu(kinect, true);
             this.Content = MenuPage;
         }
 
