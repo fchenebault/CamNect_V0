@@ -95,8 +95,9 @@
             <ImageBrush ImageSource="/Ressources/Images/background.png" />
         </Grid.Background>
         <Canvas x:Name ="CameraOneCanvas">
+            <WrapPanel x:Name="CameraOneWrapPanel" Height="1080" Width="1920"></WrapPanel>
 
-            <Image x:Name= "CameraOnePlayer" Height="1080" Width="1920" />
+            <!--<Image x:Name= "CameraOnePlayer" Height="1080" Width="1920" />-->
 
             <Polygon x:Name="polygonLeft" Style="{StaticResource  PolygonStyle}" Points="0,0 0,580 100,580 100,0" Stroke="#3C44DD" StrokeThickness="4" Canvas.Left="10" Canvas.Top="250" IsEnabled="False" IsHitTestVisible="False"/>
 

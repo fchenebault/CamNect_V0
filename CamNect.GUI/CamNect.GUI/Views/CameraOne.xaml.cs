@@ -30,15 +30,16 @@ namespace CamNect.GUI.Views
         private KinectMain kinect;
         public static List<CameraUtils> cameraList = new List<CameraUtils>();
         private static List<CamConfig> defaultConfig = new List<CamConfig>();
-        //private static int fenetre = ConfigCamWindow.maxFenetre;
         public KinectSensorChooser sensorChooser;
         public List<Polygon> polygons;
         private List<KinectHoverButton> hoverButtons;
         private bool isButtonActive = false;
-        private MjpegReader reader;
-//        private static CameraPTZ cameraOne;
         public System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
+
+        private static MjpegReader reader;
+        public static Boolean isAlreadyCreated;
+        private static Image cameraOnePlayer;
 
         private List<CameraUtils> cameraListTMP;
         private int indice;
@@ -59,14 +60,27 @@ namespace CamNect.GUI.Views
             // Sensor initialisation
             this.kinect = kinect;// new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
             this.kinect.InitKinect(sensorChooserUi, kinectRegion);
-       //     this.sensorChooser = sensorChooser;
 
             // Camera Initialisation
             this.camera = cameraListTMP[indice];
             this.cameraListTMP = cameraListTMP;
             this.indice = indice;
-            reader = new MjpegReader(camera, CameraOnePlayer, camera.Config.HighRes);
 
+            if (!isAlreadyCreated)
+            {
+                cameraOnePlayer = new Image();
+                cameraOnePlayer.Height = 1080;
+                cameraOnePlayer.Width = 1920;
+                CameraOneGrid.Children.Add(cameraOnePlayer);
+                CameraOneWrapPanel.Children.Add(cameraOnePlayer);
+                reader = new MjpegReader(camera, cameraOnePlayer, camera.Config.HighRes);
+                isAlreadyCreated = true;
+            }
+            else
+            {
+               CameraOneGrid.Children.Add(cameraOnePlayer);
+                //CameraOneWrapPanel.Children.Add(cameraOnePlayer);
+            }
 
             // Events for gestures
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);
@@ -119,6 +133,7 @@ namespace CamNect.GUI.Views
             if (cameraListTMP[indice].Config.isPtz)
             {
                 this.Content = null;
+                CameraOneCanvas.Children.Remove(cameraOnePlayer);
                 reader.MjpegReaderStop();
                 Views.CameraOne CameraOnePage = new Views.CameraOne(kinect, cameraListTMP, indice);
                 this.Content = CameraOnePage;
@@ -126,6 +141,7 @@ namespace CamNect.GUI.Views
             else
             {
                 this.Content = null;
+                CameraOneCanvas.Children.Remove(cameraOnePlayer);
                 reader.MjpegReaderStop();
                 Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(kinect, cameraListTMP, indice);
                 this.Content = cameraNotPTZPage;
@@ -147,6 +163,7 @@ namespace CamNect.GUI.Views
             if (cameraListTMP[indice].Config.isPtz)
             {
                 this.Content = null;
+                CameraOneCanvas.Children.Remove(cameraOnePlayer);
                 reader.MjpegReaderStop();
                 Views.CameraOne CameraOnePage = new Views.CameraOne(kinect, cameraListTMP, indice);
                 this.Content = CameraOnePage;
@@ -154,6 +171,7 @@ namespace CamNect.GUI.Views
             else
             {
                 this.Content = null;
+                CameraOneCanvas.Children.Remove(cameraOnePlayer);
                 reader.MjpegReaderStop();
                 Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(kinect, cameraListTMP, indice);
                 this.Content = cameraNotPTZPage;
@@ -475,8 +493,8 @@ namespace CamNect.GUI.Views
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
             this.Content = null;
-            reader.MjpegReaderStop();
 
+            CameraOneGrid.Children.Clear();
             Views.Menu Menu = new Views.Menu(kinect, false);
             this.Content = Menu;
         }

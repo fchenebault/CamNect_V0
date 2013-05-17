@@ -33,7 +33,8 @@ namespace CamNect.GUI.Views
         private List<CameraUtils> cameraListTMP;
         private int indice;
         private CameraUtils camera;
-        private MjpegReader reader;
+        private static MjpegReader reader;
+        public static Boolean isAlreadyCreated;
 
         public CameraNotPTZ(KinectMain kinect, List<CameraUtils> cameraListTMP, int indice)
         {
@@ -48,8 +49,12 @@ namespace CamNect.GUI.Views
             this.camera = cameraListTMP[indice];
             this.cameraListTMP = cameraListTMP;
             this.indice = indice;
-            reader = new MjpegReader(camera, CameraNotPTZPlayer, camera.Config.HighRes);
 
+            if (!isAlreadyCreated)
+            {
+                reader = new MjpegReader(camera, CameraNotPTZPlayer, camera.Config.HighRes);
+                isAlreadyCreated = true;
+            }
 
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);
             kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(swipeRightAction);
