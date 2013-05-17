@@ -79,6 +79,10 @@ namespace CamNect.GUI.Views
         }
 
 
+        private void onCancelClick(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
 
         private void onOkayClick(object sender, RoutedEventArgs e)
         {
