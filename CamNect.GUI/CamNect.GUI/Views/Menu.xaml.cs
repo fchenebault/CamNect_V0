@@ -48,8 +48,6 @@ namespace CamNect.GUI.Views
                 imageList = new List<Image>();
                 kinectButtonList = new List<KinectTileButton>();
 
-                CameraOne.isAlreadyCreated = false;
-                CameraNotPTZ.isAlreadyCreated = false;
 
                 // Initialise the number of images depending on camera(s)
                 InitCam();
