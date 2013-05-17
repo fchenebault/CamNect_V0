@@ -68,20 +68,20 @@
                 <Image x:Name="lightmin" Source="/Ressources/Images/lumieremin.png" Height="150" Width="150" Opacity="0.8" Margin="1734,768,36,162" RenderTransformOrigin="1.28,1.78" />
                 <GUI:KinectHoverButton x:Name="lightMoins" Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1734,772,36,158" />
 
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,40,282,0" RenderTransformOrigin="0.182,0.247">
+                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,52,36,0" RenderTransformOrigin="0.182,0.247">
                     <Image x:Name="exit" Source="/Ressources/Images/exit.png" Opacity="0.8" />
                 </k:KinectTileButton>
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound1_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,291,1716,0">
-                    <Image Source="/Ressources/Images/click2.png" Opacity="0.8" />
+                <k:KinectTileButton x:Name="clickButton" HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound1_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,291,1716,0">
+                    <Image x:Name="click" Source="/Ressources/Images/click2.png" Opacity="0.8" />
                 </k:KinectTileButton>
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound2_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,455,1716,0" RenderTransformOrigin="0.551,0.929">
-                    <Image Source="/Ressources/Images/psst2.png" Opacity="0.8" />
+                <k:KinectTileButton x:Name="psstButton" HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound2_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,455,1716,0" RenderTransformOrigin="0.551,0.929">
+                    <Image x:Name="psst" Source="/Ressources/Images/psst2.png" Opacity="0.8" />
                 </k:KinectTileButton>
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="154" Width="187" Click="sound3_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,0,1716,317">
-                    <Image Source="/Ressources/Images/intruder2.png" Opacity="0.8" />
+                <k:KinectTileButton x:Name="intruderButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="154" Width="187" Click="sound3_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,0,1716,317">
+                    <Image x:Name="intruder" Source="/Ressources/Images/intruder2.png" Opacity="0.8" />
                 </k:KinectTileButton>
-                <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound4_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,768,1716,0">
-                    <Image Source="/Ressources/Images/dog2.png" Opacity="0.8" />
+                <k:KinectTileButton x:Name="dogButton" HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="sound4_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,768,1716,0">
+                    <Image x:Name="dog"  Source="/Ressources/Images/dog2.png" Opacity="0.8" />
                 </k:KinectTileButton>
             </Grid>
         </k:KinectRegion>

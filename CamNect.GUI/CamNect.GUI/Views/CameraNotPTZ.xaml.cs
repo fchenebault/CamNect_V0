@@ -35,6 +35,7 @@ namespace CamNect.GUI.Views
         private CameraUtils camera;
         private MjpegReader reader;
         private bool isButtonActive;
+        private List<Image> listImages;
 
         public CameraNotPTZ(KinectMain kinect, List<CameraUtils> cameraListTMP, int indice)
         {
@@ -57,6 +58,7 @@ namespace CamNect.GUI.Views
 
             // Light initialisation
             i = 0;
+            camera.light(0);
             lightProgressBar.Orientation = Orientation.Vertical;
             lumiereEllipse.StrokeThickness = 100;
             lightPlus.Visibility = System.Windows.Visibility.Hidden;
@@ -64,6 +66,13 @@ namespace CamNect.GUI.Views
             lightmin.Opacity = 0.4;
             lightmax.Opacity = 0.4;
 
+            // TileButtons init
+            listImages = new List<Image> { dog, psst, click, intruder };
+            foreach (Image image in this.listImages)
+            {
+                image.Opacity = 0.4;
+            }
+            
             // Events for grip buttons
             isButtonActive = false;
             backgroundGrip.isCameraOne = true;
@@ -89,6 +98,7 @@ namespace CamNect.GUI.Views
 
         public void retourMenu()
         {
+            camera.light(0);
             this.Content = null;
             reader.MjpegReaderStop();
 
@@ -149,6 +159,7 @@ namespace CamNect.GUI.Views
 
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
+            camera.light(0);
             this.Content = null;
             reader.MjpegReaderStop();
 
@@ -206,6 +217,12 @@ namespace CamNect.GUI.Views
                 lightmax.Opacity = 0.4;
                 lightPlus.Visibility = System.Windows.Visibility.Hidden;
                 lightMoins.Visibility = System.Windows.Visibility.Hidden;
+
+                foreach (Image image in this.listImages)
+                {
+                    image.Opacity = 0.4;
+                }
+
                 isButtonActive = false;
             }
             else
@@ -214,6 +231,12 @@ namespace CamNect.GUI.Views
                 lightmax.Opacity = 0.8;
                 lightPlus.Visibility = System.Windows.Visibility.Visible;
                 lightMoins.Visibility = System.Windows.Visibility.Visible;
+
+                foreach (Image image in this.listImages)
+                {
+                    image.Opacity = 0.8;
+                }
+
                 isButtonActive = true;
             }
         }
