@@ -28,6 +28,7 @@ namespace CamNect.GUI.Views
         private static List<KinectTileButton> kinectButtonList;
         private static List<Image> imageList;
 
+
         public Menu(KinectMain kinect, Boolean firstCreation)
         {
             InitializeComponent();
@@ -164,6 +165,11 @@ namespace CamNect.GUI.Views
                 }
 
                 i++;
+            }
+
+            foreach (MjpegReader reader in readerList)
+            {
+                reader.MjpegReaderStop();
             }
 
             // Select if the camera is PTZ

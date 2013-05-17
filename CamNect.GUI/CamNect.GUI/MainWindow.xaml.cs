@@ -56,8 +56,6 @@ namespace CamNect.GUI
 
         public void button_Start(object sender, RoutedEventArgs e)
         {
-            Views.Menu MenuPage = new Views.Menu(kinect);
-            this.Content = MenuPage;
 
         }
 

@@ -29,7 +29,6 @@ namespace CamNect.Camera
 
             String url = "http://" + camera.Ip + "/mjpg/video.mjpg?resolution=" + resolution;
 
-
             _mjpeg.FrameReady += mjpeg_FrameReady;
             _mjpeg.Error += mjpeg_Error;
             _mjpeg.ParseStream(new Uri(url), camera.Config.Id, camera.Config.Pass);
@@ -56,6 +55,7 @@ namespace CamNect.Camera
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            /*
             dispatcherTimer.Stop();
             _mjpeg.StopStream();
             Uri uri = new Uri("/Ressources/Images/warning_big.png", UriKind.Relative);
@@ -63,6 +63,7 @@ namespace CamNect.Camera
 
             this.camera.Config.Plugged = false;
             reader.Source = bi;
+             * */
         }
 
         public void MjpegReaderStop()

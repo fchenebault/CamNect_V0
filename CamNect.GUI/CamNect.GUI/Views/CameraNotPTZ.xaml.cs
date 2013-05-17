@@ -34,6 +34,7 @@ namespace CamNect.GUI.Views
         private int indice;
         private CameraUtils camera;
         private MjpegReader reader;
+        private bool isButtonActive;
 
         public CameraNotPTZ(KinectMain kinect, List<CameraUtils> cameraListTMP, int indice)
         {
@@ -42,7 +43,6 @@ namespace CamNect.GUI.Views
             // Sensor initialisation
             this.kinect = kinect;
             this.kinect.InitKinect(sensorChooserUi, kinectRegion);
-           // this.sensorChooser = sensorChooser;
 
             // Camera Initialisation
             this.camera = cameraListTMP[indice];
@@ -54,11 +54,21 @@ namespace CamNect.GUI.Views
             kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(swipeLeftAction);
             kinect.gestureCamera.OnSwipeRightEvent += new GestureCamera.SwipeRightEvent(swipeRightAction);
             kinect.gestureCamera.OnSwipeUpEvent += new GestureCamera.SwipeUpEvent(retourMenu);
+
             // Light initialisation
             i = 0;
             lightProgressBar.Orientation = Orientation.Vertical;
             lumiereEllipse.StrokeThickness = 100;
-                       
+            lightPlus.Visibility = System.Windows.Visibility.Hidden;
+            lightMoins.Visibility = System.Windows.Visibility.Hidden;
+            lightmin.Opacity = 0.4;
+            lightmax.Opacity = 0.4;
+
+            // Events for grip buttons
+            isButtonActive = false;
+            backgroundGrip.isCameraOne = true;
+            backgroundGrip.OnHandGrip += new KinectScrollViewer.HandGripEvent(activeButtons);
+                      
         }
 
         public void gestureEvent(object sender, EventArgs e)
@@ -82,7 +92,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu( kinect);
+            Views.Menu Menu = new Views.Menu( kinect, true);
             this.Content = Menu;
         }
 
@@ -142,7 +152,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(kinect);
+            Views.Menu Menu = new Views.Menu(kinect, true);
             this.Content = Menu;
         }
 
@@ -156,7 +166,6 @@ namespace CamNect.GUI.Views
                 lightProgressBar.Value = i;
             }
             camera.light(i);
-            message.Content = "valeur" + i;
             
         }
 
@@ -169,7 +178,6 @@ namespace CamNect.GUI.Views
                 lightProgressBar.Value = i;
             }
             camera.light(i);
-            message.Content = "valeur" + i;
             
         }
 
@@ -189,5 +197,26 @@ namespace CamNect.GUI.Views
         {
             camera.playMediaClip(9);
         }
+
+        public void activeButtons()
+        {
+            if (isButtonActive)
+            {
+                lightmin.Opacity = 0.4;
+                lightmax.Opacity = 0.4;
+                lightPlus.Visibility = System.Windows.Visibility.Hidden;
+                lightMoins.Visibility = System.Windows.Visibility.Hidden;
+                isButtonActive = false;
+            }
+            else
+            {
+                lightmin.Opacity = 0.8;
+                lightmax.Opacity = 0.8;
+                lightPlus.Visibility = System.Windows.Visibility.Visible;
+                lightMoins.Visibility = System.Windows.Visibility.Visible;
+                isButtonActive = true;
+            }
+        }
+
     }
 }

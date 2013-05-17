@@ -33,23 +33,23 @@ namespace CamNect.GUI.Views
 
             CameraOne.loadDatabase();
             configCamWin = new ConfigCamWindow();
-           // configCamWin.Closed += OnCloseConfig;
+            // configCamWin.Closed += OnCloseConfig;
 
-                Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
-                disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
-                disc.Start();
+            Discovery disc = new Discovery(null, AddressFamilyFlags.IPv4, false);
+            disc.DeviceAdded += new DeviceAddedEventHandler(CameraOne.discDeviceAdded);
+            disc.Start();
 
 
             // Timer 
-             dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer = new DispatcherTimer();
         }
 
-       /* private void OnCloseConfig(object sender, EventArgs e)
-        {
-            this.Content = null;
-            Views.Menu MenuPage = new Menu(kinect.sensorChooser);
-            this.Content = MenuPage;
-        }*/
+        /* private void OnCloseConfig(object sender, EventArgs e)
+         {
+             this.Content = null;
+             Views.Menu MenuPage = new Menu(kinect.sensorChooser);
+             this.Content = MenuPage;
+         }*/
 
         private void Window_Loaded(Object sender, RoutedEventArgs e)
         {
@@ -64,7 +64,7 @@ namespace CamNect.GUI.Views
         {
             dispatcherTimer.Stop();
             this.Content = null;
-            Views.Menu MenuPage = new Menu(kinect);
+            Views.Menu MenuPage = new Menu(kinect, true);
             this.Content = MenuPage;
         }
 

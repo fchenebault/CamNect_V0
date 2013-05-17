@@ -128,8 +128,6 @@
             <Polygon x:Name="polygonOverDownRight" Style="{StaticResource  PolygonStyle}" Points="190,190 200,50 100,0 0,100 50,200" Stroke="#3C44DD" StrokeThickness="4" Canvas.Right="10" Canvas.Bottom="10" IsEnabled="False"/>
             <Polygon x:Name="polygonFlecheDownRight" Style="{StaticResource  PolygonStyleFleche}" Points="90,90 100,10 80,0 70,70 0,80 10,100" Stroke="#3C44DD" StrokeThickness="2" Fill="DarkViolet" Canvas.Right="40" Canvas.Bottom="40" IsEnabled="False" />
 
-            <Label Canvas.Left="711" Canvas.Top="689" Content="" Height="66" x:Name="message" Width="530" Foreground="Red" FontSize="40" Background="{x:Null}" Panel.ZIndex="1000"  />
-
             <Ellipse x:Name="im_modeZoom" HorizontalAlignment="Left" Height="142" Canvas.Left="1500" Canvas.Top="16" Opacity="0.5" Stroke="Black" VerticalAlignment="Top" Width="135" Fill="#FFF4F4F5" Visibility="Hidden" />
             <TextBox x:Name="text_modeZoom" Height="30" TextWrapping="WrapWithOverflow" Text="Mode Zoom" Width="120" Canvas.Left="1505" Canvas.Top="70" FontWeight="Bold" FontStyle="Italic" FontSize="18" TextAlignment="Center" Visibility="Hidden"/>
             <Ellipse x:Name="im_handL" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Visibility="Hidden" Canvas.Left="-46" Canvas.Top="495" />

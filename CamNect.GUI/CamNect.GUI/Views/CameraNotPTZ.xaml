@@ -50,8 +50,7 @@
         </Grid.Background>
 
         <Image x:Name= "CameraNotPTZPlayer" />
-        <Label Canvas.Left="711" Canvas.Top="689" Content="" x:Name="message" Foreground="Red" FontSize="40" Background="{x:Null}" Panel.ZIndex="1000" Margin="513,833,739,145"  />
-
+        
         <k:KinectUserViewer k:KinectRegion.KinectRegion="{Binding ElementName=kinectRegion}" Height="123" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="112,10,0,0" Width="164" />
         <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Center" Height="123" VerticalAlignment="Top" Width="164" Margin="800,0,956,0"/>
         <Toolkit:KinectSensorChooserUI HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="sensorChooserUi" RenderTransformOrigin="0.418,0.112" Margin="862,0,1018,0" Height="40" Width="40" />
@@ -59,13 +58,15 @@
         <k:KinectRegion x:Name="kinectRegion" VerticalAlignment="Bottom" HandPointersUpdated="gestureEvent" Height="1080">
 
             <Grid x:Name="kinectRegionGrid" Height="1080" Width="1920">
+                <k:KinectScrollViewer x:Name="backgroundGrip" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" HoverBackground="Transparent" />
+                
                 <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="68" Width="225" FontFamily="Gisha" FontSize="50" Foreground="#FF662D91" Margin="17,174,1678,0" FontWeight="Bold"><Run Language="fr-fr" Text="SOUNDS"/></TextBlock>
 
                 <Image x:Name="lightmax" Source="/Ressources/Images/lumiere.png" Height="150" Width="150" Opacity="0.8" Margin="1734,291,36,639" />
-                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightIncreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageLeftEnabled}" Margin="1734,295,36,635" />
+                <GUI:KinectHoverButton x:Name="lightPlus" Style="{StaticResource KinectHoverButtonStyle}" Click="LightIncreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageLeftEnabled}" Margin="1734,295,36,635" />
 
                 <Image x:Name="lightmin" Source="/Ressources/Images/lumieremin.png" Height="150" Width="150" Opacity="0.8" Margin="1734,768,36,162" RenderTransformOrigin="1.28,1.78" />
-                <GUI:KinectHoverButton Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1734,772,36,158" />
+                <GUI:KinectHoverButton x:Name="lightMoins" Style="{StaticResource KinectHoverButtonStyle}" Click="LightDecreaseButtonClick" IsEnabled="{Binding ElementName=ControlsBasicsWindow, Path=PageRightEnabled}" Margin="1734,772,36,158" />
 
                 <k:KinectTileButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="154" Width="187" Click="quit_onClick" Background=" Transparent" BorderBrush="Transparent" Margin="0,40,282,0" RenderTransformOrigin="0.182,0.247">
                     <Image x:Name="exit" Source="/Ressources/Images/exit.png" Opacity="0.8" />

@@ -102,7 +102,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(kinect, false);
+            Views.Menu Menu = new Views.Menu(kinect, true);
             this.Content = Menu;
         }
 
@@ -220,7 +220,6 @@ namespace CamNect.GUI.Views
         public void TimerStop(Object myObject, EventArgs myEventArgs)
         {
             this.timer.Stop();
-            message.Content = null;
         }
 
         private void highlightTimer_Tick(object sender, System.EventArgs e)
@@ -254,7 +253,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Right");
-                message.Content = "Button Right";
                 this.camera.goRight();
             }
         }
@@ -268,7 +266,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Left");
-                message.Content = "Button Left";
                 this.camera.goLeft();
             }
         }
@@ -282,7 +279,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Top");
-                message.Content = "Button Up";
                 this.camera.goUp();
             }
         }
@@ -298,7 +294,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopLeft");
-                message.Content = "Button UpLeft";
                 this.camera.goUpLeft();
             }
         }
@@ -314,7 +309,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button TopRight");
-                message.Content = "Button UpRight";
                 this.camera.goUpRight();
             }
             
@@ -329,7 +323,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button Down");
-                message.Content = "Button Down";
                 this.camera.goDown();
             }
         }
@@ -345,7 +338,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button DownRight");
-                message.Content = "Button DownRight";
                 this.camera.goDownRight();
             }
             
@@ -362,7 +354,6 @@ namespace CamNect.GUI.Views
                 this.timer.Interval = 1000;
                 this.timer.Start();
                 System.Console.WriteLine("Button DownLeft");
-                message.Content = "Button  DownLeft";
                 this.camera.goDownLeft();
             }
         }
@@ -477,7 +468,7 @@ namespace CamNect.GUI.Views
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(kinect, false);
+            Views.Menu Menu = new Views.Menu(kinect, true);
             this.Content = Menu;
         }
                
