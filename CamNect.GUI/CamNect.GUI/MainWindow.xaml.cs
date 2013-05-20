@@ -28,8 +28,8 @@ namespace CamNect.GUI
             Instruction.Text = "Push the start button";
 
             // Sensor initialisation
-            this.sensorChooser = new KinectSensorChooser();
-            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
+         //   this.sensorChooser = new KinectSensorChooser();
+         //   this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion);
 
             // Add gestures events
             //kinect.gestureCamera.OnSwipeLeftEvent += new GestureCamera.SwipeLeftEvent(writeMessage);

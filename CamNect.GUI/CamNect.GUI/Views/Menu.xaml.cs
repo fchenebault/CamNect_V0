@@ -29,13 +29,13 @@ namespace CamNect.GUI.Views
         private static List<Image> imageList;
 
 
-        public Menu(KinectMain kinect, Boolean firstCreation)
+        public Menu(KinectSensorChooser sensorChooser, Boolean firstCreation)
         {
             InitializeComponent();
 
             // Sensor initialisation
-            this.kinect = kinect;
-            this.kinect.InitKinect(sensorChooserUi, kinectRegion);
+            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion,false);
+         //   this.kinect.InitKinect(sensorChooserUi, kinectRegion);
 
             // Configuration panel initialisation
             configCamWin = Start.configCamWin;
@@ -178,7 +178,7 @@ namespace CamNect.GUI.Views
                 this.Content = null;
 
                 wrapPanel.Children.Clear();
-                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect, CameraOne.cameraList, j);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect.sensorChooser, CameraOne.cameraList, j);
                 this.Content = CameraOnePage;
             }
             else
@@ -186,7 +186,7 @@ namespace CamNect.GUI.Views
                 this.Content = null;
 
                 wrapPanel.Children.Clear();
-                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(kinect, CameraOne.cameraList, j);
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(kinect.sensorChooser, CameraOne.cameraList, j);
                 this.Content = cameraNotPTZPage;
             }
         }

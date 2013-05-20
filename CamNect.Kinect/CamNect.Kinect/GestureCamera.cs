@@ -17,6 +17,11 @@ namespace CamNect.Kinect
             InitGesture();
         }
 
+        public void stopEventGesture()
+        {
+            gestureController.GestureRecognized -= OnGestureRecognized;
+        }
+
 
         public override void InitGesture()
         {
@@ -26,7 +31,6 @@ namespace CamNect.Kinect
             swipeleftSegments[1] = new SwipeLeftSegment2();
             swipeleftSegments[2] = new SwipeLeftSegment3();
             gestureController.AddGesture("SwipeLeft", swipeleftSegments);
-
             // Add SwipeRight
             IRelativeGestureSegment[] swiperightSegments = new IRelativeGestureSegment[3];
             swiperightSegments[0] = new SwipeRightSegment1();

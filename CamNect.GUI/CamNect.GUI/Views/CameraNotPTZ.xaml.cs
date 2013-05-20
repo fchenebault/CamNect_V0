@@ -37,13 +37,13 @@ namespace CamNect.GUI.Views
         private bool isButtonActive;
         private List<Image> listImages;
 
-        public CameraNotPTZ(KinectMain kinect, List<CameraUtils> cameraListTMP, int indice)
+        public CameraNotPTZ(KinectSensorChooser sensorChooser, List<CameraUtils> cameraListTMP, int indice)
         {
             InitializeComponent();
 
             // Sensor initialisation
-            this.kinect = kinect;
-            this.kinect.InitKinect(sensorChooserUi, kinectRegion);
+            this.kinect = new KinectMain(sensorChooser, sensorChooserUi, kinectRegion, true);
+            //this.kinect.InitKinect(sensorChooserUi, kinectRegion);
 
             // Camera Initialisation
             this.camera = cameraListTMP[indice];
@@ -98,16 +98,24 @@ namespace CamNect.GUI.Views
 
         public void retourMenu()
         {
+            this.kinect.gestureCamera.OnSwipeLeftEvent -= new GestureCamera.SwipeLeftEvent(swipeLeftAction);
+            this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
+            this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
+            this.kinect.gestureCamera.stopEventGesture();
             camera.light(0);
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu( kinect, true);
+            Views.Menu Menu = new Views.Menu(kinect.sensorChooser, true);
             this.Content = Menu;
         }
 
         public void swipeLeftAction()
         {
+            this.kinect.gestureCamera.OnSwipeLeftEvent -= new GestureCamera.SwipeLeftEvent(swipeLeftAction);
+            this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
+            this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
+            this.kinect.gestureCamera.stopEventGesture();
             int nb = cameraListTMP.Count;
             do {
             indice--;
@@ -121,12 +129,12 @@ namespace CamNect.GUI.Views
             // Select if the camera is PTZ
             if (cameraListTMP[indice].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect, cameraListTMP, indice);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect.sensorChooser, cameraListTMP, indice);
                 this.Content = CameraOnePage;
             }
             else
             {
-                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ( kinect, cameraListTMP, indice);
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(kinect.sensorChooser, cameraListTMP, indice);
                 this.Content = cameraNotPTZPage;
             }
 
@@ -134,6 +142,10 @@ namespace CamNect.GUI.Views
 
         public void swipeRightAction()
         {
+            this.kinect.gestureCamera.OnSwipeLeftEvent -= new GestureCamera.SwipeLeftEvent(swipeLeftAction);
+            this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
+            this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
+            this.kinect.gestureCamera.stopEventGesture();
             int nb = cameraListTMP.Count;
             do {
             indice++;
@@ -147,23 +159,27 @@ namespace CamNect.GUI.Views
             // Select if the camera is PTZ
             if (cameraListTMP[indice].Config.isPtz)
             {
-                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect, cameraListTMP, indice);
+                Views.CameraOne CameraOnePage = new Views.CameraOne(kinect.sensorChooser, cameraListTMP, indice);
                 this.Content = CameraOnePage;
             }
             else
             {
-                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ( kinect, cameraListTMP, indice);
+                Views.CameraNotPTZ cameraNotPTZPage = new Views.CameraNotPTZ(kinect.sensorChooser, cameraListTMP, indice);
                 this.Content = cameraNotPTZPage;
             }
         }
 
         public void quit_onClick(object sender, RoutedEventArgs e)
         {
+            this.kinect.gestureCamera.OnSwipeLeftEvent -= new GestureCamera.SwipeLeftEvent(swipeLeftAction);
+            this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
+            this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
+            this.kinect.gestureCamera.stopEventGesture();
             camera.light(0);
             this.Content = null;
             reader.MjpegReaderStop();
 
-            Views.Menu Menu = new Views.Menu(kinect, true);
+            Views.Menu Menu = new Views.Menu(kinect.sensorChooser, true);
             this.Content = Menu;
         }
 

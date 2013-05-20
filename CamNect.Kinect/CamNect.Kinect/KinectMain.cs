@@ -20,11 +20,21 @@ namespace CamNect.Kinect
 
 
         // Constructor
-        public KinectMain(KinectSensorChooser sensorChooser, KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
+        public KinectMain(KinectSensorChooser sensorChooser, KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion,Boolean geste)
         {
             this.sensorChooser = sensorChooser;
             InitKinect(sensorChooserUi, kinectRegion);
-            gestureCamera = new GestureCamera();
+            if(geste)
+                 gestureCamera = new GestureCamera();
+            handsTracked = kinectRegion.HandPointers;
+        }
+
+
+        public KinectMain(KinectSensorChooser sensorChooser, KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
+        {
+            this.sensorChooser = sensorChooser;
+            InitKinect(sensorChooserUi, kinectRegion,true);
+             //   gestureCamera = new GestureCamera();
             handsTracked = kinectRegion.HandPointers;
         }
 
@@ -48,12 +58,24 @@ namespace CamNect.Kinect
         }
 
         // Initialise the Kinect
-        public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
+        public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion,Boolean first)
         {
             // initialize the sensor chooser and UI
             this.sensorChooser.KinectChanged += SensorChooserOnKinectChanged;
             sensorChooserUi.KinectSensorChooser = this.sensorChooser;
             this.sensorChooser.Start();
+
+            // Bind the sensor chooser's current sensor to the KinectRegion
+            var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
+            BindingOperations.SetBinding(kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
+        }
+
+        public void InitKinect(KinectSensorChooserUI sensorChooserUi, KinectRegion kinectRegion)
+        {
+            // initialize the sensor chooser and UI
+         //   this.sensorChooser.KinectChanged += SensorChooserOnKinectChanged;
+            sensorChooserUi.KinectSensorChooser = this.sensorChooser;
+           // this.sensorChooser.Start();
 
             // Bind the sensor chooser's current sensor to the KinectRegion
             var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
