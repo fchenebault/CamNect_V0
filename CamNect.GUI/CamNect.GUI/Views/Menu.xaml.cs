@@ -80,6 +80,7 @@ namespace CamNect.GUI.Views
                 image.Width = 800;
                 image.Height = 600;
                 kinectTileButton.Content = image;
+                kinectTileButton.Label = camera.Config.Nom;
                 kinectTileButton.Click += KinectTileButtonClick;
                 wrapPanel.Children.Add(kinectTileButton);
                 MjpegReader reader = new MjpegReader(camera, image, camera.Config.MediumRes);
@@ -229,6 +230,7 @@ namespace CamNect.GUI.Views
 
                                 if (tag.Equals(serie))
                                 {
+                                    button.Label = camera.Config.Nom;
                                     button.Visibility = System.Windows.Visibility.Visible;
                                 }
                             }

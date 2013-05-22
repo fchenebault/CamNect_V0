@@ -59,15 +59,6 @@
                 <DataGridTextColumn IsReadOnly="False" Binding="{Binding Plugged}" Visibility="Hidden" Header="Show" />
 
 
-                <DataGridTemplateColumn Header="Supprimer">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Command="{x:Static DataGrid.DeleteCommand}"  Content="Supprimer"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-
 
             </DataGrid.Columns>
         </DataGrid>
