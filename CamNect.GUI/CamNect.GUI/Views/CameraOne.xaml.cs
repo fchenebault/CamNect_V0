@@ -106,6 +106,7 @@ namespace CamNect.GUI.Views
             this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
             this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
             this.kinect.gestureCamera.stopEventGesture();
+            backgroundGrip.OnHandGrip -= new KinectScrollViewer.HandGripEvent(activeButtons);
 
             Views.Menu Menu = new Views.Menu(kinect.sensorChooser, true);
             this.Content = Menu;
@@ -119,6 +120,7 @@ namespace CamNect.GUI.Views
             this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
             this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
             this.kinect.gestureCamera.stopEventGesture();
+            backgroundGrip.OnHandGrip -= new KinectScrollViewer.HandGripEvent(activeButtons);
             int nb = cameraListTMP.Count;
             do {
             indice--;
@@ -150,6 +152,8 @@ namespace CamNect.GUI.Views
             this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
             this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
             this.kinect.gestureCamera.stopEventGesture();
+            backgroundGrip.OnHandGrip -= new KinectScrollViewer.HandGripEvent(activeButtons);
+
             int nb = cameraListTMP.Count;
             do
             {

@@ -102,6 +102,7 @@ namespace CamNect.GUI.Views
             this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
             this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
             this.kinect.gestureCamera.stopEventGesture();
+            backgroundGrip.OnHandGrip -= new KinectScrollViewer.HandGripEvent(activeButtons);
             camera.light(0);
             this.Content = null;
             reader.MjpegReaderStop();
@@ -116,6 +117,8 @@ namespace CamNect.GUI.Views
             this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
             this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
             this.kinect.gestureCamera.stopEventGesture();
+            backgroundGrip.OnHandGrip -= new KinectScrollViewer.HandGripEvent(activeButtons);
+
             int nb = cameraListTMP.Count;
             do {
             indice--;
@@ -147,6 +150,7 @@ namespace CamNect.GUI.Views
             this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
             this.kinect.gestureCamera.stopEventGesture();
             int nb = cameraListTMP.Count;
+            backgroundGrip.OnHandGrip -= new KinectScrollViewer.HandGripEvent(activeButtons);
             do {
             indice++;
             if (indice > nb - 1)
@@ -175,6 +179,7 @@ namespace CamNect.GUI.Views
             this.kinect.gestureCamera.OnSwipeRightEvent -= new GestureCamera.SwipeRightEvent(swipeRightAction);
             this.kinect.gestureCamera.OnSwipeUpEvent -= new GestureCamera.SwipeUpEvent(retourMenu);
             this.kinect.gestureCamera.stopEventGesture();
+            backgroundGrip.OnHandGrip -= new KinectScrollViewer.HandGripEvent(activeButtons);
             camera.light(0);
             this.Content = null;
             reader.MjpegReaderStop();
